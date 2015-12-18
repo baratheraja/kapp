@@ -12,11 +12,10 @@
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardElevation="@dimen/card_elevation"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"
-    android:nestedScrollingEnabled="true"
     android:id="@+id/view">
 
 

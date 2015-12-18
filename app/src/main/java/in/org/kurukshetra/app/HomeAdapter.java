@@ -1,13 +1,16 @@
 package in.org.kurukshetra.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.priya.kurukshetra.R;
 
@@ -19,7 +22,6 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
     private LayoutInflater inflater;
     private  Context context;
-    public  boolean isContact;
     public HomeAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context=context;
@@ -39,21 +41,27 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     public void onBindViewHolder(HomeViewHolder homeViewHolder, int i) {
 
         homeViewHolder.imageView.setImageResource(R.drawable.banner);
-
+       if(i==0)
+           homeViewHolder.textView.setText("Events");
+       else
+           homeViewHolder.textView.setText("Workshops");
     }
 
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 2;
     }
 
     static class HomeViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
+        TextView textView;
         public HomeViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.list_item_image);
+            textView = (TextView) itemView.findViewById(R.id.domain);
         }
+
     }
 }
