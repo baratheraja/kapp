@@ -1,0 +1,4 @@
+int attr panningDurationInMs 0x7f010000
+int bool portrait 0x7f020000
+int[] styleable PanningView { 0x7f010000 }
+int styleable PanningView_panningDurationInMs 0

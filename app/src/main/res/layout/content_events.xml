@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.priya.app.MainActivity">
+    <com.fourmob.panningview.library.PanningView
+        android:id="@+id/panningView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/blue"
+        custom:panningDurationInMs="20000"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/chartLayout"
+            android:paddingTop="70dp"
+            android:orientation="vertical">
+
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/platinum"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                />
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
+
