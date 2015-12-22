@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import in.org.kurukshetra.app.R;
 
 /**
@@ -22,9 +24,11 @@ class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdatesViewHold
 
     private LayoutInflater inflater;
     private  Context context;
-    public UpdatesAdapter(Context context) {
+    private ArrayList list = new ArrayList();
+    public UpdatesAdapter(Context context,ArrayList<String> list) {
         inflater = LayoutInflater.from(context);
         this.context=context;
+        this.list = list;
     }
 
     @Override
@@ -40,14 +44,14 @@ class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdatesViewHold
     @Override
     public void onBindViewHolder(UpdatesViewHolder homeViewHolder, int i) {
 
-        homeViewHolder.textView.setText("update");
+        homeViewHolder.textView.setText(list.get(i).toString());
 
     }
 
 
     @Override
     public int getItemCount() {
-        return 2;
+        return list.size();
     }
 
     static class UpdatesViewHolder extends RecyclerView.ViewHolder {

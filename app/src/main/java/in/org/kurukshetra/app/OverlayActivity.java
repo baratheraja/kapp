@@ -2,28 +2,22 @@ package in.org.kurukshetra.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-
 import java.util.ArrayList;
-
 import android.widget.Toast;
-
-import in.org.kurukshetra.app.R;
 
 public class OverlayActivity extends Activity {
 
     TagView tag;
     CloudView view;
-    ImageButton fb,twitter,youtube;
-    ArrayList<TagView> tags = new ArrayList<TagView>();
+    ImageButton fb,twitter,youtube,close;
+    ArrayList<TagView> tags = new ArrayList<>();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +56,13 @@ public class OverlayActivity extends Activity {
                startActivity(intent);
            }
        });
+       close = (ImageButton) findViewById(R.id.close);
+       close.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               onBackPressed();
+           }
+       });
     }
 
     public void initTag(String name) {
@@ -90,9 +91,7 @@ public class OverlayActivity extends Activity {
                     Toast.makeText(OverlayActivity.this, "Item clicked", Toast.LENGTH_SHORT).show();
             }
         });
-
         tags.add(tag);
-
     }
 
 }
