@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.priya.kurukshetra.R;
+import in.org.kurukshetra.app.R;
 
 /**
  * Created by baratheraja on 23/11/15.

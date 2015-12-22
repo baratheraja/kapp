@@ -1,6 +1,11 @@
 package in.org.kurukshetra.app;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 
-import com.example.priya.kurukshetra.R;
 import com.fourmob.panningview.library.PanningView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -47,16 +51,20 @@ public class Events extends AppCompatActivity {
         initKeys();
 
         setContentView(R.layout.activity_events);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        //final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        //upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-       // actionBar.setHomeAsUpIndicator(upArrow);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+      /*  Toolbar toolbar = (Toolbar) findViewById(R.id.event_toolbar);
+        setSupportActionBar(toolbar);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        final Drawable upArrow = getResources().getDrawable(R.drawable.back_icon);
+        //upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        actionBar.setHomeAsUpIndicator(upArrow);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        */
+
         setTitle("Events");
-
-
         for (int i = 0; i < 7; i++) {
             entries.add(new Entry(1, i));
             categories.add(cats[i]);

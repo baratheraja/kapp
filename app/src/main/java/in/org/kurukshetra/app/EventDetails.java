@@ -23,7 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.priya.kurukshetra.R;
+import in.org.kurukshetra.app.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,6 +61,9 @@ public class EventDetails extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        actionBar.setHomeAsUpIndicator(upArrow);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         eventName=getIntent().getStringExtra("name");

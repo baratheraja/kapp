@@ -12,10 +12,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.priya.kurukshetra.R;
+import in.org.kurukshetra.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class HomeActivity extends AppCompatActivity {
     };
     public void funEvents(View view) {
         //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-        TextView textView = (TextView) view.findViewById(R.id.domain);
-        if(textView.getText().toString().equals("Events")){
+        ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
+        if(imageView.getContentDescription().toString().equals("Events")){
             Intent intent = new Intent(this,Events.class);
             startActivity(intent);
         }
@@ -53,8 +54,8 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(HomeActivity.this,OverlayActivity.class);
+                startActivity(intent);
             }
         });
     }

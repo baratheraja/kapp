@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.priya.kurukshetra.R;
+import in.org.kurukshetra.app.R;
 
 /**
  * Created by baratheraja on 23/11/15.

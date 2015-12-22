@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.priya.kurukshetra.R;
+import in.org.kurukshetra.app.R;
 
 /**
  * Created by baratheraja on 23/11/15.
@@ -40,12 +40,15 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     @Override
     public void onBindViewHolder(HomeViewHolder homeViewHolder, int i) {
 
-        homeViewHolder.imageView.setImageResource(R.drawable.banner);
-       if(i==0)
-           homeViewHolder.textView.setText("Events");
-       else
-           homeViewHolder.textView.setText("Workshops");
-    }
+       if(i==0) {
+           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+           homeViewHolder.imageView.setContentDescription("Events");
+       }
+       else {
+           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+           homeViewHolder.imageView.setContentDescription("Workshops");
+        }
+       }
 
 
     @Override
@@ -56,11 +59,9 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     static class HomeViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView textView;
         public HomeViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.list_item_image);
-            textView = (TextView) itemView.findViewById(R.id.domain);
         }
 
     }
