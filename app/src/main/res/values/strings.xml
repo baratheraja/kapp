@@ -13,4 +13,5 @@
     <string name="title_activity_hospi">HospiActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_about_us">AboutUsActivity</string>
+    <string name="title_activity_gl_details">GlDetails</string>
 </resources>

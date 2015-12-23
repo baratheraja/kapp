@@ -44,16 +44,20 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
            homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
            homeViewHolder.imageView.setContentDescription("Events");
        }
-       else {
+       else if(i==1){
            homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
            homeViewHolder.imageView.setContentDescription("Workshops");
         }
+        else {
+           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+           homeViewHolder.imageView.setContentDescription("Gl");
+       }
        }
 
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
     static class HomeViewHolder extends RecyclerView.ViewHolder {

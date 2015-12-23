@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:padding="5dp"
+    android:onClick="onClick"
+    android:contentDescription="algelo"
+    style="@style/CardViewStyle">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/gl1"
+        android:id="@+id/imageView"
+        app:riv_corner_radius_top_left="@dimen/card_corner_radius"
+        app:riv_corner_radius_bottom_left="@dimen/card_corner_radius"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="0dp"
+        android:layout_marginLeft="0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Angelo Vermeulen"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/textView3"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crew commander of MARS Simulation program funded by NASA"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:id="@+id/textView3"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+</LinearLayout>

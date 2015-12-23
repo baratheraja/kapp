@@ -180,6 +180,9 @@ public class CloudView extends RelativeLayout {
 		Point rPoint = Matrix.pointMakeRotation(point, direction, angle);
 		mPoints.set(index, rPoint);
 		setTagOfPoint(rPoint, index);
+		rPoint = Matrix.pointMakeRotation(rPoint, direction, angle);
+		mPoints.set(index, rPoint);
+		setTagOfPoint(rPoint, index);
 	}
 	
 	private Point last;

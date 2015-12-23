@@ -1,6 +1,7 @@
 package in.org.kurukshetra.app;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,7 +14,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
-public class UpdatesFragment extends Fragment {
+public class
+        UpdatesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     HandleJSON obj;
     private static ArrayList<String> list = new ArrayList();
@@ -24,7 +26,7 @@ public class UpdatesFragment extends Fragment {
     public UpdatesFragment() {
         // Required empty public constructor
     }
-
+UpdatesAdapter updatesAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +68,8 @@ public class UpdatesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_update, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.itemsRecyclerView);
-        recyclerView.setAdapter(new UpdatesAdapter(getActivity(),list));
+        updatesAdapter = new UpdatesAdapter(getActivity(),list);
+        recyclerView.setAdapter(updatesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
@@ -89,26 +92,52 @@ public class UpdatesFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final View viewi = view;
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeLayout.setOnRefreshListener(this);;
+    }
+
+    @Override
+    public void onRefresh() {
+
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    obj = new HandleJSON();
+                    setdata();
+                    pref = getActivity().getSharedPreferences(My_Pref,0);
+                    updatecount = pref.getInt("size", 0);
+                    if (updatecount > 0)
+                        list.clear();
+
+                    for (int i = 0; i < updatecount; i++) {
+
+                        list.add(pref.getString("update" + i, ""));
+                    }
+                    updatesAdapter.updateItem(list);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
 
             @Override
-            public void onRefresh() {
-                Thread t = new Thread() {
+            protected void onPostExecute(Void result) {
+                swipeLayout.setRefreshing(false);
+                super.onPostExecute(result);
+                updatesAdapter.notifyDataSetChanged();
+
+            }
+        }.execute();
+
+              /*  Thread t = new Thread() {
                     @Override
                     public void run() {
                         try {
-                            obj = new HandleJSON();
-
-                        } catch (Exception e) {
+                                                    } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            setdata();
-                        }
-                    }
-                    
-                };
-                t.start();
-
+                              obj = new HandleJSON();
+                setdata();
                 pref = getActivity().getSharedPreferences(My_Pref,0);
                 updatecount = pref.getInt("size", 0);
                 if (updatecount > 0)
@@ -117,14 +146,14 @@ public class UpdatesFragment extends Fragment {
                 for (int i = 0; i < updatecount; i++) {
 
                     list.add(pref.getString("update" + i, ""));
-
                 }
+                updatesAdapter.updateItem(list);
+                        }
+                    }
 
-                RecyclerView recyclerView = (RecyclerView) viewi.findViewById(R.id.itemsRecyclerView);
-                recyclerView.setAdapter(new UpdatesAdapter(getActivity(),list));
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            }
-        });;
+                };
+                t.start();*/
+
     }
 
 }

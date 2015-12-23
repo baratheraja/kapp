@@ -42,10 +42,15 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this,Events.class);
             startActivity(intent);
         }
+        else if(imageView.getContentDescription().toString().equals("Gl")){
+            Intent intent = new Intent(this,GlActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);

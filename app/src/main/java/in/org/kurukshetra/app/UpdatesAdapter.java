@@ -48,6 +48,10 @@ class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.UpdatesViewHold
 
     }
 
+    public void updateItem(ArrayList list){
+        this.list = list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
