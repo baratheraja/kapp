@@ -46,7 +46,7 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
        }
        else if(i==1){
            homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
-           homeViewHolder.imageView.setContentDescription("Workshops");
+           homeViewHolder.imageView.setContentDescription("Xceed");
         }
         else {
            homeViewHolder.imageView.setImageResource(R.drawable.events_banner);

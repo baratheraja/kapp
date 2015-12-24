@@ -36,9 +36,9 @@ public class Events extends AppCompatActivity {
 
     String[] cats = {"General", "Engineering", "Online", "Coding", "Robotics", "Quiz", "Management"};
     String[] general = {"Alcatraz","Gambling Math","k! Spell Bee","Mock G20"};
-    String[] engineering = {"Building Information Modelling","Circuit Craze","Contraptions","Fully Doped","Godspeed","How Stuff Works","Innovate"};
-    String[] online = {"Bank Robbery","Dalal Bull","Online Programming Contest","Riddles Of the Sphinx","Sherlock"};
-    String[] coding = {"Heptathlon","Ninja Coding","Onsite Programming Contest","Tame the Code","The Imitation Game"};
+    String[] engineering = {"BIM","Circuit Craze","Contraptions","Fully Doped","Godspeed","How Stuff Works","Innovate"};
+    String[] online = {"Bank Robbery","Dalal Bull","OLPC","Riddles Of the Sphinx","Sherlock"};
+    String[] coding = {"Heptathlon","Ninja Coding","OSPC","Tame the Code","The Imitation Game"};
     String[] robotics = {"k!ardinal Quest","Robowars","Tanker Bot","The Gem Quest"};
     String[] quiz = {"k! Biz Quiz","k! Open Quiz","k! School Quiz","SciTech Quiz"};
     String[] management = {"Chaos Theory","Enigma","k! Wallet","Marketing Madness"};
@@ -132,7 +132,7 @@ public class Events extends AppCompatActivity {
         eventKeys.put("Innovate","innovate");
         eventKeys.put("Godspeed","godspeed");
         eventKeys.put("How Stuff Works","how-stuff-works");
-        eventKeys.put("Building Information Modelling","building-information-modelling");
+        eventKeys.put("BIM","building-information-modelling");
         eventKeys.put("Circuit Craze","circuit-craze");
         eventKeys.put("Fully Doped","fully-doped");
         eventKeys.put("Chaos Theory","chaos-theory");
@@ -152,8 +152,8 @@ public class Events extends AppCompatActivity {
         eventKeys.put("Tanker Bot","tanker-bot");
         eventKeys.put("Tame the Code","tame-the-code");
         eventKeys.put("Heptathlon","heptathlon");
-        eventKeys.put("Onsite Programming Contest","onsite-programming-contest");
-        eventKeys.put("Online Programming Contest","online-programming-contest");
+        eventKeys.put("OSPC","onsite-programming-contest");
+        eventKeys.put("OLPC","online-programming-contest");
         eventKeys.put("Contraptions","contraptions");
         eventKeys.put("Ninja Coding","ninja-coding");
         eventKeys.put("k!ardinal Quest","k-ardinal-quest");

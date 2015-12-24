@@ -27,14 +27,15 @@ public class  OneFragment extends Fragment {
         Bundle args = getArguments();
         RecyclerView recyclerView = new RecyclerView(getActivity());
 
-        if(args.getStringArray("number")!= null)
+        if(args.getString("mail_id") != null)
+            recyclerView.setAdapter(new YourRecyclerAdapter(getActivity(),args.getStringArray("value"),args.getStringArray("number"), args.getString("mail_id")));
+        else if ( args.getStringArray("number")!= null)
             recyclerView.setAdapter(new YourRecyclerAdapter(getActivity(),args.getStringArray("value"),args.getStringArray("number")));
         else
-             recyclerView.setAdapter(new YourRecyclerAdapter(getActivity(),args.getStringArray("value")));
+            recyclerView.setAdapter(new YourRecyclerAdapter(getActivity(),args.getStringArray("value")));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return recyclerView;
     }
 
 }
-

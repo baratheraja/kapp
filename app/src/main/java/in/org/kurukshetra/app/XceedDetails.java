@@ -1,12 +1,9 @@
 package in.org.kurukshetra.app;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,18 +11,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import in.org.kurukshetra.app.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventDetails extends AppCompatActivity {
+public class XceedDetails extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -54,16 +42,8 @@ public class EventDetails extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         actionBar.setHomeAsUpIndicator(upArrow);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         eventName=getIntent().getStringExtra("name");
-        if(eventName.equals("BIM")){
-            eventName = "Building Information Modelling";
-        }
-        else if(eventName.equals("OSPC")){
-            eventName = "Onsite Programming Contest";
-        }
-        else if(eventName.equals("OLPC")){
-            eventName = "Online Programming Contest";
-        }
         setTitle(eventName);
         eventKey = getIntent().getStringExtra("key");
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -85,11 +65,11 @@ public class EventDetails extends AppCompatActivity {
         imageView.setImageDrawable(d);
 
         String json = loadJSONFromAsset(eventKey);
-        ContactDetails store = new ContactDetails();
+        XceedContactDetails store = new XceedContactDetails();
         store.init();
         try {
             JSONObject obj = new JSONObject(json);
-            JSONArray tabs = obj.getJSONObject("event").getJSONArray("tabs");
+            JSONArray tabs = obj.getJSONObject("xceed").getJSONArray("tabs");
             int n = tabs.length();
 
             for(int i=0;i<n-1;i++) {
@@ -137,7 +117,7 @@ public class EventDetails extends AppCompatActivity {
     public String loadJSONFromAsset(String name) {
         String json;
         try {
-            InputStream is = getAssets().open("events/"+name+".json");
+            InputStream is = getAssets().open("xceed/"+name+".json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -149,17 +129,8 @@ public class EventDetails extends AppCompatActivity {
             return null;
         }
         return json;
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hospi, menu);
-        return true;
-
-    }
-
-    Intent intent2=new Intent(Intent.ACTION_SEND);
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -167,13 +138,7 @@ public class EventDetails extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         }
-        if (id == R.id.share){
-            String text="";
-            intent2.setType("text/plain");
-            intent2.putExtra(Intent.EXTRA_TEXT,"Check out the  event at 'Kurukshetra'16' "+text);
-            startActivity(Intent.createChooser(intent2, "Share via . . ."));
 
-        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -30,22 +30,16 @@ public class XceedActivity extends AppCompatActivity {
     ArrayList<String> eventlist = new ArrayList<>();
 
     String[] cats = {"Ahmedabad", "Bangalore"};
-    String[] general = {"Alcatraz","Gambling Math","k! Spell Bee","Mock G20"};
-    String[] engineering = {"Building Information Modelling","Circuit Craze","Contraptions","Fully Doped","Godspeed","How Stuff Works","Innovate"};
-    String[] online = {"Bank Robbery","Dalal Bull","Online Programming Contest","Riddles Of the Sphinx","Sherlock"};
-    String[] coding = {"Heptathlon","Ninja Coding","Onsite Programming Contest","Tame the Code","The Imitation Game"};
-    String[] robotics = {"k!ardinal Quest","Robowars","Tanker Bot","The Gem Quest"};
-    String[] quiz = {"k! Biz Quiz","k! Open Quiz","k! School Quiz","SciTech Quiz"};
-    String[] management = {"Chaos Theory","Enigma","k! Wallet","Marketing Madness"};
-
+    String[] ahmedabad = {"Chaos Theory","Biz Quiz"};
+    String[] bangalore = {"Chaos Theory","How Stuff Works"};
+    String[] hydrabad = {};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
         initKeys();
-
-        setContentView(R.layout.activity_events);
+        setContentView(R.layout.activity_xceed);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -59,8 +53,8 @@ public class XceedActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         */
 
-        setTitle("Events");
-        for (int i = 0; i < 7; i++) {
+        setTitle("Xceed");
+        for (int i = 0; i < 2; i++) {
             entries.add(new Entry(1, i));
             categories.add(cats[i]);
         }
@@ -75,11 +69,11 @@ public class XceedActivity extends AppCompatActivity {
 
         //setting categories
         pieChart = (PieChart) findViewById(R.id.platinum);
-        pieChart.setCenterText("Events");
+        pieChart.setCenterText("Xceed");
         pieChart.setDescription(null);
         pieChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        PieDataSet dataset1 = new PieDataSet(entries, "Events");
+        PieDataSet dataset1 = new PieDataSet(entries, "Xceed");
         dataset1.setColors(ColorTemplate.VORDIPLOM_COLORS);
         dataset1.setDrawValues(false);
         dataset1.setValueTextColor(R.color.white);
@@ -120,40 +114,11 @@ public class XceedActivity extends AppCompatActivity {
     }
 
     private void initKeys() {
-        eventKeys.put("Sherlock","sherlock");
-        eventKeys.put("Riddles Of the Sphinx","riddles-of-the-sphinx");
-        eventKeys.put("Dalal Bull","dalal-bull");
-        eventKeys.put("Bank Robbery","bank-robbery");
-        eventKeys.put("Innovate","innovate");
-        eventKeys.put("Godspeed","godspeed");
-        eventKeys.put("How Stuff Works","how-stuff-works");
-        eventKeys.put("Building Information Modelling","building-information-modelling");
-        eventKeys.put("Circuit Craze","circuit-craze");
-        eventKeys.put("Fully Doped","fully-doped");
-        eventKeys.put("Chaos Theory","chaos-theory");
-        eventKeys.put("Marketing Madness","marketing-madness");
-        eventKeys.put("Enigma","enigma");
-        eventKeys.put("k! Wallet","k-wallet");
-        eventKeys.put("SciTech Quiz","scitech-quiz");
-        eventKeys.put("k! Biz Quiz","k-biz-quiz");
-        eventKeys.put("k! Open Quiz","k-open-quiz");
-        eventKeys.put("k! School Quiz","k-school-quiz");
-        eventKeys.put("Mock G20","mock-g20");
-        eventKeys.put("k! Spell Bee","k-spell-bee");
-        eventKeys.put("Gambling Math","gambling-math");
-        eventKeys.put("Alcatraz","alcatraz");
-        eventKeys.put("Robowars","robowars");
-        eventKeys.put("The Gem Quest","the-gem-quest");
-        eventKeys.put("Tanker Bot","tanker-bot");
-        eventKeys.put("Tame the Code","tame-the-code");
-        eventKeys.put("Heptathlon","heptathlon");
-        eventKeys.put("Onsite Programming Contest","onsite-programming-contest");
-        eventKeys.put("Online Programming Contest","online-programming-contest");
-        eventKeys.put("Contraptions","contraptions");
-        eventKeys.put("Ninja Coding","ninja-coding");
-        eventKeys.put("k!ardinal Quest","k-ardinal-quest");
-        eventKeys.put("The Imitation Game","the-imitation-game");
 
+        eventKeys.put("Chaos Theory Ahmedabad","chaos-theory");
+        eventKeys.put("Biz Quiz Ahmedabad","biz-quiz");
+        eventKeys.put("How Stuff Works Bangalore","how-stuff-works");
+        eventKeys.put("Chaos Theory Bangalore","chaos-theory-edb72509-27cc-46a7-b84b-744cec0c24e4");
     }
 
     //showing events
@@ -166,27 +131,16 @@ public class XceedActivity extends AppCompatActivity {
         entries = new ArrayList<>();
         eventlist = new ArrayList<>();
         String [] events;
-        if(cat.equals("General")){
-         events = general;
+        if(cat.equals("Ahmedabad")){
+         events = ahmedabad;
         }
-        else if(cat.equals("Engineering")){
-            events = engineering;
-        }
-        else if(cat.equals("Online")){
-            events = online;
-        }
-        else if(cat.equals("Coding")){
-            events = coding;
-        }
-        else if(cat.equals("Robotics")){
-           events = robotics;
-        }
-        else if(cat.equals("Quiz")){
-            events = quiz;
+        else if(cat.equals("Bangalore")){
+            events = bangalore;
         }
         else{
-            events = management;
+            events = hydrabad;
         }
+
         for (int i = 0; i < events.length; i++) {
             entries.add(new Entry(1, i));
             eventlist.add(events[i]);
@@ -211,9 +165,9 @@ public class XceedActivity extends AppCompatActivity {
         eventList.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                Intent intent = new Intent(XceedActivity.this,EventDetails.class);
+                Intent intent = new Intent(XceedActivity.this, XceedDetails.class);
                 intent.putExtra("name",eventlist.get(e.getXIndex()));
-                intent.putExtra("key",eventKeys.get(eventlist.get(e.getXIndex())));
+                intent.putExtra("key",eventKeys.get(eventlist.get(e.getXIndex())+" "+eventList.getCenterText()));
                 startActivity(intent);
             }
 

@@ -41,5 +41,18 @@
 
 </ScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_hospi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/pin"
+        android:onClick="map"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/scrollView2"
+        android:layout_alignRight="@+id/scrollView2"
+        android:layout_alignEnd="@+id/scrollView2" />
+
 
 </RelativeLayout>

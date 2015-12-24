@@ -33,6 +33,7 @@ public class OverlayActivity extends Activity {
        fb.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               onBackPressed();
                Uri uri = Uri.parse("https://www.facebook.com/kurkshetra.org.in");
                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                startActivity(intent);
@@ -42,6 +43,7 @@ public class OverlayActivity extends Activity {
        twitter.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               onBackPressed();
                Uri uri = Uri.parse("https://www.twitter.com/kurkshetra_ceg");
                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                startActivity(intent);
@@ -51,6 +53,7 @@ public class OverlayActivity extends Activity {
        youtube.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               onBackPressed();
                Uri uri = Uri.parse("https://www.youtube.com/kurkshetramedia");
                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                startActivity(intent);
@@ -79,12 +82,15 @@ public class OverlayActivity extends Activity {
             public void onClick(View v) {
                 TagView vw = (TagView) v;
                 if (vw.getText().toString().equals("Hospitality")) {
+                    onBackPressed();
                     Intent intent = new Intent(OverlayActivity.this,HospiActivity.class);
                     startActivity(intent);
                 } else if (vw.getText().toString().equals("Contacts")) {
+                    onBackPressed();
                     Intent intent = new Intent(OverlayActivity.this,contacts.class);
                     startActivity(intent);
                 } else if (vw.getText().toString().equals("About us")) {
+                    onBackPressed();
                     Intent intent = new Intent(OverlayActivity.this,AboutUsActivity.class);
                     startActivity(intent);
                 } else

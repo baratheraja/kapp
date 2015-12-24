@@ -1,5 +1,7 @@
 package in.org.kurukshetra.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -32,19 +34,31 @@ import java.io.InputStream;
 
 public class HospiActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public void map(View view) {
+        double latitude
+                = 13.0096996;
+        double longitude = 80.2353672;
+        String label = "College of Engineering,Guindy";
+        String uriBegin = "geo:" + latitude + "," + longitude;
+        String query = latitude + "," + longitude + "(" + label + ")";
+        String encodedQuery = Uri.encode(query);
+        String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+        Uri uri = Uri.parse(uriString);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+    public void call(View view){
+        String phno = view.getContentDescription().toString();
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phno));
+        startActivity(intent);
+    }
+    public void mail(View view)
+    {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + view.getContentDescription().toString()));
+        startActivity(Intent.createChooser(emailIntent, "Chooser Title"));
+    }
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     @Override
@@ -92,6 +106,8 @@ public class HospiActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_CONTENT = "contents";
+        private static final String POSITION = "position";
+
 
         public PlaceholderFragment() {
         }
@@ -100,10 +116,11 @@ public class HospiActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(String content) {
+        public static PlaceholderFragment newInstance(String content,int position) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putString(ARG_SECTION_CONTENT, content);
+            args.putInt(POSITION,position);
             fragment.setArguments(args);
             return fragment;
         }
@@ -111,7 +128,13 @@ public class HospiActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            int position = getArguments().getInt(POSITION);
+
             View rootView = inflater.inflate(R.layout.fragment_hospi, container, false);
+            FloatingActionButton fab= (FloatingActionButton) rootView.findViewById(R.id.fab_hospi);
+            if(position!=3) {
+                fab.hide();
+            }
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(Html.fromHtml(getArguments().getString(ARG_SECTION_CONTENT)));
             return rootView;
@@ -162,21 +185,22 @@ public class HospiActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-
-            try {
-
-                return PlaceholderFragment.newInstance(tabs.getJSONObject(position).getString("desc"));
-            } catch (Exception e) {
-                e.printStackTrace();
-                return  null;
+            {
+                try {
+                    if(position < 5)
+                        return PlaceholderFragment.newInstance(tabs.getJSONObject(position).getString("desc"),position);
+                    else
+                        return new hospi();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
-
 
         }
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
             return 6;
         }
 

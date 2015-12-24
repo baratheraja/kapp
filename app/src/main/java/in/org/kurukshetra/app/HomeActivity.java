@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pushbots.push.Pushbots;
+
 import in.org.kurukshetra.app.R;
 
 import java.util.ArrayList;
@@ -42,10 +44,17 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this,Events.class);
             startActivity(intent);
         }
+
         else if(imageView.getContentDescription().toString().equals("Gl")){
             Intent intent = new Intent(this,GlActivity.class);
             startActivity(intent);
         }
+        else if(imageView.getContentDescription().toString().equals("Xceed")){
+            Intent intent = new Intent(this,XceedActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     @Override
@@ -54,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        Pushbots.sharedInstance().init(this);
         mHeaderPicture = (KenBurnsView) findViewById(R.id.header_picture);
         mHeaderPicture.setResourceIds(R.drawable.image1, R.drawable.image2, R.drawable.image3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
