@@ -41,23 +41,27 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     public void onBindViewHolder(HomeViewHolder homeViewHolder, int i) {
 
        if(i==0) {
-           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+           homeViewHolder.imageView.setImageResource(R.drawable.events_card);
            homeViewHolder.imageView.setContentDescription("Events");
        }
        else if(i==1){
-           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+           homeViewHolder.imageView.setImageResource(R.drawable.xceed_card);
            homeViewHolder.imageView.setContentDescription("Xceed");
         }
-        else {
-           homeViewHolder.imageView.setImageResource(R.drawable.events_banner);
+        else if(i==2){
+           homeViewHolder.imageView.setImageResource(R.drawable.gl_card);
            homeViewHolder.imageView.setContentDescription("Gl");
+       }
+        else {
+           homeViewHolder.imageView.setImageResource(R.drawable.workshop_card);
+           homeViewHolder.imageView.setContentDescription("Workshops");
        }
        }
 
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
     static class HomeViewHolder extends RecyclerView.ViewHolder {

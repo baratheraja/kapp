@@ -35,4 +35,5 @@ dependencies {
     compile 'com.truizlop.fabreveallayout:library:1.0.0'
     compile 'com.github.amlcurran.showcaseview:library:5.3.0'
     compile 'com.pushbots:pushbots-lib:2.0.13@aar'
+    compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
 }

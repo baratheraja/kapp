@@ -3,13 +3,13 @@
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
-    <com.fourmob.panningview.library.PanningView
+   <!-- <com.fourmob.panningview.library.PanningView
         android:id="@+id/panningView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/blue"
         custom:panningDurationInMs="20000"
-        />
+        />-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

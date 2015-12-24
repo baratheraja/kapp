@@ -1,12 +1,16 @@
 package in.org.kurukshetra.app;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import java.util.ArrayList;
@@ -17,11 +21,15 @@ public class OverlayActivity extends Activity {
     TagView tag;
     CloudView view;
     ImageButton fb,twitter,youtube,close;
+
     ArrayList<TagView> tags = new ArrayList<>();
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overlay);
+       final SharedPreferences s;
+       final String MyPREFERENCES = "MyPrefs" ;
+       s=getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
         view =  (CloudView) findViewById(R.id.cloudview);
         initTag("Sponsors");
         initTag("Contacts");
@@ -66,8 +74,31 @@ public class OverlayActivity extends Activity {
                onBackPressed();
            }
        });
-    }
+       if(s.getInt("fab",0)==0) {
+           SharedPreferences.Editor e = s.edit();
+           e.putInt("fab", 1);
+           e.commit();
+           onCoachMark();
+       }
 
+   }
+    public void onCoachMark(){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.coach_mark);
+        dialog.setCanceledOnTouchOutside(true);
+        //for dismissing anywhere you touch
+        View masterView = dialog.findViewById(R.id.coach_mark_master_view);
+        masterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
     public void initTag(String name) {
 
         tag = new TagView(this);

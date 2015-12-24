@@ -34,7 +34,7 @@ public class Events extends AppCompatActivity {
     ArrayList<String> categories = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
 
-    String[] cats = {"General", "Engineering", "Online", "Coding", "Robotics", "Quiz", "Management"};
+    String[] cats = {"General", "Engineering", "Online", "Coding", "Robotics", "Quizzes", "Management"};
     String[] general = {"Alcatraz","Gambling Math","k! Spell Bee","Mock G20"};
     String[] engineering = {"BIM","Circuit Craze","Contraptions","Fully Doped","Godspeed","How Stuff Works","Innovate"};
     String[] online = {"Bank Robbery","Dalal Bull","OLPC","Riddles Of the Sphinx","Sherlock"};
@@ -73,10 +73,10 @@ public class Events extends AppCompatActivity {
         //setting the layout height
 
         //moving background
-        PanningView panningView = (PanningView) findViewById(R.id.panningView);
+/*        PanningView panningView = (PanningView) findViewById(R.id.panningView);
         panningView.setImageResource(R.drawable.blue);
         panningView.startPanning();
-
+*/
 
         //setting categories
         pieChart = (PieChart) findViewById(R.id.platinum);
@@ -186,7 +186,7 @@ public class Events extends AppCompatActivity {
         else if(cat.equals("Robotics")){
            events = robotics;
         }
-        else if(cat.equals("Quiz")){
+        else if(cat.equals("Quizzes")){
             events = quiz;
         }
         else{
@@ -219,6 +219,7 @@ public class Events extends AppCompatActivity {
                 Intent intent = new Intent(Events.this,EventDetails.class);
                 intent.putExtra("name",eventlist.get(e.getXIndex()));
                 intent.putExtra("key",eventKeys.get(eventlist.get(e.getXIndex())));
+                intent.putExtra("cat", categories.get(index));
                 startActivity(intent);
             }
 

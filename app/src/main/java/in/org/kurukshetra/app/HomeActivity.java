@@ -1,9 +1,11 @@
 package in.org.kurukshetra.app;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +26,13 @@ import android.widget.Toast;
 import com.pushbots.push.Pushbots;
 
 import in.org.kurukshetra.app.R;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -37,24 +42,32 @@ public class HomeActivity extends AppCompatActivity {
             R.drawable.notif_icon
     };
 
-    public void funEvents(View view) {
+    public void funEvents1(View view) {
         //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-        ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
-        if(imageView.getContentDescription().toString().equals("Events")){
+        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
             Intent intent = new Intent(this,Events.class);
             startActivity(intent);
-        }
+    }
 
-        else if(imageView.getContentDescription().toString().equals("Gl")){
-            Intent intent = new Intent(this,GlActivity.class);
-            startActivity(intent);
-        }
-        else if(imageView.getContentDescription().toString().equals("Xceed")){
-            Intent intent = new Intent(this,XceedActivity.class);
-            startActivity(intent);
-        }
+    public void funEvents2(View view) {
+        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
+        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image2);
+        Intent intent = new Intent(this,XceedActivity.class);
+        startActivity(intent);
+    }
 
+    public void funEvents3(View view) {
+        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
+        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
+        Intent intent = new Intent(this,GlActivity.class);
+        startActivity(intent);
+    }
 
+    public void funEvents4(View view) {
+        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
+      //  ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
+       // Intent intent = new Intent(this,Events.class);
+        //startActivity(intent);
     }
 
     @Override
@@ -63,6 +76,24 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final SharedPreferences s;
+        final String MyPREFERENCES = "MyPrefs" ;
+
+        s=getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+
+        if(s.getInt("status",0)==0)
+        {
+            new MaterialShowcaseView.Builder(this)
+                    .setTarget(fab)
+                    .setDismissText("GOT IT")
+                    .setContentText("This is some amazing feature you should know about")
+                    .show();
+            SharedPreferences.Editor e = s.edit();
+            e.putInt("status", 1);
+            e.commit();
+        }
+
         Pushbots.sharedInstance().init(this);
         mHeaderPicture = (KenBurnsView) findViewById(R.id.header_picture);
         mHeaderPicture.setResourceIds(R.drawable.image1, R.drawable.image2, R.drawable.image3);
@@ -75,12 +106,14 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.home_tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, OverlayActivity.class);
-                startActivity(intent);
+
+
+                    Intent intent = new Intent(HomeActivity.this, OverlayActivity.class);
+                    startActivity(intent);
+
             }
         });
 

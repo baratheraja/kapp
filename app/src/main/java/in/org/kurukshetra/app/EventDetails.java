@@ -41,7 +41,7 @@ public class EventDetails extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ImageView imageView;
-    String eventName,eventKey;
+    String eventName,eventKey,category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class EventDetails extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(upArrow);
         actionBar.setDisplayHomeAsUpEnabled(true);
         eventName=getIntent().getStringExtra("name");
+        category = getIntent().getStringExtra("cat");
         if(eventName.equals("BIM")){
             eventName = "Building Information Modelling";
         }
@@ -168,9 +169,9 @@ public class EventDetails extends AppCompatActivity {
             onBackPressed();
         }
         if (id == R.id.share){
-            String text="";
+            String text="http://m.kurukshetra.org.in/#/"+category.toString();
             intent2.setType("text/plain");
-            intent2.putExtra(Intent.EXTRA_TEXT,"Check out the  event at 'Kurukshetra'16' "+text);
+            intent2.putExtra(Intent.EXTRA_TEXT,"Check out the  event "+eventName+" at 'Kurukshetra'16' "+text);
             startActivity(Intent.createChooser(intent2, "Share via . . ."));
 
         }

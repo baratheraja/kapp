@@ -24,11 +24,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle args = getArguments();
-        RecyclerView recyclerView = new RecyclerView(getActivity());
-        recyclerView.setAdapter(new HomeAdapter(getActivity()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        return recyclerView;
+      //  Bundle args = getArguments();
+       // RecyclerView recyclerView = new RecyclerView(getActivity());
+      //  recyclerView.setAdapter(new HomeAdapter(getActivity()));
+      //  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return inflater.inflate(R.layout.home_menu, container, false);
     }
 
 }
