@@ -64,6 +64,8 @@ public class EventDetails extends AppCompatActivity {
         }
         else if(eventName.equals("OLPC")){
             eventName = "Online Programming Contest";
+        }else if(eventName.equals("ROS")){
+            eventName = "Riddles Of the Sphinx";
         }
         setTitle(eventName);
         eventKey = getIntent().getStringExtra("key");
@@ -82,7 +84,7 @@ public class EventDetails extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         imageView = (ImageView) findViewById(R.id.backdrop);
-        Drawable d = loadImageFromAsset("riddles-of-the-sphinx");
+        Drawable d = loadImageFromAsset(eventKey);
         imageView.setImageDrawable(d);
 
         String json = loadJSONFromAsset(eventKey);
@@ -127,7 +129,7 @@ public class EventDetails extends AppCompatActivity {
     public Drawable loadImageFromAsset(String file) {
         Drawable d=null;
         try {
-            InputStream ims = getAssets().open("images/"+file+".jpg");
+            InputStream ims = getAssets().open("images/"+file+".jpeg");
             d = Drawable.createFromStream(ims, null);
         }
         catch(IOException ex) {

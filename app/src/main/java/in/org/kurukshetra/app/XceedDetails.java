@@ -61,7 +61,7 @@ public class XceedDetails extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         imageView = (ImageView) findViewById(R.id.backdrop);
-        Drawable d = loadImageFromAsset("riddles-of-the-sphinx");
+        Drawable d = loadImageFromAsset(eventKey);
         imageView.setImageDrawable(d);
 
         String json = loadJSONFromAsset(eventKey);
@@ -106,7 +106,7 @@ public class XceedDetails extends AppCompatActivity {
     public Drawable loadImageFromAsset(String file) {
         Drawable d=null;
         try {
-            InputStream ims = getAssets().open("images/"+file+".jpg");
+            InputStream ims = getAssets().open("images/"+file+".jpeg");
             d = Drawable.createFromStream(ims, null);
         }
         catch(IOException ex) {

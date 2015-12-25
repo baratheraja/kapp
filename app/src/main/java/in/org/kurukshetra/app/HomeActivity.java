@@ -66,8 +66,8 @@ public class HomeActivity extends AppCompatActivity {
     public void funEvents4(View view) {
         //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
       //  ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
-       // Intent intent = new Intent(this,Events.class);
-        //startActivity(intent);
+       Intent intent = new Intent(this,Workshops.class);
+        startActivity(intent);
     }
 
     @Override

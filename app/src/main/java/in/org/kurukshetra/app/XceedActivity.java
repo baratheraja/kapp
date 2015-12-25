@@ -1,6 +1,7 @@
 package in.org.kurukshetra.app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -28,11 +29,12 @@ public class XceedActivity extends AppCompatActivity {
     ArrayList<Entry> entries = new ArrayList<>();
     ArrayList<String> categories = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
-
-    String[] cats = {"Ahmedabad", "Bangalore"};
+    int[] colors = { Color.rgb(189, 47, 71), Color.rgb(228, 101, 92), Color.rgb(241, 177, 79),
+            Color.rgb(161, 204, 89), Color.rgb(33, 197, 163), Color.rgb(58, 158, 173),Color.rgb(92, 101, 100)};
+    String[] cats = {"Ahmedabad", "Bangalore","Hyderabad"};
     String[] ahmedabad = {"Chaos Theory","Biz Quiz"};
     String[] bangalore = {"Chaos Theory","How Stuff Works"};
-    String[] hydrabad = {};
+    String[] hyderabad = {"Chaos Theory","How Stuff Works"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,7 +56,7 @@ public class XceedActivity extends AppCompatActivity {
         */
 
         setTitle("Xceed");
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             entries.add(new Entry(1, i));
             categories.add(cats[i]);
         }
@@ -62,28 +64,27 @@ public class XceedActivity extends AppCompatActivity {
         //setting the layout height
 
         //moving background
-        PanningView panningView = (PanningView) findViewById(R.id.panningView);
+       /* PanningView panningView = (PanningView) findViewById(R.id.panningView);
         panningView.setImageResource(R.drawable.blue);
         panningView.startPanning();
-
+*/
 
         //setting categories
         pieChart = (PieChart) findViewById(R.id.platinum);
         pieChart.setCenterText("Xceed");
         pieChart.setDescription(null);
-        pieChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+        pieChart.animateY(1500, Easing.EasingOption.EaseInOutCirc);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         PieDataSet dataset1 = new PieDataSet(entries, "Xceed");
-        dataset1.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        dataset1.setColors(colors);
         dataset1.setDrawValues(false);
-        dataset1.setValueTextColor(R.color.white);
         PieData pieData1 = new PieData(categories, dataset1);
-        pieData1.setValueTextColor(R.color.white);
+        pieData1.setValueTextColor(Color.rgb(255,255,255));
+        pieData1.setValueTextSize(16);
         pieChart.setDescriptionTextSize(100);
-        pieChart.setDescriptionColor(R.color.white);
         pieChart.setData(pieData1);
-        pieChart.setCenterTextColor(R.color.white);
         pieChart.setHoleRadius(40);
+        pieChart.setCenterTextColor(R.color.black);
         pieChart.setTransparentCircleRadius(50);
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -119,6 +120,9 @@ public class XceedActivity extends AppCompatActivity {
         eventKeys.put("Biz Quiz Ahmedabad","biz-quiz");
         eventKeys.put("How Stuff Works Bangalore","how-stuff-works");
         eventKeys.put("Chaos Theory Bangalore","chaos-theory-edb72509-27cc-46a7-b84b-744cec0c24e4");
+        eventKeys.put("How Stuff Works Hyderabad","how-stuff-works");
+        eventKeys.put("Chaos Theory Hyderabad","chaos-theory-edb72509-27cc-46a7-b84b-744cec0c24e4");
+
     }
 
     //showing events
@@ -138,7 +142,7 @@ public class XceedActivity extends AppCompatActivity {
             events = bangalore;
         }
         else{
-            events = hydrabad;
+            events = hyderabad;
         }
 
         for (int i = 0; i < events.length; i++) {
@@ -151,16 +155,15 @@ public class XceedActivity extends AppCompatActivity {
         eventList.setDescription(null);
         eventList.animateY(1500, Easing.EasingOption.EaseInOutQuad);
         PieDataSet dataset2 = new PieDataSet(entries, "Events");
-        dataset2.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataset2.setColors(colors);
         dataset2.setDrawValues(false);
-        dataset2.setValueTextColor(R.color.white);
         PieData pieData2 = new PieData(eventlist, dataset2);
-        pieData2.setValueTextColor(R.color.white);
+        pieData2.setValueTextColor(Color.rgb(255, 255, 255));
+        pieData2.setValueTextSize(16);
         eventList.setDescriptionTextSize(100);
-        eventList.setDescriptionColor(R.color.white);
         eventList.setData(pieData2);
-        eventList.setCenterTextColor(R.color.white);
         eventList.setHoleRadius(40);
+        eventList.setCenterTextColor(R.color.black);
         eventList.setTransparentCircleRadius(50);
         eventList.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override

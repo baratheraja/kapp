@@ -32,7 +32,7 @@ public class ContactDetails {
         names.put("scitech-quiz",new String[]{"A Raja","Reuben V Mathew","Prasath Rajan"});
         names.put("k-biz-quiz",new String[]{"Adharsh Gukan"});
         names.put("k-open-quiz",new String[]{"Adharsh Gukan"});
-        names.put("k-school-quiz",new String[]{"S.Saravana Kumar"});
+        names.put("k-general-quiz",new String[]{"S.Saravana Kumar"});
         names.put("mock-g20",new String[]{"Tejal","Agraja"});
         names.put("k-spell-bee",new String[]{"Keerthana"});
         names.put("gambling-math",new String[]{"Nandini","Sanduni U. Kodagoda"});
@@ -67,7 +67,7 @@ public class ContactDetails {
         ph_no.put("scitech-quiz",new String[]{"+91 96293 14522","+91 97891 13731","+91 94879 69618"});
         ph_no.put("k-biz-quiz",new String[]{"+91 94875 39200"});
         ph_no.put("k-open-quiz",new String[]{"+91 94875 39200"});
-        ph_no.put("k-school-quiz",new String[]{"+91 76674 66171"});
+        ph_no.put("k-general-quiz",new String[]{"+91 76674 66171"});
         ph_no.put("mock-g20",new String[]{"+91 9894775962","+91 9884544356"});
         ph_no.put("k-spell-bee",new String[]{"+91 90423 89902"});
         ph_no.put("gambling-math",new String[]{"+91 97109 29778","+91 96004 92164"});
@@ -103,7 +103,7 @@ public class ContactDetails {
         mail_id.put("scitech-quiz","scitechquiz@kurukshetra.org.in" );
         mail_id.put("k-biz-quiz","bizquiz@kurukshetra.org.in" );
         mail_id.put("k-open-quiz","openquiz@kurukshetra.org.in" );
-        mail_id.put("k-school-quiz"," schoolquiz@kurukshetra.org.in");
+        mail_id.put("k-general-quiz"," generalquiz@kurukshetra.org.in");
         mail_id.put("mock-g20","g20@kurukshetra.org.in" );
         mail_id.put("k-spell-bee","spellbee@kurukshetra.org.in" );
         mail_id.put("gambling-math","gamblingmath@kurukshetra.org.in" );

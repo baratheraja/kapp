@@ -36,6 +36,7 @@ public class OverlayActivity extends Activity {
         initTag("About us");
         initTag("Hospitality");
         initTag("Login");
+        initTag("Student Ambassador");
         view.setCloudTags(tags);
        fb=(ImageButton) findViewById(R.id.fb_icon);
        fb.setOnClickListener(new View.OnClickListener() {
@@ -114,18 +115,26 @@ public class OverlayActivity extends Activity {
                 TagView vw = (TagView) v;
                 if (vw.getText().toString().equals("Hospitality")) {
                     onBackPressed();
-                    Intent intent = new Intent(OverlayActivity.this,HospiActivity.class);
+                    Intent intent = new Intent(OverlayActivity.this, HospiActivity.class);
                     startActivity(intent);
                 } else if (vw.getText().toString().equals("Contacts")) {
                     onBackPressed();
-                    Intent intent = new Intent(OverlayActivity.this,contacts.class);
+                    Intent intent = new Intent(OverlayActivity.this, contacts.class);
                     startActivity(intent);
                 } else if (vw.getText().toString().equals("About us")) {
                     onBackPressed();
-                    Intent intent = new Intent(OverlayActivity.this,AboutUsActivity.class);
+                    Intent intent = new Intent(OverlayActivity.this, AboutUsActivity.class);
                     startActivity(intent);
-                } else
-                    Toast.makeText(OverlayActivity.this, "Item clicked", Toast.LENGTH_SHORT).show();
+                } else if (vw.getText().toString().equals("Sponsors")) {
+                    onBackPressed();
+                    Intent intent = new Intent(OverlayActivity.this, Sponsers.class);
+                    startActivity(intent);
+                }else if (vw.getText().toString().equals("Student Ambassador")) {
+                    Uri uri = Uri.parse("http://m.kurukshetra.org.in/#/sa");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+
             }
         });
         tags.add(tag);

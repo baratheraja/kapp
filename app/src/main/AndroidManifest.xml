@@ -32,11 +32,19 @@
             android:label="@string/title_activity_events"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Workshops"
+            android:label="Workshops"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".XceedActivity"
             android:label="@string/title_activity_xceed"
             android:screenOrientation="portrait" />
         <activity
             android:name=".EventDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WorkshopDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -85,7 +93,7 @@
         </activity>
         <activity
             android:name=".AboutUsActivity"
-            android:label="@string/title_activity_about_us"
+            android:label="About us"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -122,9 +130,13 @@
         <service android:name="com.pushbots.push.GCMIntentService" />
 
         <activity
-            android:name=".Aa"
-            android:label="@string/title_activity_aa"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".Sponsers"
+            android:label="Previous Sponsors"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

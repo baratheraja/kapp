@@ -40,7 +40,7 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     @Override
     public void onBindViewHolder(HomeViewHolder homeViewHolder, int i) {
 
-       if(i==0) {
+       /*if(i==0) {
            homeViewHolder.imageView.setImageResource(R.drawable.events_card);
            homeViewHolder.imageView.setContentDescription("Events");
        }
@@ -55,7 +55,7 @@ class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
         else {
            homeViewHolder.imageView.setImageResource(R.drawable.workshop_card);
            homeViewHolder.imageView.setContentDescription("Workshops");
-       }
+       }*/
        }
 
 

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.org.kurukshetra.app"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -32,8 +32,8 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
-    compile 'com.truizlop.fabreveallayout:library:1.0.0'
     compile 'com.github.amlcurran.showcaseview:library:5.3.0'
     compile 'com.pushbots:pushbots-lib:2.0.13@aar'
     compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
+    compile files('libs/android-smart-image-view-1.0.0.jar')
 }
