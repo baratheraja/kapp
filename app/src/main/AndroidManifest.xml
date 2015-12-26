@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.org.kurukshetra.app">
+    package="in.org.kurukshetra.app16">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,105 +9,123 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <permission
-        android:name="in.org.kurukshetra.app.permission.C2D_MESSAGE"
+        android:name="in.org.kurukshetra.app16.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="in.org.kurukshetra.app.permission.C2D_MESSAGE" />
+    <uses-permission android:name="in.org.kurukshetra.app16.permission.C2D_MESSAGE" />
     <!-- This app has permission to register and receive dataf message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
+        android:name="in.org.kurukshetra.app16.app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="in.org.kurukshetra.app16.SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="in.org.kurukshetra.app16.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Events"
+            android:name="in.org.kurukshetra.app16.Events"
             android:label="@string/title_activity_events"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
+        </activity>
         <activity
-            android:name=".Workshops"
+            android:name="in.org.kurukshetra.app16.Workshops"
             android:label="Workshops"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
+        </activity>
         <activity
-            android:name=".XceedActivity"
+            android:name="in.org.kurukshetra.app16.XceedActivity"
             android:label="@string/title_activity_xceed"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
+        </activity>
         <activity
-            android:name=".EventDetails"
+            android:name="in.org.kurukshetra.app16.EventDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".WorkshopDetails"
+            android:name="in.org.kurukshetra.app16.WorkshopDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".XceedDetails"
+            android:name="in.org.kurukshetra.app16.XceedDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HomeActivity"
+            android:name="in.org.kurukshetra.app16.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="in.org.kurukshetra.app.MESSAGE" />
+                <action android:name="in.org.kurukshetra.app16.MESSAGE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".OverlayActivity"
+            android:name="in.org.kurukshetra.app16.OverlayActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
-            android:name=".HospiActivity"
+            android:name="in.org.kurukshetra.app16.HospiActivity"
             android:label="Hospitality"
-            android:parentActivityName=".HomeActivity"
+            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name=".contacts"
+            android:name="in.org.kurukshetra.app16.contacts"
             android:label="Contacts"
-            android:parentActivityName=".HomeActivity"
+            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name=".AboutUsActivity"
+            android:name="in.org.kurukshetra.app16.AboutUsActivity"
             android:label="About us"
-            android:parentActivityName=".HomeActivity"
+            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name="in.org.kurukshetra.app16.LoginActivity" />
         <activity
-            android:name=".GlActivity"
+            android:name="in.org.kurukshetra.app16.GlActivity"
             android:label="Guest Lectures"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GlDetails"
+            android:name="in.org.kurukshetra.app16.GlDetails"
             android:label="@string/title_activity_gl_details"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -122,7 +140,7 @@
                 <!-- Receives the registration id. -->
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="in.org.kurukshetra.app" />
+                <category android:name="in.org.kurukshetra.app16" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.pushbots.push.DefaultPushHandler" />
@@ -130,13 +148,40 @@
         <service android:name="com.pushbots.push.GCMIntentService" />
 
         <activity
-            android:name=".Sponsers"
+            android:name="in.org.kurukshetra.app16.Sponsers"
             android:label="Previous Sponsors"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
+
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "in.org.kurukshetra.app"
+        applicationId "in.org.kurukshetra.app16"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -14,7 +14,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,4 +36,5 @@ dependencies {
     compile 'com.pushbots:pushbots-lib:2.0.13@aar'
     compile 'com.github.deano2390:MaterialShowcaseView:1.0.5@aar'
     compile files('libs/android-smart-image-view-1.0.0.jar')
+    compile 'com.google.android.gms:play-services-analytics:7.3.0'
 }

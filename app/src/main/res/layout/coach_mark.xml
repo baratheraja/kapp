@@ -18,7 +18,7 @@
             android:textStyle="bold"
             android:textSize="25sp"
             android:textColor="@android:color/white"
-            android:text="Swipe in any direction for menu"
+            android:text="Hover the screen to navigate between the menu item"
             android:gravity="center_horizontal"
             android:layout_below="@+id/coach_marks_image"
             android:layout_centerHorizontal="true"

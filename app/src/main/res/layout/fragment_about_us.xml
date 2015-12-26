@@ -9,7 +9,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="in.org.kurukshetra.app.AboutUsActivity$PlaceholderFragment"
+    tools:context="in.org.kurukshetra.app16.AboutUsActivity$PlaceholderFragment"
     android:orientation="vertical"
     android:paddingTop="0dp"
     >

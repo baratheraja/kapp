@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="in.org.kurukshetra.app.HospiActivity">
+    tools:context="in.org.kurukshetra.app16.HospiActivity">
     <item
         android:id="@+id/share"
         android:icon="@drawable/share"
