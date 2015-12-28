@@ -37,35 +37,38 @@ UpdatesAdapter updatesAdapter;
                              Bundle savedInstanceState) {
 
 
+try {
+    Thread t = new Thread() {
+        @Override
+        public void run() {
+            try {
+                obj = new HandleJSON();
 
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    obj = new HandleJSON();
+            } catch (Exception e) {
 
-                } catch (Exception e) {
-
-                } finally {
-                    setdata();
-                }
+            } finally {
+                setdata();
             }
-        };
-        t.start();
-
-        list.clear();
-        list.add("Please connect to the internet");
-        pref = getActivity().getSharedPreferences(My_Pref,0);
-        updatecount = pref.getInt("size", 0);
-        if (updatecount > 0)
-            list.clear();
-
-        for (int i = 0; i < updatecount; i++) {
-
-            list.add(pref.getString("update" + i, ""));
-
         }
+    };
+    t.start();
+}
+catch (Exception e){
+    e.printStackTrace();
+}
 
+    list.clear();
+    list.add("Please connect to the internet");
+    pref = getActivity().getSharedPreferences(My_Pref, 0);
+    updatecount = pref.getInt("size", 0);
+    if (updatecount > 0)
+        list.clear();
+
+    for (int i = 0; i < updatecount; i++) {
+
+        list.add(pref.getString("update" + i, ""));
+
+    }
         View view = inflater.inflate(R.layout.fragment_update, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.itemsRecyclerView);
         updatesAdapter = new UpdatesAdapter(getActivity(),list);
@@ -76,16 +79,19 @@ UpdatesAdapter updatesAdapter;
 
     public void setdata()
     {
-        pref = getActivity().getSharedPreferences(My_Pref, 0);
-        SharedPreferences.Editor ed = pref.edit();
-        if(obj.count>0)
-            ed.putInt("size", obj.count);
-        for(int i=0;i<obj.count;i++)
-        {
-            ed.putString("update"+i,obj.title[i]);
+        try {
+            pref = getActivity().getSharedPreferences(My_Pref, 0);
+            SharedPreferences.Editor ed = pref.edit();
+            if (obj.count > 0)
+                ed.putInt("size", obj.count);
+            for (int i = 0; i < obj.count; i++) {
+                ed.putString("update" + i, obj.title[i]);
+            }
+            ed.commit();
         }
-        ed.commit();
-
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
