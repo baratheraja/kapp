@@ -27,7 +27,6 @@ public class Events extends AppCompatActivity {
     private ScrollView scrollView;
     private Map<String, String> eventKeys = new HashMap<>();
     ArrayList<Entry> entries = new ArrayList<>();
-    ArrayList<String> categories = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
 
     String[] cats = {"General", "Engineering", "Online", "Coding", "Robotics", "Quizzes", "Management"};
@@ -38,18 +37,26 @@ public class Events extends AppCompatActivity {
     String[] robotics = {"k!ardinal Quest","Robowars","Tanker Bot","The Gem Quest"};
     String[] quiz = {"k! Biz Quiz","k! Open Quiz","k! General Quiz","SciTech Quiz"};
     String[] management = {"Chaos Theory","Enigma","k! Wallet","Marketing Madness"};
-    int[] colors = { Color.rgb(189, 47, 71), Color.rgb(228, 101, 92), Color.rgb(241, 177, 79),
-            Color.rgb(161, 204, 89), Color.rgb(33, 197, 163), Color.rgb(58, 158, 173),Color.rgb(92, 101, 100)};
+
+	ArrayList<String> categories = new ArrayList<>();
+
+
+	int[] colors = {
+		    Color.rgb(189, 47, 71), Color.rgb(228, 101, 92), Color.rgb(241, 177, 79),
+            Color.rgb(161, 204, 89), Color.rgb(33, 197, 163), Color.rgb(58, 158, 173),
+		    Color.rgb(92, 101, 100)
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         initKeys();
 
         setContentView(R.layout.activity_events);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+	    if (actionBar != null) {
+		    actionBar.setDisplayHomeAsUpEnabled(true);
+	    }
 
       /*  Toolbar toolbar = (Toolbar) findViewById(R.id.event_toolbar);
         setSupportActionBar(toolbar);
@@ -62,31 +69,26 @@ public class Events extends AppCompatActivity {
         */
         setTitle("Events");
 
-        for (int i = 0; i < 7; i++) {
-            entries.add(new Entry(1, i));
-            categories.add(cats[i]);
-        }
-
-        //setting the layout height
-
-        //moving background
-    //    PanningView panningView = (PanningView) findViewById(R.id.panningView);
-     //   panningView.setImageResource(R.drawable.blue);
-      //  panningView.startPanning();
-
         //setting categories
-        pieChart = (PieChart) findViewById(R.id.platinum);
+	    for (int i = 0; i < cats.length; i++) {
+		    entries.add(new Entry(1, i));
+		    categories.add(cats[i]);
+	    }
+
+	    pieChart = (PieChart) findViewById(R.id.platinum);
         pieChart.setCenterText("Events");
         pieChart.setDescription(null);
         pieChart.animateY(1500, Easing.EasingOption.EaseInOutCirc);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
+
         PieDataSet dataset1 = new PieDataSet(entries, "Events");
         dataset1.setColors(colors);
         dataset1.setDrawValues(false);
         PieData pieData1 = new PieData(categories, dataset1);
         pieData1.setValueTextColor(Color.rgb(255,255,255));
         pieData1.setValueTextSize(16);
-        pieChart.setDescriptionTextSize(100);
+
+	    pieChart.setDescriptionTextSize(100);
         pieChart.setData(pieData1);
         pieChart.setHoleRadius(40);
         pieChart.setCenterTextColor(R.color.black);
@@ -153,7 +155,6 @@ public class Events extends AppCompatActivity {
         eventKeys.put("Ninja Coding", "ninja-coding");
         eventKeys.put("k!ardinal Quest","k-ardinal-quest");
         eventKeys.put("The Imitation Game", "the-imitation-game");
-
     }
 
     //showing events
@@ -166,27 +167,31 @@ public class Events extends AppCompatActivity {
         entries = new ArrayList<>();
         eventlist = new ArrayList<>();
         String [] events;
-        if(cat.equals("General")){
-         events = general;
+
+        switch (cat) {
+            case "General":
+                events = general;
+                break;
+            case "Engineering":
+                events = engineering;
+                break;
+            case "Online":
+                events = online;
+                break;
+            case "Coding":
+                events = coding;
+                break;
+            case "Robotics":
+                events = robotics;
+                break;
+            case "Quizzes":
+                events = quiz;
+                break;
+            default:
+                events = management;
+                break;
         }
-        else if(cat.equals("Engineering")){
-            events = engineering;
-        }
-        else if(cat.equals("Online")){
-            events = online;
-        }
-        else if(cat.equals("Coding")){
-            events = coding;
-        }
-        else if(cat.equals("Robotics")){
-           events = robotics;
-        }
-        else if(cat.equals("Quizzes")){
-            events = quiz;
-        }
-        else{
-            events = management;
-        }
+
         for (int i = 0; i < events.length; i++) {
             entries.add(new Entry(1, i));
             eventlist.add(events[i]);
@@ -196,12 +201,14 @@ public class Events extends AppCompatActivity {
         eventList.setCenterText(categories.get(index));
         eventList.setDescription(null);
         eventList.animateY(1500, Easing.EasingOption.EaseInOutQuad);
+
         PieDataSet dataset2 = new PieDataSet(entries, "Events");
         dataset2.setColors(colors);
         dataset2.setDrawValues(false);
         PieData pieData2 = new PieData(eventlist, dataset2);
         pieData2.setValueTextColor(Color.rgb(255, 255, 255));
         pieData2.setValueTextSize(16);
+
         eventList.setDescriptionTextSize(100);
         eventList.setData(pieData2);
         eventList.setHoleRadius(40);
@@ -211,8 +218,8 @@ public class Events extends AppCompatActivity {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
                 Intent intent = new Intent(Events.this,EventDetails.class);
-                intent.putExtra("name",eventlist.get(e.getXIndex()));
-                intent.putExtra("key",eventKeys.get(eventlist.get(e.getXIndex())));
+                intent.putExtra("name", eventlist.get(e.getXIndex()));
+                intent.putExtra("key", eventKeys.get(eventlist.get(e.getXIndex())));
                 intent.putExtra("cat", categories.get(index));
                 startActivity(intent);
             }
@@ -229,9 +236,7 @@ public class Events extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home) {
-            onBackPressed();
-        }
+        if (id == android.R.id.home) onBackPressed ();
 
         return super.onOptionsItemSelected(item);
     }
