@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -121,7 +124,9 @@ public class WorkshopDetails extends AppCompatActivity {
     public String loadJSONFromAsset(String name) {
         String json;
         try {
-            InputStream is = getAssets().open("workshops/"+name+".json");
+
+            File inputFile = new File(Environment.getExternalStorageDirectory()+"/k16/workshops",name+".json");
+            InputStream is = new FileInputStream(inputFile);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
