@@ -53,7 +53,7 @@ public class contacts extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new genral_enquiry(), "General Enquiry");
         adapter.addFragment(new hospi(), "Hospitality");
-        adapter.addFragment(new events(),"Events");
+        adapter.addFragment(new event(),"Events");
         adapter.addFragment(new workshop(), "Workshops");
         adapter.addFragment(new ir(), "Industry Relations");
         adapter.addFragment(new media(), "Media");

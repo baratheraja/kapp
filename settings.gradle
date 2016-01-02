@@ -1,1 +1,1 @@
-include ':app', ':PanningViewLibrary', ':mylibrary'
+include ':app', ':mylibrary'
