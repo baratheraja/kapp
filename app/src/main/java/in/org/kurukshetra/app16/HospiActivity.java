@@ -2,32 +2,33 @@ package in.org.kurukshetra.app16;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
-
-import in.org.kurukshetra.app16.app.MyApplication;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import in.org.kurukshetra.app16.app.MyApplication;
 
 public class HospiActivity extends AppCompatActivity {
 
@@ -164,7 +165,9 @@ public class HospiActivity extends AppCompatActivity {
             String json;
 
             try {
-                InputStream is = getAssets().open("hospi/hospitalities.json");
+
+                File inputFile = new File(Environment.getExternalStorageDirectory()+"/k16/hospi","hospitalities.json");
+                InputStream is = new FileInputStream(inputFile);
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);

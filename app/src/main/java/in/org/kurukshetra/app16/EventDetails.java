@@ -3,6 +3,8 @@ package in.org.kurukshetra.app16;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,22 +13,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import in.org.kurukshetra.app16.app.MyApplication;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import in.org.kurukshetra.app16.app.MyApplication;
 
 public class EventDetails extends AppCompatActivity {
     private Toolbar toolbar;
@@ -132,7 +135,8 @@ public class EventDetails extends AppCompatActivity {
     public String loadJSONFromAsset(String name) {
         String json;
         try {
-            InputStream is = getAssets().open("events/"+name+".json");
+            File inputFile = new File(Environment.getExternalStorageDirectory()+"/k16/events",name+".json");
+            InputStream is = new FileInputStream(inputFile);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
