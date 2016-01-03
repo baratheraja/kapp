@@ -22,11 +22,10 @@ public class ChatDialog extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate (savedInstanceState);
-//		this.requestWindowFeature (Window.FEATURE_NO_TITLE);
-
 		myDialog = this;
+		myDialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
 
+		super.onCreate (savedInstanceState);
 		setContentView(R.layout.chat);
 
 		arrayList = new ArrayList<> ();

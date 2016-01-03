@@ -14,16 +14,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 public class ChatHead extends Service {
 
 	private WindowManager windowManager;
 	private RelativeLayout chatheadView, removeView;
-	private ImageView chatheadImg, removeImg;
+	private ImageView removeImg;
 	private int x_init_cord, y_init_cord, x_init_margin, y_init_margin;
 	private android.graphics.Point windowPoint = new android.graphics.Point ();
-	private boolean isLeft = true;
 
 	@Override
 	public void onCreate() {
@@ -31,7 +29,7 @@ public class ChatHead extends Service {
 	}
 
 	private void handleStart(){
-		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+		windowManager = (WindowManager) getSystemService (WINDOW_SERVICE);
 
 		LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -48,8 +46,7 @@ public class ChatHead extends Service {
 		removeImg = (ImageView)removeView.findViewById(R.id.remove_img);
 		windowManager.addView(removeView, paramRemove);
 
-		chatheadView = (RelativeLayout) inflater.inflate(R.layout.chathead, null);
-		chatheadImg = (ImageView) chatheadView.findViewById(R.id.chathead_img);
+		chatheadView = (RelativeLayout) inflater.inflate (R.layout.chathead, null);
 
 		windowManager.getDefaultDisplay().getSize(windowPoint);
 
@@ -233,10 +230,8 @@ public class ChatHead extends Service {
 		int w = chatheadView.getWidth();
 
 		if (x_cord_now + w / 2 <= windowPoint.x / 2) {
-			isLeft = true;
 			moveToLeft(x_cord_now);
 		} else if (x_cord_now + w / 2 > windowPoint.x / 2) {
-			isLeft = false;
 			moveToRight (x_cord_now);
 		}
 
@@ -247,8 +242,8 @@ public class ChatHead extends Service {
 			WindowManager.LayoutParams mParams = (WindowManager.LayoutParams) chatheadView.getLayoutParams();
 			public void onTick(long t) {
 				long step = (500 - t)/5;
-				mParams.x = (int)(double)bounceValue(step,x_cord_now);
-				windowManager.updateViewLayout(chatheadView, mParams);
+				mParams.x = (int)(double)bounceValue(step, x_cord_now);
+				windowManager.updateViewLayout (chatheadView, mParams);
 			}
 			public void onFinish() {
 				mParams.x = 0;
@@ -285,7 +280,7 @@ public class ChatHead extends Service {
 		if(ChatDialog.active)
 			ChatDialog.myDialog.finish ();
 		else
-			startActivity (new Intent (this, ChatDialog.class).setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+			startActivity (new Intent (this, ChatDialog.class).setFlags (Intent.FLAG_ACTIVITY_SINGLE_TOP));
 	}
 
 	private void chathead_longclick(){
@@ -306,8 +301,7 @@ public class ChatHead extends Service {
 			handleStart();
 			return super.onStartCommand(intent, flags, startId);
 		}
-		else
-			return Service.START_NOT_STICKY;
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
