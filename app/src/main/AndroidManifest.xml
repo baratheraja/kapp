@@ -252,8 +252,7 @@
 
         <service
             android:name=".ChatHead"
-            android:enabled="true"
-            android:exported="true">
+            android:enabled="true">
         </service>
 
         <!-- SyncAdapter's dummy authentication service -->

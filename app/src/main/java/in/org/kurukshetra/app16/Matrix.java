@@ -34,12 +34,12 @@ public class Matrix {
 		return matrix;
 	}
 	
-	public static final Point pointMakeRotation(Point point, Point direction, double angle) {
-	   // Point resultPoint = increaseSpeed(point,direction,angle);
+	public static final Point3D pointMakeRotation(Point3D point, Point3D direction, double angle) {
+	   // Point3D resultPoint = increaseSpeed(point,direction,angle);
 		return increaseSpeed(point,direction,angle);
 	}
 
-	public static final Point increaseSpeed(Point point,Point direction,double angle){
+	public static final Point3D increaseSpeed(Point3D point,Point3D direction,double angle){
 		if (angle == 0) {
 			return point;
 		}
@@ -84,7 +84,7 @@ public class Matrix {
 			result = matrixMutiply(result, m1);
 		}
 
-		Point resultPoint = new Point(result.matrix[0][0], result.matrix[0][1], result.matrix[0][2]);
+		Point3D resultPoint = new Point3D (result.matrix[0][0], result.matrix[0][1], result.matrix[0][2]);
 		return resultPoint;
 	}
 }
