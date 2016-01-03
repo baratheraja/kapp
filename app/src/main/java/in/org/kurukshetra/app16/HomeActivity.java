@@ -30,13 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.org.kurukshetra.app16.app.MyApplication;
+import in.org.kurukshetra.app16.sync.K16SyncAdapter;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class HomeActivity extends AppCompatActivity {
 
 
 
-    public static final String[] ASSET_SUB_DIR = { "events" , "hospi" , "images" , "workshops", "xceed" };
+    public static final String[] ASSET_SUB_DIR = { "hospi" , "workshops", "xceed" , "events" };
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -120,7 +121,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        K16SyncAdapter.initializeSyncAdapter(this);
+        K16SyncAdapter.syncImmediately(this);
 
     }
 
