@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:background="@drawable/btn_white">
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:clickable="true"
+          android:id="@+id/dialog_top"
+          android:layout_weight="3" />
+
+    <ListView
+        android:id="@+id/chat"
+        android:background="#fff"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:divider="#fff"
+        android:layout_weight="6"
+        android:gravity="top|start"
+        android:dividerHeight="10dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <EditText
+            android:focusableInTouchMode="true"
+            android:id="@+id/new_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:hint="@string/placeholder"
+            android:textColorHint="#bcaaa4"
+            android:inputType="text"
+            android:clickable="true"
+            android:textColor="#000"
+            android:layout_alignParentBottom="true"
+            />
+
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_send"
+            />
+    </RelativeLayout>
+</LinearLayout>

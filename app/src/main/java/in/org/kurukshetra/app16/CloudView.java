@@ -16,7 +16,7 @@ import java.util.TimerTask;
 public class CloudView extends RelativeLayout {
 	private static final String TAG = "CloudView";
 	private ArrayList<TagView> mTags;
-	private ArrayList<Point> mPoints = new ArrayList<Point>();
+	private ArrayList<Point> mPoints = new ArrayList<>();
 	private GestureDetector mDetector;
 	private int mTagTextSize = 30;
 	private Point normalDirection = null;
