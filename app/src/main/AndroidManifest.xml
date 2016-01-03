@@ -130,6 +130,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
+
+        <activity
+            android:name="in.org.kurukshetra.app16.ProjectsActivity"
+            android:label="Projects"
+            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
+        </activity>
+
         <activity android:name="in.org.kurukshetra.app16.LoginActivity" />
         <activity
             android:name="in.org.kurukshetra.app16.GlActivity"
@@ -173,6 +185,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+		
+		<activity
+            android:name=".ChatDialog"
+            android:label="Chat"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity"/>
+        </activity>
 
         <activity
             android:name="in.org.kurukshetra.app16.workshopreg.Twoparticipant"
@@ -186,6 +208,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name="in.org.kurukshetra.app16.QR_reader"
+            android:label="QR Scannner"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="in.org.kurukshetra.app16.LoginActivity2"
             android:label="Login"
             android:screenOrientation="portrait"
@@ -223,7 +250,11 @@
 
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
-
+        <service
+            android:name=".ChatHead"
+            android:enabled="true"
+            android:exported="true">
+        </service>
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.K16AuthenticatorService">

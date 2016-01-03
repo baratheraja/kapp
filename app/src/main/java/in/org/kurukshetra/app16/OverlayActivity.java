@@ -2,7 +2,9 @@ package in.org.kurukshetra.app16;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -65,6 +67,8 @@ public class OverlayActivity extends AppCompatActivity{
         initTag("About us");
         initTag("Hospitality");
         initTag("Student Ambassador");
+        initTag("QR Scanner");
+		initTag("Chat");
         view.setCloudTags(tags);
        loginFragment = LoginFragment.loginInstance();
        final FragmentManager manager = getSupportFragmentManager();
@@ -225,6 +229,40 @@ public class OverlayActivity extends AppCompatActivity{
                     Intent intent = new Intent(OverlayActivity.this, GlActivity.class);
                     startActivity(intent);
                     finish();
+				} else if (vw.getText().toString().equals("Chat") {
+					
+					startActivity(new Intent(OverlayActivity.this, ChatDialog.class);
+					finish();
+			    } else if (vw.getText().toString().equals("QR Scanner")) {
+                    SessionManager session = new SessionManager(OverlayActivity.this);
+                    if (session.isLoggedIn()) {
+                        Intent intent = new Intent(OverlayActivity.this, QR_reader.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                                OverlayActivity.this);
+
+
+                        alertDialog.setMessage("Scan the QR code Kurukshetra posters to get exciting prizes. Click OK to proceed.");
+
+                        alertDialog.setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        onClickLogin();
+                                        dialog.cancel();
+                                        //finish();
+                                    }
+                                });
+
+                        alertDialog.setNegativeButton("CANCEL",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
                 }
             }
         });
