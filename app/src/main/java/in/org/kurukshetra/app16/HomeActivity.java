@@ -42,8 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private static KenBurnsView mHeaderPicture;
     private int[] tabIcons = {
-            R.drawable.home_icon,
-            R.drawable.notif_icon
+            R.drawable.home_ico,
+            R.drawable.notif_ico
     };
 
     public void funEvents1(View view) {
@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         //Display alert message when back button has been pressed
         backButtonHandler();
-        return;
+
     }
 
     public void backButtonHandler() {
@@ -160,8 +160,10 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.show();
     }
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+
+            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
