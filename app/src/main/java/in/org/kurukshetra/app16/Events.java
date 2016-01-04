@@ -248,4 +248,5 @@ public class Events extends AppCompatActivity {
         MyApplication.getInstance().trackScreenView("Events Page");
     }
 
+
 }

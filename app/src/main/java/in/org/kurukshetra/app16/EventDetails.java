@@ -74,8 +74,8 @@ public class EventDetails extends AppCompatActivity {
         if (collapsingToolbarLayout != null) {
             collapsingToolbarLayout.setTitle(toolbar.getTitle());
         }
-
     }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         imageView = (ImageView) findViewById(R.id.backdrop);

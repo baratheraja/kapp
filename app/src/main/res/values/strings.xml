@@ -16,4 +16,7 @@
     <string name="title_activity_gl_details">GlDetails</string>
     <string name="title_activity_xceed">Xceed</string>
     <string name="title_activity_aa">Aa</string>
+    <string name="sync_account_type">in.org.kurukshetra</string>
+
+    <string name="content_authority">in.org.kurukshetra.content</string>
 </resources>
