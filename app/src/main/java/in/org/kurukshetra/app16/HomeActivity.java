@@ -30,18 +30,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.org.kurukshetra.app16.app.MyApplication;
+import in.org.kurukshetra.app16.sync.K16SyncAdapter;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public static final String[] ASSET_SUB_DIR = { "events" , "hospi" , "images" , "workshops", "xceed" };
+    public static final String[] ASSET_SUB_DIR = { "hospi" , "workshops", "xceed" , "events" };
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private static KenBurnsView mHeaderPicture;
     private int[] tabIcons = {
-            R.drawable.home_icon,
-            R.drawable.notif_icon
+            R.drawable.home_ico,
+            R.drawable.notif_ico
     };
 
     public void funEvents1(View view) {
@@ -126,12 +127,17 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        K16SyncAdapter.initializeSyncAdapter(this);
+        K16SyncAdapter.syncImmediately(this);
+
     }
 
     @Override
     public void onBackPressed() {
         //Display alert message when back button has been pressed
         backButtonHandler();
+
     }
 
     public void backButtonHandler() {
@@ -157,8 +163,10 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.show();
     }
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+
+            tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+            tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

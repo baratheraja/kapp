@@ -17,4 +17,7 @@
     <string name="title_activity_aa">Aa</string>
 
     <string name="placeholder">Your message here</string>
+    <string name="sync_account_type">in.org.kurukshetra</string>
+
+    <string name="content_authority">in.org.kurukshetra.content</string>
 </resources>
