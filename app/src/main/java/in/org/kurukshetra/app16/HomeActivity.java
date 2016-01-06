@@ -67,13 +67,13 @@ public class HomeActivity extends AppCompatActivity {
 	@Override
 	protected void onPostResume () {
 		super.onPostResume ();
-		stopService (new Intent (HomeActivity.this, ChatHead.class));
+	//	stopService (new Intent (HomeActivity.this, ChatHead.class));
 	}
 
 	@Override
 	protected void onPause () {
 		super.onPause ();
-		startService (new Intent (HomeActivity.this, ChatHead.class));
+	//	startService (new Intent (HomeActivity.this, ChatHead.class));
 	}
 
 	@Override

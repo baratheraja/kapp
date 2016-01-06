@@ -4,196 +4,252 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import java.util.ArrayList;
 
 public class ChatHead extends Service {
 
 	private WindowManager windowManager;
-	private RelativeLayout chatheadView, removeView;
-	private ImageView removeImg;
-	private int x_init_cord, y_init_cord, x_init_margin, y_init_margin;
-	private android.graphics.Point windowPoint = new android.graphics.Point ();
+	private RelativeLayout removeView;
+	private View chatRL, chatDialogView;
+	private ListView chatListView;
+	private ChatAdapter chatAdapter;
+	private JSONFile jsonFile;
+	private ImageView removeImage, chatHeadView;
+	private ArrayList<Message> arrayList;
+	private Point initialCoordinates = new Point(0, 0);
+	private Point initialMargin = new Point(0, 0);
+	private Point windowSize = new Point (0 ,0);
 
 	@Override
-	public void onCreate() {
+	public void onCreate () {
 		super.onCreate ();
 	}
 
-	private void handleStart(){
+	public void onBackPressed() {
+
+	}
+
+	private void handleStart () {
+
 		windowManager = (WindowManager) getSystemService (WINDOW_SERVICE);
 
 		LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 
-		removeView = (RelativeLayout)inflater.inflate(R.layout.remove, null);
-		WindowManager.LayoutParams paramRemove = new WindowManager.LayoutParams(
+		removeView = (RelativeLayout) inflater.inflate (R.layout.remove, null);
+		WindowManager.LayoutParams paramRemove = new WindowManager.LayoutParams (
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.TYPE_PHONE,
-				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+				WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
+				WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
 				PixelFormat.TRANSLUCENT);
 		paramRemove.gravity = Gravity.TOP | Gravity.START;
 
-		removeView.setVisibility(View.GONE);
-		removeImg = (ImageView)removeView.findViewById(R.id.remove_img);
-		windowManager.addView(removeView, paramRemove);
+		removeView.setVisibility (View.GONE);
+		removeImage = (ImageView) removeView.findViewById (R.id.remove_img);
+		windowManager.addView (removeView, paramRemove);
 
-		chatheadView = (RelativeLayout) inflater.inflate (R.layout.chathead, null);
+		chatDialogView = inflater.inflate (R.layout.chat, null);
 
-		windowManager.getDefaultDisplay().getSize(windowPoint);
+		//View tempView = inflater.inflate (R.layout.chathead, null);
+
+		//chatHeadView = (ImageView) tempView.findViewById (R.id.chathead_img);
+
+
+		chatDialogView.setOnKeyListener (new View.OnKeyListener () {
+			@Override
+			public boolean onKey (View v, int keyCode, KeyEvent event) {
+				if (event.getKeyCode () == KeyEvent.KEYCODE_BACK) {
+					chatDialogView.setVisibility (View.GONE);
+				}
+				//keyCode
+				return false;
+			}
+		});
+
+		chatHeadView = new ImageView (this);
+		chatHeadView.setImageResource (R.drawable.cyclotron);
+
+		arrayList = new ArrayList<> ();
+
+		jsonFile = new JSONFile (getAssets ());
+
+		String[] temp = jsonFile.getStringArray ("help");
+		StringBuilder help = new StringBuilder();
+		for (String i : temp) help.append ("\n").append (i);
+
+		arrayList.add (new Message ("bot", help.toString ()));
+
+		chatAdapter = new ChatAdapter (this, arrayList);
+
+		chatListView = (ListView) chatDialogView.findViewById (R.id.chat);
+		chatListView.setAdapter(chatAdapter);
+		//chatRL = chatDialogView.findViewById (R.id.editor);
+
+		windowManager.getDefaultDisplay().getSize(windowSize);
 
 		WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
 				WindowManager.LayoutParams.TYPE_PHONE,
-				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+				WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
+				WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
 				PixelFormat.TRANSLUCENT);
+
 		params.gravity = Gravity.TOP | Gravity.START;
 		params.x = 0;
 		params.y = 100;
-		windowManager.addView(chatheadView, params);
 
-		chatheadView.setOnTouchListener(new View.OnTouchListener() {
-			long time_start = 0, time_end = 0;
+		windowManager.addView(chatHeadView, params);
+
+		WindowManager.LayoutParams nparams = new WindowManager.LayoutParams(
+				WindowManager.LayoutParams.MATCH_PARENT,
+				WindowManager.LayoutParams.MATCH_PARENT,
+				WindowManager.LayoutParams.TYPE_PHONE,
+				WindowManager.LayoutParams.FLAGS_CHANGED,
+				PixelFormat.TRANSLUCENT);
+		nparams.gravity = Gravity.CENTER_VERTICAL | Gravity.BOTTOM;
+
+		chatDialogView.setVisibility (View.GONE);
+		windowManager.addView (chatDialogView, nparams);
+
+		chatHeadView.setOnTouchListener (new View.OnTouchListener () {
+			long startTime = 0, endTime = 0;
 			boolean isLongclick = false, inBounded = false;
-			int remove_img_width = 0, remove_img_height = 0;
+			Point removeImageAttr = new Point(0, 0);
 
-			Handler handler_longClick = new Handler();
-			Runnable runnable_longClick = new Runnable() {
+			Handler handler_longClick = new Handler ();
+			Runnable runnable_longClick = new Runnable () {
 
 				@Override
-				public void run() {
+				public void run () {
 					isLongclick = true;
-					removeView.setVisibility(View.VISIBLE);
-					chathead_longclick();
+					removeView.setVisibility (View.VISIBLE);
+					chathead_longclick ();
 				}
 			};
 
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) chatheadView.getLayoutParams();
+			public boolean onTouch (View v, MotionEvent event) {
+				WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) chatHeadView.getLayoutParams ();
 
-				int x_cord = (int) event.getRawX();
-				int y_cord = (int) event.getRawY();
-				int x_cord_Destination, y_cord_Destination;
+				Point tempCoordinates = new Point ((int) event.getRawX (), (int) event.getRawY ());
 
-				switch (event.getAction()) {
+				Point destinationCoordinates = new Point(0 ,0);
+
+				switch (event.getAction ()) {
 					case MotionEvent.ACTION_DOWN:
-						time_start = System.currentTimeMillis();
-						handler_longClick.postDelayed(runnable_longClick, 600);
+						startTime = System.currentTimeMillis ();
+						handler_longClick.postDelayed (runnable_longClick, 600);
 
-						remove_img_width = removeImg.getLayoutParams().width;
-						remove_img_height = removeImg.getLayoutParams().height;
+						removeImageAttr.set (removeImage.getLayoutParams ().width, removeImage.getLayoutParams ().height);
 
-						x_init_cord = x_cord;
-						y_init_cord = y_cord;
+						initialCoordinates = tempCoordinates;
 
-						x_init_margin = layoutParams.x;
-						y_init_margin = layoutParams.y;
+						initialMargin.set (layoutParams.x, layoutParams.y);
 
 						break;
 					case MotionEvent.ACTION_MOVE:
-						int x_diff_move = x_cord - x_init_cord;
-						int y_diff_move = y_cord - y_init_cord;
+						Point moveDifference = new Point(tempCoordinates.x - initialCoordinates.x, tempCoordinates.y - initialCoordinates.y);
 
-						x_cord_Destination = x_init_margin + x_diff_move;
-						y_cord_Destination = y_init_margin + y_diff_move;
+						destinationCoordinates.set (initialMargin.x + moveDifference.x, initialMargin.y + moveDifference.y);
 
-						if(isLongclick){
-							int x_bound_left = (windowPoint.x - removeView.getWidth()) / 2 - 250;
-							int x_bound_right = (windowPoint.x + removeView.getWidth()) / 2 + 100;
+						if (isLongclick) {
+							int x_bound_left = (windowSize.x - removeView.getWidth ()) / 2 - 250;
+							int x_bound_right = (windowSize.x + removeView.getWidth ()) / 2 + 100;
 
-							int y_bound_top = windowPoint.y - (removeView.getHeight() + getStatusBarHeight()) - 200;
+							int y_bound_top = windowSize.y - (removeView.getHeight () + getStatusBarHeight ()) - 200;
 
-							if((x_cord_Destination >= x_bound_left && x_cord_Destination <= x_bound_right) && y_cord_Destination >= y_bound_top){
+							if ((destinationCoordinates.x >= x_bound_left && destinationCoordinates.x <= x_bound_right) && destinationCoordinates.y >= y_bound_top) {
 								inBounded = true;
 
-								layoutParams.x = (windowPoint.x - chatheadView.getWidth()) / 2;
-								layoutParams.y = windowPoint.y - (removeView.getHeight() + getStatusBarHeight()) + 70;
+								layoutParams.x = (windowSize.x - chatHeadView.getWidth ()) / 2;
+								layoutParams.y = windowSize.y - (removeView.getHeight () + getStatusBarHeight ()) + 70;
 
-								if(removeImg.getLayoutParams().height == remove_img_height){
-									removeImg.getLayoutParams().height = (int) (remove_img_height * 1.5);
-									removeImg.getLayoutParams().width = (int) (remove_img_width * 1.5);
+								if (removeImage.getLayoutParams ().height == removeImageAttr.y) {
 
-									WindowManager.LayoutParams param_remove = (WindowManager.LayoutParams) removeView.getLayoutParams();
-									int x_cord_remove = (int) ((windowPoint.x - (remove_img_height * 1.5)) / 2);
-									int y_cord_remove = (int) (windowPoint.y - ((remove_img_width * 1.5) + getStatusBarHeight() ));
-									param_remove.x = x_cord_remove;
-									param_remove.y = y_cord_remove;
+									removeImage.getLayoutParams ().width = (int) (removeImageAttr.x * 1.5);
+									removeImage.getLayoutParams ().height = (int) (removeImageAttr.y * 1.5);
 
-									windowManager.updateViewLayout(removeView, param_remove);
+									WindowManager.LayoutParams param_remove = (WindowManager.LayoutParams) removeView.getLayoutParams ();
+									param_remove.x = (int) ((windowSize.x - (removeImageAttr.y * 1.5)) / 2);
+									param_remove.y = (int) (windowSize.y - ((removeImageAttr.x * 1.5) + getStatusBarHeight ()));
+
+									windowManager.updateViewLayout (removeView, param_remove);
 								}
 
-								windowManager.updateViewLayout(chatheadView, layoutParams);
+								windowManager.updateViewLayout (chatHeadView, layoutParams);
 								break;
 							}
 							else {
 								inBounded = false;
-								removeImg.getLayoutParams().height = remove_img_height;
-								removeImg.getLayoutParams().width = remove_img_width;
 
-								WindowManager.LayoutParams param_remove = (WindowManager.LayoutParams) removeView.getLayoutParams();
-								int x_cord_remove = (windowPoint.x - removeView.getWidth()) / 2;
-								int y_cord_remove = windowPoint.y - (removeView.getHeight() + getStatusBarHeight() );
+								removeImage.getLayoutParams ().width = removeImageAttr.x;
+								removeImage.getLayoutParams ().height = removeImageAttr.y;
 
-								param_remove.x = x_cord_remove;
-								param_remove.y = y_cord_remove;
+								WindowManager.LayoutParams param_remove = (WindowManager.LayoutParams) removeView.getLayoutParams ();
+								param_remove.x = (windowSize.x - removeView.getWidth ()) / 2;
+								param_remove.y = windowSize.y - (removeView.getHeight () + getStatusBarHeight ());
 
-								windowManager.updateViewLayout(removeView, param_remove);
+								windowManager.updateViewLayout (removeView, param_remove);
 							}
 						}
 
-						layoutParams.x = x_cord_Destination;
-						layoutParams.y = y_cord_Destination;
+						layoutParams.x = destinationCoordinates.x;
+						layoutParams.y = destinationCoordinates.y;
 
-						windowManager.updateViewLayout(chatheadView, layoutParams);
+						windowManager.updateViewLayout (chatHeadView, layoutParams);
 						break;
 					case MotionEvent.ACTION_UP:
 						isLongclick = false;
-						removeView.setVisibility(View.GONE);
-						removeImg.getLayoutParams().height = remove_img_height;
-						removeImg.getLayoutParams().width = remove_img_width;
-						handler_longClick.removeCallbacks(runnable_longClick);
+						removeView.setVisibility (View.GONE);
 
-						if(inBounded){
-							if(ChatDialog.active) ChatDialog.myDialog.finish ();
+						removeImage.getLayoutParams ().width = removeImageAttr.x;
+						removeImage.getLayoutParams ().height = removeImageAttr.y;
 
-							stopService(new Intent (ChatHead.this, ChatHead.class));
+						handler_longClick.removeCallbacks (runnable_longClick);
+
+						if (inBounded) {
+							stopService (new Intent (ChatHead.this, ChatHead.class));
 							inBounded = false;
 							break;
 						}
 
-						int x_diff = x_cord - x_init_cord;
-						int y_diff = y_cord - y_init_cord;
+						Point diff = new Point (tempCoordinates.x - initialCoordinates.x, tempCoordinates.y - initialCoordinates.y);
 
-						if(x_diff < 5 && y_diff < 5){
-							time_end = System.currentTimeMillis();
-							if((time_end - time_start) < 300) chathead_click ();
+						if (diff.x < 5 && diff.y < 5) {
+							endTime = System.currentTimeMillis ();
+							if ((endTime - startTime) < 500) chatheadClick ();
 						}
 
-						x_cord_Destination = x_init_margin + x_diff;
-						y_cord_Destination = y_init_margin + y_diff;
+						destinationCoordinates.set (initialMargin.x + diff.x, initialMargin.y + diff.y);
 
-						int x_start;
-						x_start = x_cord_Destination;
+						int BarHeight = getStatusBarHeight ();
+						if (destinationCoordinates.y < 0)
+							destinationCoordinates.y = 0;
+						else if (destinationCoordinates.y + (chatHeadView.getHeight () + BarHeight) > windowSize.y)
+							destinationCoordinates.y = windowSize.y - (chatHeadView.getHeight () + BarHeight);
 
-						int BarHeight =  getStatusBarHeight();
-						if (y_cord_Destination < 0) y_cord_Destination = 0;
-						else if (y_cord_Destination + (chatheadView.getHeight() + BarHeight) > windowPoint.y)
-							y_cord_Destination = windowPoint.y - (chatheadView.getHeight () + BarHeight);
-
-						layoutParams.y = y_cord_Destination;
+						layoutParams.y = destinationCoordinates.y;
 
 						inBounded = false;
-						resetPosition(x_start);
+						resetPosition (destinationCoordinates);
 
 						break;
 					default:
@@ -204,89 +260,117 @@ public class ChatHead extends Service {
 		});
 	}
 
-
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
+	public void onConfigurationChanged (Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 
-		windowManager.getDefaultDisplay().getSize(windowPoint);
+		windowManager.getDefaultDisplay().getSize(windowSize);
 
-		WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) chatheadView.getLayoutParams();
+		WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) chatHeadView.getLayoutParams();
 
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-			if(layoutParams.y + (chatheadView.getHeight() + getStatusBarHeight()) > windowPoint.y){
-				layoutParams.y = windowPoint.y - (chatheadView.getHeight() + getStatusBarHeight());
-				windowManager.updateViewLayout(chatheadView, layoutParams);
+			if(layoutParams.y + (chatHeadView.getHeight() + getStatusBarHeight()) > windowSize.y){
+				layoutParams.y = windowSize.y - (chatHeadView.getHeight() + getStatusBarHeight());
+				windowManager.updateViewLayout(chatHeadView, layoutParams);
 			}
 
-			if(layoutParams.x != 0 && layoutParams.x < windowPoint.x) resetPosition (windowPoint.x);
+			if(layoutParams.x != 0 && layoutParams.x < windowSize.x)
+				resetPosition (windowSize);
 
-		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && layoutParams.x > windowPoint.x)
-			resetPosition (windowPoint.x);
+		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && layoutParams.x > windowSize.x)
+			resetPosition (windowSize);
 	}
 
-	private void resetPosition(int x_cord_now) {
-		int w = chatheadView.getWidth();
-
-		if (x_cord_now + w / 2 <= windowPoint.x / 2) {
-			moveToLeft(x_cord_now);
-		} else if (x_cord_now + w / 2 > windowPoint.x / 2) {
-			moveToRight (x_cord_now);
-		}
-
+	private void resetPosition (Point currentCoordinate) {
+		if (currentCoordinate.x + (chatHeadView.getWidth () / 2) <= windowSize.x / 2)
+			moveToLeft(currentCoordinate);
+		else
+			moveToRight (currentCoordinate);
 	}
-	private void moveToLeft(final int x_cord_now){
+
+	private void moveToLeft (final Point currentCoordinate){
 
 		new CountDownTimer (500, 5) {
-			WindowManager.LayoutParams mParams = (WindowManager.LayoutParams) chatheadView.getLayoutParams();
+			WindowManager.LayoutParams mParams = (WindowManager.LayoutParams) chatHeadView.getLayoutParams();
+
 			public void onTick(long t) {
 				long step = (500 - t)/5;
-				mParams.x = (int)(double)bounceValue(step, x_cord_now);
-				windowManager.updateViewLayout (chatheadView, mParams);
+				mParams.x = (int)(double) bounceValue (step, currentCoordinate.x);
+				windowManager.updateViewLayout (chatHeadView, mParams);
 			}
+
 			public void onFinish() {
 				mParams.x = 0;
-				windowManager.updateViewLayout(chatheadView, mParams);
+				windowManager.updateViewLayout(chatHeadView, mParams);
 			}
 		}.start();
 	}
 
-	private  void moveToRight(int x_cord_now){
-		final int x = x_cord_now;
+	private  void moveToRight (final Point currentCoordinate){
+
 		new CountDownTimer(500, 5) {
-			WindowManager.LayoutParams mParams = (WindowManager.LayoutParams) chatheadView.getLayoutParams();
+
+			WindowManager.LayoutParams mParams = (WindowManager.LayoutParams) chatHeadView.getLayoutParams();
+
 			public void onTick(long t) {
-				long step = (500 - t)/5;
-				mParams.x = windowPoint.x + (int)(double)bounceValue(step,x) - chatheadView.getWidth();
-				windowManager.updateViewLayout(chatheadView, mParams);
+				long step = (500 - t) / 5;
+				mParams.x = windowSize.x + (int)(double) bounceValue (step, currentCoordinate.x) - chatHeadView.getWidth ();
+				windowManager.updateViewLayout (chatHeadView, mParams);
 			}
+
 			public void onFinish() {
-				mParams.x = windowPoint.x - chatheadView.getWidth();
-				windowManager.updateViewLayout(chatheadView, mParams);
+				mParams.x = windowSize.x - chatHeadView.getWidth();
+				windowManager.updateViewLayout(chatHeadView, mParams);
 			}
 		}.start();
 	}
 
-	private double bounceValue(long step, long scale){
+	private double bounceValue (long step, long scale) {
 		return scale * Math.exp(-0.055 * step) * Math.cos(0.08 * step);
 	}
 
-	private int getStatusBarHeight() {
+	private int getStatusBarHeight () {
 		return (int) Math.ceil(25 * getApplicationContext().getResources().getDisplayMetrics().density);
 	}
 
-	private void chathead_click(){
-		if(ChatDialog.active)
-			ChatDialog.myDialog.finish ();
-		else
-			startActivity (new Intent (this, ChatDialog.class).setFlags (Intent.FLAG_ACTIVITY_SINGLE_TOP));
+	private void chatheadClick (){
+
+		WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.WRAP_CONTENT,
+				WindowManager.LayoutParams.TYPE_PHONE,
+				WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+				PixelFormat.TRANSLUCENT);
+		params.gravity = Gravity.TOP | Gravity.START;
+
+		params.x = 0;
+		params.y = 100;
+
+		if (chatDialogView != null)
+			if(chatDialogView.isShown ())
+				chatDialogView.setVisibility (View.GONE);
+			else
+				chatDialogView.setVisibility (View.VISIBLE);
+
+	/*	if(chatListView != null && !chatListView.isShown () ) {
+			chatListView.setVisibility (View.VISIBLE);
+			chatRL.setVisibility (View.VISIBLE);
+		} else {
+			if (chatListView != null) {
+				chatListView.setVisibility (View.INVISIBLE);
+			}
+			chatRL.setVisibility (View.INVISIBLE);
+		}
+	*/
+		windowManager.updateViewLayout (chatHeadView, params);
+
 	}
 
 	private void chathead_longclick(){
 		WindowManager.LayoutParams param_remove = (WindowManager.LayoutParams) removeView.getLayoutParams();
-		int x_cord_remove = (windowPoint.x - removeView.getWidth()) / 2;
-		int y_cord_remove = windowPoint.y - (removeView.getHeight() + getStatusBarHeight() );
+		int x_cord_remove = (windowSize.x - removeView.getWidth()) / 2;
+		int y_cord_remove = windowSize.y - (removeView.getHeight() + getStatusBarHeight() );
 
 		param_remove.x = x_cord_remove;
 		param_remove.y = y_cord_remove;
@@ -301,15 +385,18 @@ public class ChatHead extends Service {
 			handleStart();
 			return super.onStartCommand(intent, flags, startId);
 		}
-		return super.onStartCommand(intent, flags, startId);
+		return Service.START_NOT_STICKY;
 	}
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
+		super.onDestroy ();
 
-		if(chatheadView != null)
-			windowManager.removeView (chatheadView);
+		if(chatHeadView != null)
+			windowManager.removeView (chatHeadView);
+
+		if(chatDialogView != null)
+			windowManager.removeView (chatDialogView);
 
 		if(removeView != null)
 			windowManager.removeView (removeView);

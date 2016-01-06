@@ -16,10 +16,10 @@ import java.util.TimerTask;
 public class CloudView extends RelativeLayout {
 	private static final String TAG = "CloudView";
 	private ArrayList<TagView> mTags;
-	private ArrayList<Point> mPoints = new ArrayList<>();
+	private ArrayList<Point3D> mPoints = new ArrayList<>();
 	private GestureDetector mDetector;
 	private int mTagTextSize = 30;
-	private Point normalDirection = null;
+	private Point3D normalDirection = null;
 	public CloudView(Context context) {
 		this(context, null);
 		// TODO Auto-generated constructor stub
@@ -83,7 +83,7 @@ public class CloudView extends RelativeLayout {
 					double p3 = i * p1;
 					double x = Math.cos(p3) * r;
 					double z = Math.sin(p3) * r;
-					Point point = new Point(x, y, z);
+					Point3D point = new Point3D (x, y, z);
 					mPoints.add(point);
 					
 					setTagOfPoint(point, i);
@@ -93,7 +93,7 @@ public class CloudView extends RelativeLayout {
 				int a = random.nextInt();
 				int b = random.nextInt();
 				Log.i(TAG, "a = " + a + "; b = " + b);
-				normalDirection = new Point(a - 5, b - 5, 0);
+				normalDirection = new Point3D (a - 5, b - 5, 0);
 				timerStart();
 				
 			}
@@ -158,7 +158,7 @@ public class CloudView extends RelativeLayout {
 		}
 	}
 	
-	private void setTagOfPoint(Point point, int index) {
+	private void setTagOfPoint(Point3D point, int index) {
 		TagView tag = mTags.get(index);
 		float x = (float) ((point.x + 1) * getWidth() / 2.0f );
 		float y = (float) ((point.y + 1) * getHeight() / 2.0f);
@@ -175,9 +175,9 @@ public class CloudView extends RelativeLayout {
 		}
 	}
 	
-	private void updateOfPoint(int index, Point direction, double angle) {
-		Point point = mPoints.get(index);
-		Point rPoint = Matrix.pointMakeRotation(point, direction, angle);
+	private void updateOfPoint(int index, Point3D direction, double angle) {
+		Point3D point = mPoints.get(index);
+		Point3D rPoint = Matrix.pointMakeRotation(point, direction, angle);
 		mPoints.set(index, rPoint);
 		setTagOfPoint(rPoint, index);
 		rPoint = Matrix.pointMakeRotation(rPoint, direction, angle);
@@ -185,7 +185,7 @@ public class CloudView extends RelativeLayout {
 		setTagOfPoint(rPoint, index);
 	}
 	
-	private Point last;
+	private Point3D last;
 	private GestureDetector.OnGestureListener mGestureListener = new GestureDetector.OnGestureListener() {
 		
 		@Override
@@ -212,7 +212,7 @@ public class CloudView extends RelativeLayout {
 //			for (Tag tag : mTags) {
 //				tag.setCenter(arg1.getX(), arg1.getY());
 //			}
-			Point direction = new Point(last.y - arg1.getY(), arg1.getX() - last.x, 0);
+			Point3D direction = new Point3D (last.y - arg1.getY(), arg1.getX() - last.x, 0);
 			double distance = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
 			double angle = distance / (getWidth() / 2.0);
 			int count = mTags.size();
@@ -242,7 +242,7 @@ public class CloudView extends RelativeLayout {
 		@Override
 		public boolean onDown(MotionEvent arg0) {
 			// TODO Auto-generated method stub
-			last = new Point(arg0.getX(), arg0.getY(), 0);
+			last = new Point3D (arg0.getX(), arg0.getY(), 0);
 			return false;
 		}
 	};
