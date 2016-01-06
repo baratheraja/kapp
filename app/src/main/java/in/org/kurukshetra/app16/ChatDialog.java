@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,7 +52,10 @@ public class ChatDialog extends AppCompatActivity {
 		button_stop = (Button) findViewById(R.id.button_stop);
 		Intent intent = new Intent(this, HomeActivity.class);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		Notification notification = Floaty.createNotification(this, "k! Chat", "Chat Running", R.drawable.cyclotron, resultPendingIntent);
+		Notification notification = Floaty.createNotification (this, "k! Chat", "Chat Running", R.drawable.cyclotron, resultPendingIntent);
+
+		ImageView head = new ImageView(this);
+		head.setBackgroundResource (R.drawable.cyclotron);
 
 		// Inflate the Views that are to be used as HEAD and BODY of The Window
 		//View head = LayoutInflater.from (this).inflate(R.layout.float_head, null);
@@ -94,7 +98,7 @@ public class ChatDialog extends AppCompatActivity {
 			}
 		});
 
-		floaty = Floaty.createInstance(this, null, body, NOTIFICATION_ID, notification, new FloatyOrientationListener () {
+		floaty = Floaty.createInstance(this, head, body, NOTIFICATION_ID, notification, new FloatyOrientationListener () {
 			@Override
 			public void beforeOrientationChange(Floaty floaty) {
 				Toast.makeText(ChatDialog.this, "Orientation Change Start", Toast.LENGTH_SHORT).show();

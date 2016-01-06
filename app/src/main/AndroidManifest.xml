@@ -248,12 +248,11 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
-
         <service
             android:name=".ChatHead"
             android:enabled="true">
         </service>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"/>
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.K16AuthenticatorService">
