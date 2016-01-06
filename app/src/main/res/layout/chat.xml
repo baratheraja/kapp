@@ -1,62 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom"
+    android:background="@drawable/btn_white"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
     android:orientation="vertical"
-    android:background="#00000000">
+    >
 
-    <Space
+    <EditText
+        android:background="#fff"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/placeholder"
+        android:id="@+id/new_msg"
+        android:inputType="text"
+        android:layout_alignParentBottom="true"
+        android:layout_height="48dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="#00ffffff"
+        android:textColor="#000"
+        android:textColorHint="#bcaaa4"
         />
 
     <ListView
-        android:id="@+id/chat"
         android:background="#fff"
-        android:stackFromBottom="true"
-        android:padding="5dp"
-        android:transcriptMode="alwaysScroll"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:divider="#fff"
-        android:layout_weight="8"
-        android:gravity="top|start"
         android:dividerHeight="10dp"
+        android:id="@+id/chat"
+        android:layout_above="@id/new_msg"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
         />
 
-    <LinearLayout
-        android:id="@+id/editor"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:orientation="horizontal">
+    <Button
+        android:background="@drawable/ic_send"
+        android:id="@+id/btn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        />
 
-        <EditText
-            android:focusableInTouchMode="true"
-            android:id="@+id/new_msg"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:hint="@string/placeholder"
-            android:textColorHint="#bcaaa4"
-            android:inputType="text"
-            android:clickable="true"
-            android:textColor="#000"
-            android:layout_weight="4"
-            />
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ic_send"
-            />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

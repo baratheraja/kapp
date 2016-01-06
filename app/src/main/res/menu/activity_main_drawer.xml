@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/home_icon"
+            android:icon="@drawable/home_ico"
             android:title="Home"
             android:checked="true"
            />
