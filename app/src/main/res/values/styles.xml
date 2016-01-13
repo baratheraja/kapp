@@ -57,8 +57,10 @@
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardUseCompatPadding">true</item>
     </style>
-
-    <style name="Theme.Transparent" parent="android:Theme.Translucent.NoTitleBar">
+<!--android:Theme.Translucent.NoTitleBar-->
+    <style name="Theme.Transparent" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsFloating">true</item>

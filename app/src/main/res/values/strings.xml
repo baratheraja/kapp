@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Kurukshetra</string>
-
+    <string name="facebook_app_id">1491975041128547</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -19,4 +19,37 @@
     <string name="sync_account_type">in.org.kurukshetra</string>
 
     <string name="content_authority">in.org.kurukshetra.content</string>
+
+    <!-- Button text -->
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="server_client_id">113263203194-28161907ap7nks6mehhc2f5j7qkke4pr.apps.googleusercontent.com</string>
+    <string name="loading">Loading</string>
+    <string name="dialog_fire_missiles">fire missile??</string>
+    <string name="fire">Fire</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Workshop regs -->
+    <string name="hint_name">FullName</string>
+    <string name="hint_email">Email-id</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_year">Year</string>
+    <string name="btn_register">Register</string>
+    <string name="hint_facebook">Facebook</string>
+    <string name="hint_whatsapp">Whatsapp</string>
+    <string name="hint_student">Student Ambassador</string>
+    <string name="hint_website">Website/App</string>
+    <string name="hint_others">Others</string>
+    <string name="btn_sign_up">Register</string>
+    <string name="error">Error in details</string>
+    <string name="participant_2">PARTICIPANT 2</string>
+    <string name="participant_1">PARTICIPANT 1</string>
+    <string name="participant_3">PARTICIPANT 3</string>
+    <string name="participant_4">PARTICIPANT 4</string>
+
+    <string name="title_activity_two_participant">Two Participant</string>
+    <string name="title_activity_three__participant">Three Participant</string>
+    <string name="title_activity_fout__participant">Four Participant</string>
+    <string name="title_activity_transaction">Transaction</string>
+
 </resources>

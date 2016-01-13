@@ -1,11 +1,15 @@
 package in.org.kurukshetra.app16;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +19,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.facebook.FacebookSdk;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,20 +34,26 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import in.org.kurukshetra.app16.app.MyApplication;
+import in.org.kurukshetra.app16.workshopreg.CountChooserFragment;
 
-public class WorkshopDetails extends AppCompatActivity {
+public class WorkshopDetails extends AppCompatActivity implements LoginFragment.OnLoginListener{
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ImageView imageView;
     String eventName,eventKey,category;
-
+    HashMap<String,String> idMap;
+    HashMap<String,Integer> minMap;
+    HashMap<String,Integer> maxMap;
+    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_workshop_details);
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
@@ -48,9 +62,17 @@ public class WorkshopDetails extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         actionBar.setHomeAsUpIndicator(upArrow);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        initMaps();
         eventName=getIntent().getStringExtra("name");
         category = getIntent().getStringExtra("cat");
-
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleRegister();
+            }
+        });
         setTitle(eventName);
         eventKey = getIntent().getStringExtra("key");
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -65,6 +87,66 @@ public class WorkshopDetails extends AppCompatActivity {
         }
 
     }
+
+    private void initMaps() {
+        idMap = new HashMap<>();
+        minMap = new HashMap<>();
+        maxMap = new HashMap<>();
+        idMap.put("cognitive-computing","IC");
+        idMap.put("creative-coding","CC");
+        idMap.put("growth-hacking","GH");
+        idMap.put("krithi","KR");
+
+        minMap.put("cognitive-computing",1);
+        minMap.put("creative-coding",1);
+        minMap.put("growth-hacking",1);
+        minMap.put("krithi",2);
+
+        maxMap.put("cognitive-computing",1);
+        maxMap.put("creative-coding",1);
+        maxMap.put("growth-hacking",1);
+        maxMap.put("krithi",3);
+
+    }
+
+    public void onClickLogin(){
+        //LoginFragment loginFragment = LoginFragment.loginInstance();
+        //FragmentManager manager = getSupportFragmentManager();
+        //loginFragment.show(manager,"LOGIN");
+        Intent intent = new Intent(this,LoginActivity2.class);
+        startActivityForResult(intent, 101);
+    }
+
+    private void handleRegister() {
+        SessionManager session= new SessionManager(this);
+        if(session.isLoggedIn()){
+            proceedToRegister();
+        } else{
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                    WorkshopDetails.this);
+
+
+            alertDialog.setMessage("Please Login to register for Workshop");
+
+            alertDialog.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            onClickLogin();
+                            dialog.cancel();
+                            //finish();
+                        }
+                    });
+
+            alertDialog.setNegativeButton("CANCEL",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            alertDialog.show();
+        }
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         imageView = (ImageView) findViewById(R.id.backdrop);
@@ -164,6 +246,40 @@ public class WorkshopDetails extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLogin(int position) {
+        if(position == 1){
+            Toast.makeText(this,"Logged in",Toast.LENGTH_SHORT).show();
+            proceedToRegister();
+        }
+        else
+            Toast.makeText(this,"Logged out",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if(requestCode == 101){
+            if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
+                proceedToRegister();
+            }
+            else if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this,"Logout Successful",Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+    private void proceedToRegister() {
+        initMaps();
+        CountChooserFragment fragment = CountChooserFragment.newInstance(minMap.get(eventKey),maxMap.get(eventKey),idMap.get(eventKey));
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment.show(fragmentManager,"REGISTER");
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
