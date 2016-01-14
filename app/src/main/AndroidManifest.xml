@@ -284,6 +284,8 @@
             android:exported="false"
             />
 
+        <service android:name="in.org.kurukshetra.app16.Floaty$FloatHeadService" >
+        </service>
 
     </application>
 

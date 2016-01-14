@@ -17,6 +17,7 @@ public class JSONFile {
 
 	HashMap<String, String[]> stringHashMap;
 	HashMap<String, String> queryType;
+	AssetManager JSONAssetManager;
 
 	public JSONFile (AssetManager assetManager) {
 
@@ -24,9 +25,12 @@ public class JSONFile {
 		queryType = new HashMap<> () ;
 
 		String[] helpStrings = new String[] {
-				"Hey! This is DexBot here to help you! <br/> You can use these commands to communicate with me <br/>",
-				"when is ___? - e.g. when coding <br/>",
-				"about __? - e.g. about categories <br/>",
+				"Hey! This is DexBot here to help you! <br/> ",
+				"<b>You can single tap the chathead to close this chat box </b> <br/> ",
+				"<b>You can double tap the chathead to close this chat </b> <br/>",
+				"You can use these commands to communicate with me <br/>",
+				"event __? - e.g. event Sherlock <br/>",
+				"workshop __? - e.g. workshop Creative Coding <br/>",
 				"help - To see this help message <br/>"
 		};
 
@@ -36,26 +40,28 @@ public class JSONFile {
 
 		stringHashMap.put ("help", helpStrings);
 
-		initJSONFile (assetManager);
+		JSONAssetManager = assetManager;
 
+		initJSONFile ("events");
+		initJSONFile ("workshops");
 	}
 
-	public void initJSONFile(AssetManager assetManager) {
+	public void initJSONFile(String type) {
 
 		try {
-			BufferedReader br = new BufferedReader (new InputStreamReader (assetManager.open ("events.json")));
+			BufferedReader br = new BufferedReader (new InputStreamReader (JSONAssetManager.open (type + ".json")));
 
 			StringBuilder builder = new StringBuilder ();
 			String JSONString;
 			while((JSONString = br.readLine ()) != null) builder.append (JSONString);
 
-			JSONArray categoryJSONArray = new JSONObject (builder.toString ()).getJSONArray ("events");
+			JSONArray categoryJSONArray = new JSONObject (builder.toString ()).getJSONArray (type);
 
 			String[] categories = new String[categoryJSONArray.length ()];
 
 			for(int i = 0; i < categoryJSONArray.length (); i++) {
 				categories[i] = categoryJSONArray.getJSONObject (i).getString ("name");
-				JSONArray tempArray = categoryJSONArray.getJSONObject (i).getJSONArray ("events");
+				JSONArray tempArray = categoryJSONArray.getJSONObject (i).getJSONArray (type);
 
 				String[] eventNames = new String[tempArray.length ()];
 
@@ -75,12 +81,14 @@ public class JSONFile {
 
 					String[] description = new String[contentList.size ()];
 					contentList.toArray (description);
-					stringHashMap.put (eventNames[j], description);
+					stringHashMap.put (type + eventNames[j], description);
 				}
-				stringHashMap.put (categories[i].toLowerCase (), eventNames);
+
+
+				stringHashMap.put (type + categories[i].toLowerCase (), eventNames);
 			}
 
-			stringHashMap.put ("categories", categories);
+			stringHashMap.put (type + "all", categories);
 		}
 		catch(IOException ie) {
 			Log.d ("JSONFile", "Read error");
@@ -91,11 +99,11 @@ public class JSONFile {
 
 	}
 
+
 	public String[] getStringArray(String key) {
 		return stringHashMap.get (key);
 	}
 
-	@SuppressWarnings ("unused")
 	public String getQueryType(String key) {
 		return queryType.get (key);
 	}
@@ -110,11 +118,26 @@ public class JSONFile {
 
 		String messageBody = message.substring (messageType.length ()).toLowerCase ().trim ();
 
-		if (message.matches ("about(.*)")) {
-			if(stringHashMap.get (messageBody) != null) {
+		if (message.matches ("event(s*)(.*)")) {
+
+			StringBuilder reply = new StringBuilder ();
+			String[] wordParts = stringHashMap.get ("events" + messageBody);
+
+			if(wordParts != null) {
 				parsedMessage = "";
-				String[] wordParts = stringHashMap.get (messageBody);
-				for(String i : wordParts) parsedMessage = parsedMessage + "<br/>" + i;
+				for(String i : wordParts) reply.append ("<br/>").append (i);
+				parsedMessage = parsedMessage + reply.toString();
+			}
+		}
+		else if(message.matches ("workshop(s*)(.*)")){
+
+			StringBuilder reply = new StringBuilder ();
+			String[] wordParts = stringHashMap.get ("workshops" + messageBody);
+
+			if(wordParts != null) {
+				parsedMessage = "";
+				for(String i : wordParts) reply.append ("<br/>").append (i);
+				parsedMessage = parsedMessage + reply.toString();
 			}
 		}
 		else if(message.matches ("help(.*)")) {
