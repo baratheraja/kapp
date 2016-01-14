@@ -158,84 +158,90 @@ public class OverlayActivity extends AppCompatActivity{
 
     public void onCoachMark(){
 
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.coach_mark);
-        dialog.setCanceledOnTouchOutside(true);
-        //for dismissing anywhere you touch
-        View masterView = dialog.findViewById(R.id.coach_mark_master_view);
-        masterView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-    public void initTag(String name) {
+		final Dialog dialog = new Dialog(this);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		dialog.setContentView(R.layout.coach_mark);
+		dialog.setCanceledOnTouchOutside(true);
+		//for dismissing anywhere you touch
+		View masterView = dialog.findViewById(R.id.coach_mark_master_view);
+		masterView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+	}
+	public void initTag(String name) {
 
-        tag = new TagView(this);
-        tag.setText(name);
-        tag.setTextColor(Color.WHITE);
-       // tag.setBackgroundResource(R.drawable.button);
-        tag.setGravity(Gravity.CENTER);
-        RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        view.addView(tag, p);
-        tag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TagView vw = (TagView) v;
-                if (vw.getText().toString().equals("Hospitality")) {
-                    Intent intent = new Intent(OverlayActivity.this, HospiActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Contacts")) {
-                    Intent intent = new Intent(OverlayActivity.this, contacts.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("About us")) {
-                    Intent intent = new Intent(OverlayActivity.this, AboutUsActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Sponsors")) {
-                    Intent intent = new Intent(OverlayActivity.this, Sponsers.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Student Ambassador")) {
-                    Uri uri = Uri.parse("http://m.kurukshetra.org.in/#/sa");
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Events")) {
+		tag = new TagView(this);
+		tag.setText(name);
+		tag.setTextColor(Color.WHITE);
+		// tag.setBackgroundResource(R.drawable.button);
+		tag.setGravity(Gravity.CENTER);
+		RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		view.addView(tag, p);
+		tag.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TagView vw = (TagView) v;
+				if (vw.getText().toString().equals("Hospitality")) {
+					Intent intent = new Intent(OverlayActivity.this, HospiActivity.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Contacts")) {
+					Intent intent = new Intent(OverlayActivity.this, contacts.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("About us")) {
+					Intent intent = new Intent(OverlayActivity.this, AboutUsActivity.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Sponsors")) {
+					Intent intent = new Intent(OverlayActivity.this, Sponsers.class);
+					startActivity(intent);
+					finish();
+				}else if (vw.getText().toString().equals("Student Ambassador")) {
+					Uri uri = Uri.parse("http://m.kurukshetra.org.in/#/sa");
+					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Events")) {
 
-                    Intent intent = new Intent(OverlayActivity.this, Events.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Workshops")) {
-                    Intent intent = new Intent(OverlayActivity.this, Workshops.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Xceed")) {
-                    Intent intent = new Intent(OverlayActivity.this, XceedActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else if (vw.getText().toString().equals("Guest Lectures")) {
+					Intent intent = new Intent(OverlayActivity.this, Events.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Workshops")) {
+					Intent intent = new Intent(OverlayActivity.this, Workshops.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Xceed")) {
 
-                    Intent intent = new Intent(OverlayActivity.this, GlActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-        tags.add(tag);
-    }
+					Intent intent = new Intent(OverlayActivity.this, XceedActivity.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Guest Lectures")) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MyApplication.getInstance().trackScreenView("Sphere Menu");
-    }
+					Intent intent = new Intent(OverlayActivity.this, GlActivity.class);
+					startActivity(intent);
+					finish();
+				} else if (vw.getText().toString().equals("Chat")) {
+
+					Intent intent = new Intent(OverlayActivity.this, ChatDialog.class);
+					startActivity(intent);
+					finish();
+				}
+
+			}
+		});
+		tags.add(tag);
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MyApplication.getInstance().trackScreenView("Sphere Menu");
+	}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/btn_white"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:background="#fff"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/placeholder"
+        android:id="@+id/new_msg"
+        android:inputType="text"
+        android:layout_alignParentBottom="true"
+        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:textColorHint="#bcaaa4"
+        />
+
+    <ListView
+        android:background="#fff"
+        android:divider="#fff"bas
+        android:dividerHeight="5dp"
+        android:id="@+id/chat"
+        android:layout_above="@id/new_msg"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
+        />
+
+    <Button
+        android:background="@drawable/ic_send"
+        android:id="@+id/btn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        />
+
+</RelativeLayout>
