@@ -30,10 +30,12 @@ public class Workshops extends AppCompatActivity {
     ArrayList<String> categories = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
 
-    String[] cats = {"Engineering", "Management", "School"};
-    String[] engineering = {"IBM's Cognitive Computing","Creative Coding"};
+    String[] cats = {"Engineering","Robotics", "Management", "School"};
+    String[] engineering = {"IBM's Cognitive Computing","Creative Coding","Distance Relays and Substation Automation",
+            "Build Your 3D Printer","ESRI's Connective Convergence","Samsung's Virtual Reality"};
     String[] management = {"Growth Hacking"};
     String[] school = {"Krithi"};
+    String[] robotics = {"Eye Controlled Robots"};
     int[] colors = { Color.rgb(189, 47, 71), Color.rgb(228, 101, 92), Color.rgb(241, 177, 79),
             Color.rgb(161, 204, 89), Color.rgb(33, 197, 163), Color.rgb(58, 158, 173),Color.rgb(92, 101, 100)};
 
@@ -98,10 +100,15 @@ public class Workshops extends AppCompatActivity {
     }
 
     private void initKeys() {
-            eventKeys.put("IBM's Cognitive Computing","cognitive-computing");
+            eventKeys.put("IBM's Cognitive Computing","ibm-s-cognitive-computing");
             eventKeys.put("Creative Coding","creative-coding");
             eventKeys.put("Growth Hacking","growth-hacking");
             eventKeys.put("Krithi","krithi");
+            eventKeys.put("Eye Controlled Robots","eye-controlled-robots");
+            eventKeys.put("Distance Relays and Substation Automation","distance-relays-and-substation-automation");
+            eventKeys.put("Build Your 3D Printer","build-your-3d-printer");
+            eventKeys.put("ESRI's Connective Convergence","esri-s-connective-convergence");
+            eventKeys.put("Samsung's Virtual Reality","samsung-s-virtual-reality");
     }
 
     //showing events
@@ -120,8 +127,11 @@ public class Workshops extends AppCompatActivity {
         else if(cat.equals("Management")){
             events = management;
         }
-        else {
+        else if(cats.equals("School")){
             events = school;
+        }
+        else {
+            events= robotics;
         }
         for (int i = 0; i < events.length; i++) {
             entries.add(new Entry(1, i));

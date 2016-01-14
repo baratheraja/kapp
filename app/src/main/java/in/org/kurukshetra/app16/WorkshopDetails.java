@@ -85,6 +85,9 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         if (collapsingToolbarLayout != null) {
             collapsingToolbarLayout.setTitle(toolbar.getTitle());
         }
+        if(eventName.equals("Krithi")){
+            fab.setVisibility(View.GONE);
+        }
 
     }
 

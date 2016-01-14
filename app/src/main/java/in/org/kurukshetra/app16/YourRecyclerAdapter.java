@@ -1,15 +1,20 @@
 package in.org.kurukshetra.app16;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by baratheraja on 23/11/15.
@@ -17,6 +22,7 @@ import android.widget.TextView;
 
 class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String[] dataSource, numberSource;
+    private String m_Text = "";
     private String mail_id;
     private LayoutInflater inflater;
     private Context context;
@@ -90,7 +96,18 @@ class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             try {
                 if(i<dataSource.length) {
+                    final int s =  i;
                     yourRecyclerViewHolder.num.setText(numberSource[i]);
+                    yourRecyclerViewHolder.fab_dial.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            if (numberSource[s].equals("+91 95248 99989" )|| numberSource[s].equals("+91 98945 22683")  || numberSource[s].equals("+91 94890 29308")) {
+                                showDialogBox(v);
+                            }
+                            return false;
+                        }
+                    });
+
                     yourRecyclerViewHolder.fab_dial.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -121,6 +138,43 @@ class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
 
+    }
+
+
+    public void showDialogBox(final View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle("Ask me as such.");
+
+// Set up the input
+        final EditText input = new EditText(v.getContext());
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text = input.getText().toString();
+                if(m_Text.equals("Houston,"+" "+"we've had a problem here") || m_Text.equals("Houston,"+" "+"we've had a problem") || m_Text.equals("Houston,"+" "+"we have a problem"))
+                {
+                    Toast.makeText(v.getContext(), "Thats what i'm expecting", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(v.getContext(),"Swiggert and Lovell didnt report "+m_Text+"!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
 
