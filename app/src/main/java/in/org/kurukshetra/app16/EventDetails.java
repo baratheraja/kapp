@@ -1,6 +1,7 @@
 package in.org.kurukshetra.app16;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -24,8 +26,10 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +40,7 @@ public class EventDetails extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ImageView imageView;
+    public static final String[] ASSET_SUB_DIR = { "hospi" , "workshops", "xceed" , "events" };
     String eventName,eventKey,category;
 
     @Override
@@ -83,6 +88,10 @@ public class EventDetails extends AppCompatActivity {
         imageView.setImageDrawable(d);
 
         String json = loadJSONFromAsset(eventKey);
+        if(json == null){
+            copyAssetJsonToStorage();
+        }
+        json = loadJSONFromAsset(eventKey);
         ContactDetails store = new ContactDetails();
         store.init();
         try {
@@ -208,6 +217,89 @@ public class EventDetails extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MyApplication.getInstance().trackScreenView("Event "+category+" "+eventName);
+    }
+
+
+    private void copyAssetJsonToStorage(){
+
+        File myDir = new File(Environment.getExternalStorageDirectory(),"k16");
+        if(!myDir.exists()){
+            myDir.mkdirs();
+        }
+        for(int i=0;i<ASSET_SUB_DIR.length;i++){
+            createNewSubDir(ASSET_SUB_DIR[i]);
+            copyAssets(ASSET_SUB_DIR[i]);
+        }
+    }
+
+
+    private void copyAssets(String assetFolder) {
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list(assetFolder);
+
+//            for(int i=0;i<files.length;i++){
+//                Log.e("tag",files[i]);
+//            }
+
+            Log.e("tag", "Got Assets List");
+            copyDirContents(assetFolder, files);
+            Log.e("tag","contents copied");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+    }
+
+    public void copyDirContents(String assetFolder,String [] files){
+
+        if (files != null) for (String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = getAssets().open(assetFolder+"/"+filename);
+                Log.e("tag", "Opened - " + filename);
+                //File outFile = new File(getExternalFilesDir(null), filename);
+                File outFile = new File(Environment.getExternalStorageDirectory()+"/k16/"+assetFolder, filename);
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+                Log.e("tag", "Done copying - "+filename);
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+            }
+        }
+    }
+
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
+
+    private void createNewSubDir(String dirName){
+        File myDir = new File(Environment.getExternalStorageDirectory()+"/k16",dirName);
+        if(!myDir.exists()) {
+            myDir.mkdirs();
+        }
     }
 
 }

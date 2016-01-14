@@ -14,8 +14,6 @@
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
-
-
     <permission
         android:name="in.org.kurukshetra.app16.permission.C2D_MESSAGE"
         android:protectionLevel="signature"/>
@@ -32,6 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:largeHeap="true">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <receiver android:name="in.org.kurukshetra.app16.customHandler" />
         <activity android:name="in.org.kurukshetra.app16.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -41,6 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -171,6 +174,35 @@
                 android:value="in.org.kurukshetra.app16.HomeActivity"/>
         </activity>
 
+        <activity
+            android:name="in.org.kurukshetra.app16.workshopreg.OneParticipant"
+            android:label="Workshop Registration"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name="in.org.kurukshetra.app16.workshopreg.Twoparticipant"
+            android:label="Workshop Registration"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="in.org.kurukshetra.app16.workshopreg.ThreeParticipant"
+            android:label="Workshop Registration"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name="in.org.kurukshetra.app16.LoginActivity2"
+            android:label="Login"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="in.org.kurukshetra.app16.workshopreg.FourParticipant"
+            android:label="Workshop Registration"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
             android:enabled="true">

@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.FacebookSdk;
 import com.pushbots.push.Pushbots;
 
 import java.io.File;
@@ -66,19 +67,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 	@Override
-	protected void onPostResume () {
-		super.onPostResume ();
-	}
-
-	@Override
-	protected void onPause () {
-		super.onPause ();
-	}
-
-	@Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+        
+		super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_home);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -94,14 +86,20 @@ public class HomeActivity extends AppCompatActivity {
                     .setDismissText("GOT IT")
                     .setContentText("Click this button to open the quick menu")
                     .show();
-
-            copyAssetJsonToStorage();
             SharedPreferences.Editor e = s.edit();
             e.putInt("status", 1);
             e.commit();
         }
+        if(s.getInt("copy_status",0)==0)
+        {
+            copyAssetJsonToStorage();
+            SharedPreferences.Editor e = s.edit();
+            e.putInt("copy_status", 1);
+            e.commit();
+        }
 
         Pushbots.sharedInstance().init(this);
+        Pushbots.sharedInstance().setCustomHandler(customHandler.class);
         mHeaderPicture = (KenBurnsView) findViewById(R.id.header_picture);
         mHeaderPicture.setResourceIds(R.drawable.image1, R.drawable.image2, R.drawable.image3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
@@ -220,17 +218,6 @@ public class HomeActivity extends AppCompatActivity {
 	    }
     }
 
-
-    private void copyAssets(String assetFolder) {
-        AssetManager assetManager = getAssets();
-        String[] files;
-        try {
-            files = assetManager.list(assetFolder);
-
-            Log.e("tag", "Got Assets List");
-            copyDirContents(assetFolder,files);
-            Log.e("tag","contents copied");
-        }
         catch (IOException e) {
             Log.e("tag", "Failed to get asset file list.", e);
         }
