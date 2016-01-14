@@ -26,8 +26,8 @@ public class JSONFile {
 
 		String[] helpStrings = new String[] {
 				"Hey! This is DexBot here to help you! <br/> ",
-				"You can single tap the chathead to close this chat box <br/> ",
-				"You can double tap the chathead to close this chat <br/>",
+				"<b>You can single tap the chathead to close this chat box </b> <br/> ",
+				"<b>You can double tap the chathead to close this chat </b> <br/>",
 				"You can use these commands to communicate with me <br/>",
 				"event __? - e.g. event Sherlock <br/>",
 				"workshop __? - e.g. workshop Creative Coding <br/>",
@@ -104,7 +104,6 @@ public class JSONFile {
 		return stringHashMap.get (key);
 	}
 
-	@SuppressWarnings ("unused")
 	public String getQueryType(String key) {
 		return queryType.get (key);
 	}
@@ -125,6 +124,7 @@ public class JSONFile {
 			String[] wordParts = stringHashMap.get ("events" + messageBody);
 
 			if(wordParts != null) {
+				parsedMessage = "";
 				for(String i : wordParts) reply.append ("<br/>").append (i);
 				parsedMessage = parsedMessage + reply.toString();
 			}
@@ -135,6 +135,7 @@ public class JSONFile {
 			String[] wordParts = stringHashMap.get ("workshops" + messageBody);
 
 			if(wordParts != null) {
+				parsedMessage = "";
 				for(String i : wordParts) reply.append ("<br/>").append (i);
 				parsedMessage = parsedMessage + reply.toString();
 			}
