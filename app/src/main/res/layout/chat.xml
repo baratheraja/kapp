@@ -23,8 +23,8 @@
 
     <ListView
         android:background="#fff"
-        android:divider="#fff"
-        android:dividerHeight="10dp"
+        android:divider="#fff"bas
+        android:dividerHeight="5dp"
         android:id="@+id/chat"
         android:layout_above="@id/new_msg"
         android:layout_height="match_parent"

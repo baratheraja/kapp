@@ -21,9 +21,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.bezyapps.floatieslibrary.Floaty;
-import com.bezyapps.floatieslibrary.FloatyOrientationListener;
-
 import java.util.ArrayList;
 
 public class ChatDialog extends AppCompatActivity {
@@ -42,6 +39,7 @@ public class ChatDialog extends AppCompatActivity {
 	public static final int PERMISSION_REQUEST_CODE = 16;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		myDialog = this;
 		myDialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
 
@@ -50,17 +48,10 @@ public class ChatDialog extends AppCompatActivity {
 
 		button_start = (Button) findViewById(R.id.button_start);
 		button_stop = (Button) findViewById(R.id.button_stop);
-		Intent intent = new Intent(this, HomeActivity.class);
-		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		Notification notification = Floaty.createNotification (this, "k! Chat", "Chat Running", R.drawable.cyclotron, resultPendingIntent);
 
 		ImageView head = new ImageView(this);
-		head.setBackgroundResource (R.drawable.cyclotron);
+		head.setBackgroundResource (R.drawable.chat_head);
 
-		// Inflate the Views that are to be used as HEAD and BODY of The Window
-		//View head = LayoutInflater.from (this).inflate(R.layout.float_head, null);
-		// You should not add click listeners to head as it will be overridden, but the purpose of not making head just
-		// an ImageView is so you can add multiple views in it, and show and hide the relevant views to notify user etc.
 		View body = LayoutInflater.from(this).inflate(R.layout.chat, null);
 
 		arrayList = new ArrayList<> ();
@@ -98,17 +89,7 @@ public class ChatDialog extends AppCompatActivity {
 			}
 		});
 
-		floaty = Floaty.createInstance(this, head, body, NOTIFICATION_ID, notification, new FloatyOrientationListener () {
-			@Override
-			public void beforeOrientationChange(Floaty floaty) {
-				Toast.makeText(ChatDialog.this, "Orientation Change Start", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void afterOrientationChange(Floaty floaty) {
-				Toast.makeText(ChatDialog.this, "Orientation Change End", Toast.LENGTH_SHORT).show();
-			}
-		});
+		floaty = Floaty.createInstance(this, head, body);
 
 		button_start.setOnClickListener(new View.OnClickListener() {
 			@Override
