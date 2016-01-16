@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -32,6 +34,7 @@ import java.util.List;
 
 import  in.org.kurukshetra.app16.R;
 import  in.org.kurukshetra.app16.SessionManager;
+import in.org.kurukshetra.app16.app.MyApplication;
 import  in.org.kurukshetra.app16.workshopreg.Network2.RegisterCallback;
 
 public class OneParticipant extends AppCompatActivity implements RegisterCallback{
@@ -51,7 +54,7 @@ public class OneParticipant extends AppCompatActivity implements RegisterCallbac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         wid = getIntent().getStringExtra("wid");
-
+        Pushbots.sharedInstance().tag("Register form "+ wid);
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
@@ -160,29 +163,6 @@ public class OneParticipant extends AppCompatActivity implements RegisterCallbac
         c_spinner1.setAdapter(c_adapter);
         cr_spinner1.setAdapter(cr_adapter);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void submitForm() {
         if (!validateName()) {
             return;
@@ -342,8 +322,8 @@ public class OneParticipant extends AppCompatActivity implements RegisterCallbac
             SessionManager session= new SessionManager(this);
             session.setTkid(tid);
             Toast.makeText(this,tid,Toast.LENGTH_LONG).show();
-            //intent.putExtra("wid",wid);
-            //intent.putExtra("tid",tid);
+            intent.putExtra("wid",wid);
+            intent.putExtra("tid",tid);
             startActivity(intent);
         }
         else {
@@ -461,5 +441,11 @@ public class OneParticipant extends AppCompatActivity implements RegisterCallbac
         {
             othr_visible.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Registering " + wid);
     }
 }

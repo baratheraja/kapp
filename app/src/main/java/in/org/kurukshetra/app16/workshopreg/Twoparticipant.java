@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -32,6 +34,7 @@ import java.util.List;
 
 import in.org.kurukshetra.app16.R;
 import in.org.kurukshetra.app16.SessionManager;
+import in.org.kurukshetra.app16.app.MyApplication;
 
 import static in.org.kurukshetra.app16.workshopreg.Network2.*;
 
@@ -57,6 +60,8 @@ public class Twoparticipant extends AppCompatActivity implements RegisterCallbac
         setSupportActionBar(toolbar);
 
         wid = getIntent().getStringExtra("wid");
+
+        Pushbots.sharedInstance().tag("Register form "+ wid);
         inputLayoutName1 = (TextInputLayout) findViewById(R.id.input_layout_name1);
         inputLayoutEmail1 = (TextInputLayout) findViewById(R.id.input_layout_email1);
         inputLayoutPassword1 = (TextInputLayout) findViewById(R.id.input_layout_password1);
@@ -192,26 +197,6 @@ public class Twoparticipant extends AppCompatActivity implements RegisterCallbac
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     private void submitForm() {
@@ -605,6 +590,13 @@ public class Twoparticipant extends AppCompatActivity implements RegisterCallbac
             othr_visible.setVisibility(View.GONE);
         }
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Registering " + wid);
     }
 
 }

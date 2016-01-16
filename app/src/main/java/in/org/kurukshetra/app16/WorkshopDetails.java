@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
+import com.pushbots.push.Pushbots;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +71,8 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Pushbots.sharedInstance().tag("Register click "+ eventName);
                 handleRegister();
             }
         });
@@ -95,20 +98,32 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         idMap = new HashMap<>();
         minMap = new HashMap<>();
         maxMap = new HashMap<>();
-        idMap.put("cognitive-computing","IC");
+        idMap.put("ibm-s-cognitive-computing","IC");
         idMap.put("creative-coding","CC");
         idMap.put("growth-hacking","GH");
-        idMap.put("krithi","KR");
+        idMap.put("eye-controlled-robots","EC");
+        idMap.put("distance-relays-and-substation-automation","DR");
+        idMap.put("build-your-3d-printer","3D");
+        idMap.put("esri-s-connective-convergence","GI");
+        idMap.put("samsung-s-virtual-reality","VR");
 
         minMap.put("cognitive-computing",1);
-        minMap.put("creative-coding",1);
+        minMap.put("creative-coding", 1);
         minMap.put("growth-hacking",1);
-        minMap.put("krithi",2);
+        minMap.put("eye-controlled-robots",1);
+        minMap.put("distance-relays-and-substation-automation", 1);
+        minMap.put("build-your-3d-printer", 3);
+        minMap.put("esri-s-connective-convergence", 1);
+        minMap.put("samsung-s-virtual-reality", 2);
 
         maxMap.put("cognitive-computing",1);
         maxMap.put("creative-coding",1);
         maxMap.put("growth-hacking",1);
-        maxMap.put("krithi",3);
+        maxMap.put("eye-controlled-robots",4);
+        maxMap.put("distance-relays-and-substation-automation", 1);
+        maxMap.put("build-your-3d-printer",4);
+        maxMap.put("esri-s-connective-convergence",1);
+        maxMap.put("samsung-s-virtual-reality",2);
 
     }
 
@@ -317,6 +332,8 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
     @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.getInstance().trackScreenView("Workshop "+eventName);
+        MyApplication.getInstance().trackScreenView("Workshop " + eventName);
+
+        Pushbots.sharedInstance().tag("Workshop "+ eventName);
     }
 }

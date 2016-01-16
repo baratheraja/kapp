@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pushbots.push.Pushbots;
+
 import in.org.kurukshetra.app16.app.MyApplication;
 
 public class ProjectsActivity extends AppCompatActivity {
@@ -72,7 +74,12 @@ public class ProjectsActivity extends AppCompatActivity {
                     "Can reproduce complicated images and profiles systematically.\n",
             "Asherah is a fully autonomous unmanned bot which can clean the water surface by navigating through it.\n" +
                     "The bot is equipped with camera to detect the pollutants and garbage particles of definite size. It moves on the water surface, collects the garbage from water surface and deposits them on a tray present on top of the bot. \n" +
-                    " More than 70 percent of population depends on water bodies like lake and ponds for their daily living. However, these water bodies are polluted to a large extent. This bot is being built mainly to clean the water surface for access to cleaner water for use."
+                    " More than 70 percent of population depends on water bodies like lake and ponds for their daily living. However, these water bodies are polluted to a large extent. This bot is being built mainly to clean the water surface for access to cleaner water for use.",
+            "This project aims at preventing accidents due to people travelling on the 3rd tier of the intercity buses. This system stops the bus from moving if people are still on the 3rd tier while commencing the journey from the bus stop. The bus will slow down automatically if people move to the third tier of the bus while it is in motion. This system also integrates within itself an information system which gives a list of buses to a destination chosen by the user and the number of empty seats in those busses. This prevents overcrowding on the same bus. The system also allows users to be queued in a particular order, which prevents conflict of who should alight a bus at a particular point of time. \n",
+            "During the time of disaster it is of paramount importance to identify the people trapped in different places and also make an evacuation plan for them. It is highly unlikely that humans can access the disaster affected areas and find out if the people trapped there. A robot has been designed by us for exactly this application.",
+            "Narendra Modi’s Swachh Bharat campaign has gained momentum and why should only humans be involved in this initiative? We have designed a Swachh Robot that will help us in cleanliness. This robot will collect the waste in an area and dispose it off. This robot is controlled manually. ",
+            "Today most of the infant deaths are mainly due to the respiratory blockage that occurs in the respiratory tract while sleeping, named as APNEA. To prevent their death and to alert the parents and responsible people, we have developed a simple monitor. The purpose of this project is to saves the live of infants. Inhalation and Exhalation waveforms can be monitored along with the respiratory rate. This system will send out messages and alert the people around and can be easily installed at home.\n",
+            "Mobile phones have taken an innovative step towards security with their pattern locks. These are highly secure and also fun to use. The lock that we have made will give you the protection of a conventional lock combined with the security provided by the patterns. You will have to draw the patterns to unlock not on any surface but in Air. This lock uses infrared to sense the movements of your fingers."
     };
 
     public static String[] projects={
@@ -88,8 +95,8 @@ public class ProjectsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_us);
-
+        setContentView(R.layout.activity_projects);
+        Pushbots.sharedInstance().tag("Projects");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -138,6 +145,42 @@ public class ProjectsActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.projectDetails);
             textView.setText(getArguments().getString(ARG_SECTION_CONTENT));
+            ImageView imageView = (ImageView) rootView.findViewById(R.id.project_image);
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 0:
+                    imageView.setImageResource(R.drawable.pro_1);break;
+                case 1:
+                    imageView.setImageResource(R.drawable.pro_2);break;
+
+                case 2:
+                    imageView.setImageResource(R.drawable.pro_3); break;
+                case 3:
+                    imageView.setImageResource(R.drawable.pro_4); break;
+                case 4:
+                    imageView.setImageResource(R.drawable.pro_5);break;
+                case 5:
+                    imageView.setImageResource(R.drawable.pro_6);break;
+                case 6:
+                    imageView.setImageResource(R.drawable.pro_7);break;
+                case 7:
+                    imageView.setImageResource(R.drawable.pro_8);break;
+
+                case 8:
+                    imageView.setImageResource(R.drawable.pro_9); break;
+                case 9:
+                    imageView.setImageResource(R.drawable.pro_10); break;
+                case 10:
+                    imageView.setImageResource(R.drawable.pro_11);break;
+                case 11:
+                    imageView.setImageResource(R.drawable.pro_12);break;
+                case 12:
+                    imageView.setImageResource(R.drawable.pro_13); break;
+                case 13:
+                    imageView.setImageResource(R.drawable.pro_14);break;
+                case 14:
+                    imageView.setImageResource(R.drawable.pro_15);break;
+
+            }
             return rootView;
         }
     }
@@ -182,7 +225,16 @@ public class ProjectsActivity extends AppCompatActivity {
                     return "2D-writer";
                 case 9:
                     return "Asherah";
-
+                case 10:
+                    return "Foot Board Accident prevention system";
+                case 11:
+                    return "Disaster Surveillance Bot";
+                case 12:
+                    return "Swachh Bot";
+                case 13:
+                    return "Apnea Monitor";
+                case 14:
+                    return "Air Lock";
             }
             return null;
         }
@@ -191,6 +243,6 @@ public class ProjectsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.getInstance().trackScreenView("About us Page");
+        MyApplication.getInstance().trackScreenView("Projects");
     }
 }

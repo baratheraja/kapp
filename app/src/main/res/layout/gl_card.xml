@@ -51,7 +51,16 @@
             android:paddingTop="5dp"
             android:layout_alignRight="@+id/textView2"
             android:layout_alignEnd="@+id/textView2" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A Pre K! Guest Lecture"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:paddingLeft="5dp"
+            android:paddingBottom="20dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:textColor="@color/colorAccent"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
 </RelativeLayout>

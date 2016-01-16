@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -216,7 +218,8 @@ public class EventDetails extends AppCompatActivity {
 @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.getInstance().trackScreenView("Event "+category+" "+eventName);
+        MyApplication.getInstance().trackScreenView("Event " + category + " " + eventName);
+        Pushbots.sharedInstance().tag("Event " + category + " " + eventName);
     }
 
 

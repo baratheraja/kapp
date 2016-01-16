@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.pushbots.push.Pushbots;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +58,7 @@ public class Workshops extends AppCompatActivity {
 
         pieChart = (PieChart) findViewById(R.id.platinum);
         pieChart.setCenterText("Workshops");
+        Pushbots.sharedInstance().tag("Workshops");
         pieChart.setDescription(null);
         pieChart.animateY(1500, Easing.EasingOption.EaseInOutCirc);
         scrollView = (ScrollView) findViewById(R.id.scrollView);

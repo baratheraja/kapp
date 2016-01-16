@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -32,6 +34,7 @@ import java.util.List;
 
 import in.org.kurukshetra.app16.R;
 import in.org.kurukshetra.app16.SessionManager;
+import in.org.kurukshetra.app16.app.MyApplication;
 import in.org.kurukshetra.app16.workshopreg.Network2.RegisterCallback;
 
 public class FourParticipant extends AppCompatActivity implements RegisterCallback {
@@ -59,6 +62,8 @@ public class FourParticipant extends AppCompatActivity implements RegisterCallba
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         wid = getIntent().getStringExtra("wid");
+
+        Pushbots.sharedInstance().tag("Register form "+ wid);
 
         inputLayoutName1 = (TextInputLayout) findViewById(R.id.input_layout_name1);
         inputLayoutEmail1 = (TextInputLayout) findViewById(R.id.input_layout_email1);
@@ -852,4 +857,9 @@ public class FourParticipant extends AppCompatActivity implements RegisterCallba
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Registering " + wid);
+    }
 }

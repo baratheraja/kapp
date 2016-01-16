@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -180,6 +182,7 @@ public class XceedDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.getInstance().trackScreenView("Xceed "+eventName);
+        MyApplication.getInstance().trackScreenView("Xceed " + eventName);
+        Pushbots.sharedInstance().tag("Xceed " + eventName);
     }
 }

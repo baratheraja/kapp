@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.pushbots.push.Pushbots;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +52,6 @@ public class Events extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         initKeys();
-
         setContentView(R.layout.activity_events);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 	    if (actionBar != null) {
@@ -69,6 +69,7 @@ public class Events extends AppCompatActivity {
         */
         setTitle("Events");
 
+        Pushbots.sharedInstance().tag("Events");
         //setting categories
 	    for (int i = 0; i < cats.length; i++) {
 		    entries.add(new Entry(1, i));
@@ -165,7 +166,9 @@ public class Events extends AppCompatActivity {
     }
 
     public void showEvents(final int index) {
+
         String cat = categories.get(index);
+        Pushbots.sharedInstance().tag(cat);
         entries = new ArrayList<>();
         eventlist = new ArrayList<>();
         String [] events;

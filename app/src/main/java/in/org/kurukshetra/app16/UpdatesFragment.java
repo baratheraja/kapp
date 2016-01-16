@@ -36,27 +36,6 @@ UpdatesAdapter updatesAdapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-try {
-    Thread t = new Thread() {
-        @Override
-        public void run() {
-            try {
-                obj = new HandleJSON();
-
-            } catch (Exception e) {
-
-            } finally {
-                setdata();
-            }
-        }
-    };
-    t.start();
-}
-catch (Exception e){
-    e.printStackTrace();
-}
-
     list.clear();
     list.add("Please connect to the internet");
     pref = getActivity().getSharedPreferences(My_Pref, 0);
@@ -75,6 +54,12 @@ catch (Exception e){
         recyclerView.setAdapter(updatesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUpdte();
     }
 
     public void setdata()
@@ -101,8 +86,14 @@ catch (Exception e){
         swipeLayout.setOnRefreshListener(this);;
     }
 
+
+
     @Override
     public void onRefresh() {
+        loadUpdte();
+    }
+
+    public void loadUpdte(){
 
         new AsyncTask<Void,Void,Void>(){
             @Override
@@ -133,8 +124,5 @@ catch (Exception e){
 
             }
         }.execute();
-
-
     }
-
 }

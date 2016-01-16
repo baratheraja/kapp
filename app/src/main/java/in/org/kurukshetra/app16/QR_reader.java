@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.google.zxing.Result;
+import com.pushbots.push.Pushbots;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import in.org.kurukshetra.app16.app.MyApplication;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class QR_reader extends AppCompatActivity implements ZXingScannerView.ResultHandler{
@@ -34,26 +36,27 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Check for login...
-
-
+        Pushbots.sharedInstance().tag("Projects");
         z=new ZXingScannerView(this);
         lv=(LinearLayout)findViewById(R.id.lv);
         lv.addView(z);
         z.startCamera();
     }
 
-
     public void onPause()
     {
         super.onPause();
         z.stopCamera();
     }
-    public void onResume()
+
+    @Override
+    protected void onResume()
     {
+
         super.onResume();
         z.setResultHandler(this);
         z.startCamera();
+        MyApplication.getInstance().trackScreenView("Projects");
     }
 
     public void send(String a,String b)

@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pushbots.push.Pushbots;
+
 import in.org.kurukshetra.app16.app.MyApplication;
 
 public class GlDetails extends AppCompatActivity {
@@ -54,6 +56,7 @@ public class GlDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.getInstance().trackScreenView("GL "+ title);
+        MyApplication.getInstance().trackScreenView("GL " + title);
+        Pushbots.sharedInstance().tag("GL "+ title);
     }
 }

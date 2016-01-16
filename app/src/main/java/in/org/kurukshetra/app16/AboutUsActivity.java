@@ -24,7 +24,11 @@ public class AboutUsActivity extends AppCompatActivity {
     public static String[] abouts = {"Kurukshetra, an International Techno-Management Festival organized by CEG Tech Forum, has embarked on its journey of tenth edition. From its inception in 2007, it aimed at bringing together talents from varied engineering and management domains. Kurukshetra has evolved to act as an effective medium of interface between the academia and the industry. The fest with a vision for future to motivate, to provide opportunity and to identify and analyze societal problems, thereby provides tools to the current generation to solve it.",
     "From being a Survey school in 1794 to a Civil Engineering college in 1858 and finally College of Engineering, Guindy in 1859, the college always strives for excellence in academia and in enriching the students with experience. With the pride of being one of the oldest engineering colleges in India, CEG continues in the path of inspiring engineers to excel at any endeavour.",
     "CEG Tech Forum, the student run organisation, established in the year 2006, has become the technical hub of our college. The Student Directors of CTF work towards uniting the technical activities of CEG under this forum, to nurture and give direction to any student. Through collaborations with industries and academia, we aim to bring out the technological and research curiosity in our students. CTF's activities also include its flagship event, Kurukshetra.",
-    "The Cyclotron symbolizes the celebration of the indomitable spirit of engineering and innovation. It represents the ever expanding pursuit of knowledge. Just as a cyclotron accelerates a charged particle using high frequency, Kurukshetra provides that extra impetus for the engineer to excel.",
+            "Hey there, \n" +
+                    "\n" +
+                    "This is Dexter, the official mascot of Kurukshetra 2016, the Battle of the Brains. I was just a sketch lying there, but the people of CEG Tech Forum could not leave me there just lying. So they made me! Now, here I will be, to help you out and give you the inside news of Kurukshetra. Stay tuned for more updates from me. Just keep in mind that I can remember a lot of things and you are up for lot of exciting news!\n" +
+                    "\n",
+            "The Cyclotron symbolizes the celebration of the indomitable spirit of engineering and innovation. It represents the ever expanding pursuit of knowledge. Just as a cyclotron accelerates a charged particle using high frequency, Kurukshetra provides that extra impetus for the engineer to excel.",
     "The UNESCO patronage is the highest form of support granted by the organization, as a moral endorsement of exceptional activity which has a real impact on education, science, cultural or communication. Kurukshetra is the first event of its kind to receive this recognition. This recognition puts Kurukshetra in league with some of the most prestigious endeavors in the world.",
     };
     TabLayout tabLayout;
@@ -95,8 +99,10 @@ public class AboutUsActivity extends AppCompatActivity {
                 case 2:
                      imageView.setImageResource(R.drawable.ctf_logo); break;
                 case 3:
-                     imageView.setImageResource(R.drawable.cyclotron);break;
+                     imageView.setImageResource(R.drawable.dexter); break;
                 case 4:
+                     imageView.setImageResource(R.drawable.cyclotron);break;
+                case 5:
                      imageView.setImageResource(R.drawable.unesco);break;
 
             }
@@ -121,7 +127,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
 
         @Override
@@ -134,8 +140,10 @@ public class AboutUsActivity extends AppCompatActivity {
                 case 2:
                     return "CTF";
                 case 3:
-                    return "CYCLOTRON";
+                    return "DEXTER";
                 case 4:
+                    return "CYCLOTRON";
+                case 5:
                     return "UNESCO";
             }
             return null;

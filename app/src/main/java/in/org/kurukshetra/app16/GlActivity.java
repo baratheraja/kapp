@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.pushbots.push.Pushbots;
+
 import in.org.kurukshetra.app16.app.MyApplication;
 
 public class GlActivity extends AppCompatActivity {
@@ -36,9 +38,12 @@ public class GlActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         MyApplication.getInstance().trackScreenView("GL Page");
+
+        Pushbots.sharedInstance().tag("GL");
     }
 }

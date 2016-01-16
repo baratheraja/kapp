@@ -41,6 +41,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.pushbots.push.Pushbots;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +61,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import in.org.kurukshetra.app16.app.MyApplication;
 
 /**
  * Created by baratheraja on 8/1/16.
@@ -221,6 +224,12 @@ public class LoginActivity2 extends Activity implements GoogleApiClient.OnConnec
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Login/Logout Attempts");
     }
 
     //Google
@@ -479,6 +488,7 @@ public class LoginActivity2 extends Activity implements GoogleApiClient.OnConnec
                     else
                         session.setProvider(provider);
                     Log.e("Session", "created login session");
+                    Pushbots.sharedInstance().setAlias(user.getKid());
                     Intent resultIntent = new Intent();
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();

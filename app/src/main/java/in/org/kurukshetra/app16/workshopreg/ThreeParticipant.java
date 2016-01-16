@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.pushbots.push.Pushbots;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import in.org.kurukshetra.app16.R;
 import in.org.kurukshetra.app16.SessionManager;
+import in.org.kurukshetra.app16.app.MyApplication;
 import in.org.kurukshetra.app16.workshopreg.Network2.RegisterCallback;
 
 public class ThreeParticipant extends AppCompatActivity implements RegisterCallback{
@@ -56,6 +59,8 @@ public class ThreeParticipant extends AppCompatActivity implements RegisterCallb
         setSupportActionBar(toolbar);
 
         wid = getIntent().getStringExtra("wid");
+
+        Pushbots.sharedInstance().tag("Register form "+ wid);
         inputLayoutName1 = (TextInputLayout) findViewById(R.id.input_layout_name1);
         inputLayoutEmail1 = (TextInputLayout) findViewById(R.id.input_layout_email1);
         inputLayoutPassword1 = (TextInputLayout) findViewById(R.id.input_layout_password1);
@@ -214,24 +219,6 @@ public class ThreeParticipant extends AppCompatActivity implements RegisterCallb
 
 
     }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     private void submitForm() {
         if (!validateName1()) {
@@ -722,6 +709,12 @@ public class ThreeParticipant extends AppCompatActivity implements RegisterCallb
             othr_visible.setVisibility(View.GONE);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().trackScreenView("Registering " + wid);
     }
 
 }

@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-
+    <uses-permission android:name="android.permission.CAMERA"/>
     <permission
         android:name="in.org.kurukshetra.app16.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -43,10 +43,14 @@
         <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
-            android:name="in.org.kurukshetra.app16.MainActivity"
+            android:name="in.org.kurukshetra.app16.workshopreg.TransactionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
+        </activity>
         <activity
             android:name="in.org.kurukshetra.app16.Events"
             android:label="@string/title_activity_events"

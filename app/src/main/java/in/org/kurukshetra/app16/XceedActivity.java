@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.pushbots.push.Pushbots;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +57,8 @@ public class XceedActivity extends AppCompatActivity {
         */
 
         setTitle("Xceed");
+
+        Pushbots.sharedInstance().tag("Xceed");
         for (int i = 0; i < 3; i++) {
             entries.add(new Entry(1, i));
             categories.add(cats[i]);

@@ -11,14 +11,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -32,7 +31,7 @@ public class OverlayActivity extends AppCompatActivity{
     TagView tag;
     CloudView view;
     ImageButton fb,twitter,youtube,close,share,key,kico;
-    TextView login,kid;
+    Button login,kid;
     RelativeLayout hidden;
     LoginFragment loginFragment;
     ArrayList<TagView> tags = new ArrayList<>();
@@ -57,7 +56,7 @@ public class OverlayActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        FacebookSdk.sdkInitialize(this);
-        setContentView(R.layout.activity_overlay);
+       setContentView(R.layout.activity_overlay);
        final SharedPreferences s;
        final String MyPREFERENCES = "MyPrefs";
        s=getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
@@ -68,11 +67,12 @@ public class OverlayActivity extends AppCompatActivity{
         initTag("Hospitality");
         initTag("Student Ambassador");
         initTag("QR Scanner");
+       initTag("Projects");
         view.setCloudTags(tags);
        loginFragment = LoginFragment.loginInstance();
-       final FragmentManager manager = getSupportFragmentManager();
-       login= (TextView) findViewById(R.id.login);
-       kid = (TextView) findViewById(R.id.kid);
+     //  final FragmentManager manager = getSupportFragmentManager();
+       login= (Button) findViewById(R.id.login);
+       kid = (Button) findViewById(R.id.kid);
        key = (ImageButton) findViewById(R.id.key);
        kico = (ImageButton) findViewById(R.id.kid_ico);
        hidden = (RelativeLayout) findViewById(R.id.hidden);
@@ -90,7 +90,20 @@ public class OverlayActivity extends AppCompatActivity{
                //loginFragment.show(manager,"LOGIN");
            }
        });
-
+       kid.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               onClickLogin();
+               // loginFragment.show(manager, "LOGIN");
+           }
+       });
+       kico.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               onClickLogin();
+               //loginFragment.show(manager,"LOGIN");
+           }
+       });
        fb=(ImageButton) findViewById(R.id.fb_icon);
        fb.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -192,42 +205,36 @@ public class OverlayActivity extends AppCompatActivity{
                 if (vw.getText().toString().equals("Hospitality")) {
                     Intent intent = new Intent(OverlayActivity.this, HospiActivity.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Contacts")) {
                     Intent intent = new Intent(OverlayActivity.this, contacts.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("About us")) {
                     Intent intent = new Intent(OverlayActivity.this, AboutUsActivity.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Sponsors")) {
                     Intent intent = new Intent(OverlayActivity.this, Sponsers.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Student Ambassador")) {
                     Uri uri = Uri.parse("http://m.kurukshetra.org.in/#/sa");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Events")) {
 
                     Intent intent = new Intent(OverlayActivity.this, Events.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Workshops")) {
                     Intent intent = new Intent(OverlayActivity.this, Workshops.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Xceed")) {
                     Intent intent = new Intent(OverlayActivity.this, XceedActivity.class);
                     startActivity(intent);
-                    finish();
                 } else if (vw.getText().toString().equals("Guest Lectures")) {
 
                     Intent intent = new Intent(OverlayActivity.this, GlActivity.class);
                     startActivity(intent);
-                    finish();
+                } else if(vw.getText().toString().equals("Projects")){
+                    Intent intent = new Intent(OverlayActivity.this, ProjectsActivity.class);
+                    startActivity(intent);
                 } else if (vw.getText().toString().equals("QR Scanner")) {
                     SessionManager session = new SessionManager(OverlayActivity.this);
                     if (session.isLoggedIn()) {
