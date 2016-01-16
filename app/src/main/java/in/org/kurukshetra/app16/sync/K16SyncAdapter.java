@@ -30,11 +30,10 @@ import in.org.kurukshetra.app16.R;
  * Created by AkilAdeshwar on 03-01-2016.
  */
 
-/*
-    Work to done during sync is implemented in this class.
- */
+//
+//Work to done during sync is implemented in this class.
+//
 public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
-
 
     public static final int SYNC_INTERVAL = 60 * 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
@@ -51,7 +50,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.i(TAG, "Sync With Server Started..");
         syncWithServer();
-        Log.i(TAG," Sync With Server Complete. Data up to date.");
+        Log.i(TAG, "Sync With Server Complete. Data up to date.");
     }
 
 
@@ -61,9 +60,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
 
             String[] files  = getFilesFromSubDir(HomeActivity.ASSET_SUB_DIR[i]);
 
-            for(int j=0;j<files.length;j++){
-                downloadAndUpdateFile(HomeActivity.ASSET_SUB_DIR[i],files[j]);
-            }
+	        for (String file : files) downloadAndUpdateFile (HomeActivity.ASSET_SUB_DIR[i], file);
         }
     }
 
@@ -79,7 +76,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
         return files;
     }
 
-    public void downloadAndUpdateFile(String subDir,String fileName){
+    public void downloadAndUpdateFile(String subDir, String fileName){
 
 
         HttpURLConnection urlConnection = null;
@@ -96,8 +93,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
 
             URL url = new URL(builtUri.toString());
 
-            Log.i(TAG,"Requesting: "+url.toString());
-
+            Log.i(TAG, "Requesting: " + url.toString());
 
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -105,7 +101,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
 
             // Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder ();
             if (inputStream == null) {
                 // Nothing to do.
                 return;
@@ -117,7 +113,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
                 // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
                 // But it does make debugging a *lot* easier if you print out the completed
                 // buffer for debugging.
-                buffer.append(line + "\n");
+                buffer.append (line).append ("\n");
             }
 
             if (buffer.length() == 0) {
@@ -127,7 +123,7 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
             }
             jsonResult = buffer.toString();
 
-            Log.i(TAG,subDir+" --> "+fileName+" \n"+jsonResult);
+            Log.i(TAG, subDir +" --> " + fileName +" \n" + jsonResult);
         } catch (IOException e) {
             Log.e(TAG, "mError ", e);
         } finally {
@@ -171,16 +167,9 @@ public class K16SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-
-
-
-
-
     public static void initializeSyncAdapter(Context context) {
         getSyncAccount(context);
     }
-
-
 
     public static void syncImmediately(Context context) {
         Bundle bundle = new Bundle();

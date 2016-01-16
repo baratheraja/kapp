@@ -68,6 +68,7 @@ public class OverlayActivity extends AppCompatActivity{
         initTag("Student Ambassador");
         initTag("QR Scanner");
        initTag("Projects");
+		initTag("Chat");
         view.setCloudTags(tags);
        loginFragment = LoginFragment.loginInstance();
      //  final FragmentManager manager = getSupportFragmentManager();
@@ -235,7 +236,11 @@ public class OverlayActivity extends AppCompatActivity{
                 } else if(vw.getText().toString().equals("Projects")){
                     Intent intent = new Intent(OverlayActivity.this, ProjectsActivity.class);
                     startActivity(intent);
-                } else if (vw.getText().toString().equals("QR Scanner")) {
+                } else if (vw.getText().toString().equals("Chat")) {
+					
+					startActivity(new Intent(OverlayActivity.this, ChatDialog.class));
+					finish();
+			    } else if (vw.getText().toString().equals("QR Scanner")) {
                     SessionManager session = new SessionManager(OverlayActivity.this);
                     if (session.isLoggedIn()) {
                         Intent intent = new Intent(OverlayActivity.this, QR_reader.class);

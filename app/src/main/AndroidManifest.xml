@@ -189,6 +189,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+		
+		<activity
+            android:name=".ChatDialog"
+            android:label="Chat"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="in.org.kurukshetra.app16.HomeActivity"/>
+        </activity>
 
         <activity
             android:name="in.org.kurukshetra.app16.workshopreg.Twoparticipant"
@@ -242,9 +252,11 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
-
-
+        <service
+            android:name=".ChatHead"
+            android:enabled="true">
+        </service>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"/>
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.K16AuthenticatorService">
@@ -276,6 +288,8 @@
             android:exported="false"
             />
 
+        <service android:name="in.org.kurukshetra.app16.Floaty$FloatHeadService" >
+        </service>
 
     </application>
 

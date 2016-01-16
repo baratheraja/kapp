@@ -36,9 +36,7 @@ import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class HomeActivity extends AppCompatActivity {
 
-
-
-    public static final String[] ASSET_SUB_DIR = { "hospi" , "workshops", "xceed" , "events" };
+    public static final String[] ASSET_SUB_DIR = { "events" , "hospi" , "images" , "workshops", "xceed" };
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -49,44 +47,36 @@ public class HomeActivity extends AppCompatActivity {
     };
 
     public void funEvents1(View view) {
-        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
-            Intent intent = new Intent(this,Events.class);
-            startActivity(intent);
+        Intent intent = new Intent(this,Events.class);
+        startActivity(intent);
     }
 
     public void funEvents2(View view) {
-        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image2);
         Intent intent = new Intent(this,XceedActivity.class);
         startActivity(intent);
     }
 
     public void funEvents3(View view) {
-        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-        //ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
+        Intent intent = new Intent(this,GlActivity.class);
+        startActivity(intent);
+    }
+    public void funEvents4(View view) {
         Intent intent = new Intent(this,GlActivity.class);
         startActivity(intent);
     }
 
-    public void funEvents4(View view) {
-        //Toast.makeText(this,"testing",Toast.LENGTH_LONG).show();
-      //  ImageView imageView = (ImageView) view.findViewById(R.id.list_item_image);
-       Intent intent = new Intent(this,Workshops.class);
-        startActivity(intent);
-    }
-
-    @Override
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
+
+		FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_home);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final SharedPreferences s;
         final String MyPREFERENCES = "MyPrefs" ;
 
-        s=getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+        s = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
 
         if(s.getInt("status",0)==0)
         {
@@ -114,13 +104,17 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar2);
-        setTitle("");
-        viewPager = (ViewPager) findViewById(R.id.home_viewpager);
+
+		setTitle("");
+
+		viewPager = (ViewPager) findViewById(R.id.home_viewpager);
         setupViewPager(viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.home_tabs);
+
+		tabLayout = (TabLayout) findViewById(R.id.home_tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-        fab.setOnClickListener(new View.OnClickListener() {
+
+		fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OverlayActivity.class);
@@ -134,21 +128,14 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     @Override
     public void onBackPressed() {
         //Display alert message when back button has been pressed
         backButtonHandler();
-
     }
 
     public void backButtonHandler() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                HomeActivity.this);
-
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder (HomeActivity.this);
 
         alertDialog.setMessage("Are you sure you want to Exit?");
 
@@ -181,8 +168,6 @@ public class HomeActivity extends AppCompatActivity {
         adapter.addFrag(new UpdatesFragment(), "UPDATES");
         viewPager.setAdapter(adapter);
     }
-
-
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -219,36 +204,30 @@ public class HomeActivity extends AppCompatActivity {
         MyApplication.getInstance().trackScreenView("Home Page");
     }
 
-
-
-
     private void copyAssetJsonToStorage(){
 
         File myDir = new File(Environment.getExternalStorageDirectory(),"k16");
         if(!myDir.exists()){
             myDir.mkdirs();
         }
-        for(int i=0;i<ASSET_SUB_DIR.length;i++){
-            createNewSubDir(ASSET_SUB_DIR[i]);
-            copyAssets(ASSET_SUB_DIR[i]);
-        }
+	    for (String aASSET_SUB_DIR : ASSET_SUB_DIR) {
+		    createNewSubDir (aASSET_SUB_DIR);
+		    copyAssets (aASSET_SUB_DIR);
+	    }
     }
 
 
     private void copyAssets(String assetFolder) {
         AssetManager assetManager = getAssets();
-        String[] files = null;
+        String[] files;
         try {
             files = assetManager.list(assetFolder);
-
-//            for(int i=0;i<files.length;i++){
-//                Log.e("tag",files[i]);
-//            }
 
             Log.e("tag", "Got Assets List");
             copyDirContents(assetFolder,files);
             Log.e("tag","contents copied");
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Log.e("tag", "Failed to get asset file list.", e);
         }
     }
