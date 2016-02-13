@@ -199,7 +199,7 @@ public class ProjectsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 10;
+            return 15;
         }
 
         @Override

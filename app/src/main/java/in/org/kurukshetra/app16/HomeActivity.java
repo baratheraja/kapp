@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void funEvents4(View view) {
-        Intent intent = new Intent(this,GlActivity.class);
+        Intent intent = new Intent(this,Workshops.class);
         startActivity(intent);
     }
 

@@ -50,7 +50,7 @@ public class Sponsers extends ActionBarActivity {
         ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Activity.CONNECTIVITY_SERVICE);
         setContentView(R.layout.sponsers_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Previous Sponsors");
+        getSupportActionBar().setTitle("Sponsors");
 
         sponser = (ListView) findViewById(R.id.sponser_list);
         pref = getSharedPreferences(My_Pref, 0);
@@ -170,13 +170,9 @@ public class Sponsers extends ActionBarActivity {
             TextView txtTitle = (TextView) rowView.findViewById(R.id.sponser_name);
             SmartImageView logos = (SmartImageView) rowView.findViewById(R.id.sponser_logo);
             txtTitle.setText((CharSequence) name.get(position));
-           
 
             lastPosition = position;
-
             logos.setImageUrl("" + url.get(position) + "");
-
-
             return rowView;
         }
     }

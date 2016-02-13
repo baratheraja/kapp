@@ -71,7 +71,6 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Pushbots.sharedInstance().tag("Register click "+ eventName);
                 handleRegister();
             }
@@ -91,7 +90,6 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         if(eventName.equals("Krithi")){
             fab.setVisibility(View.GONE);
         }
-
     }
 
     private void initMaps() {
@@ -107,7 +105,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         idMap.put("esri-s-connective-convergence","GI");
         idMap.put("samsung-s-virtual-reality","VR");
 
-        minMap.put("cognitive-computing",1);
+        minMap.put("ibm-s-cognitive-computing",1);
         minMap.put("creative-coding", 1);
         minMap.put("growth-hacking",1);
         minMap.put("eye-controlled-robots",1);
@@ -116,7 +114,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         minMap.put("esri-s-connective-convergence", 1);
         minMap.put("samsung-s-virtual-reality", 2);
 
-        maxMap.put("cognitive-computing",1);
+        maxMap.put("ibm-s-cognitive-computing",1);
         maxMap.put("creative-coding",1);
         maxMap.put("growth-hacking",1);
         maxMap.put("eye-controlled-robots",4);

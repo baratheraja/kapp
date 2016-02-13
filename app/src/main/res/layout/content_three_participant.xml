@@ -105,6 +105,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4" />
+
+                <RadioButton android:id="@+id/radio_button15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
             </RadioGroup>
 
         </LinearLayout>
@@ -236,6 +241,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4" />
+
+                <RadioButton android:id="@+id/radio_button25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
             </RadioGroup>
 
         </LinearLayout>
@@ -364,6 +374,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4" />
+
+                <RadioButton android:id="@+id/radio_button35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
             </RadioGroup>
 
         </LinearLayout>

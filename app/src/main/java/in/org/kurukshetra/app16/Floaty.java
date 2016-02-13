@@ -1,6 +1,5 @@
 package in.org.kurukshetra.app16;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -34,9 +33,16 @@ public class Floaty {
     private float oldWidth = 0;
     private float oldX = 0;
     private boolean confChange = false;
-
+    public static Boolean isActive = false;
     private static final String LOG_TAG = "Floaty";
 
+    public static Boolean getIsActive() {
+        return isActive;
+    }
+
+    public static void setIsActive(Boolean isActive) {
+        Floaty.isActive = isActive;
+    }
 
     /**
      *
@@ -125,6 +131,8 @@ public class Floaty {
      */
     public void startService() {
         Intent intent = new Intent(context, FloatHeadService.class);
+        //setIsActive(true);
+        isActive = true;
         context.startService(intent);
     }
 
@@ -133,6 +141,8 @@ public class Floaty {
      */
     public void stopService() {
         Intent intent = new Intent(context, FloatHeadService.class);
+        //setIsActive(false);
+        isActive = false;
         context.stopService(intent);
     }
 

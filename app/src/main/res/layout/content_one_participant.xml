@@ -95,6 +95,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4" />
+
+                <RadioButton android:id="@+id/radio_button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
             </RadioGroup>
 
          </LinearLayout>

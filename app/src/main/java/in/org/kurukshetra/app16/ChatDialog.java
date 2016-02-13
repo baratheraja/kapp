@@ -2,8 +2,6 @@ package in.org.kurukshetra.app16;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -35,7 +33,6 @@ public class ChatDialog extends AppCompatActivity {
 
 	Floaty floaty;
 	Button button_start, button_stop;
-	private static final int NOTIFICATION_ID = 1500;
 	public static final int PERMISSION_REQUEST_CODE = 16;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,24 +87,34 @@ public class ChatDialog extends AppCompatActivity {
 		});
 
 		floaty = Floaty.createInstance(this, head, body);
-
 		button_start.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 					startFloatyForAboveAndroidL();
-				else
+				else{
+
 					floaty.startService();
+						updateUI(floaty.getIsActive());
+				}
+
 			}
 		});
-
+		updateUI(floaty.getIsActive());
 		button_stop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				floaty.stopService();
+				updateUI(floaty.getIsActive());
 			}
 		});
 
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		updateUI(floaty.getIsActive());
 	}
 
 	@TargetApi(Build.VERSION_CODES.M)
@@ -118,9 +125,22 @@ public class ChatDialog extends AppCompatActivity {
 			startActivityForResult(intent, PERMISSION_REQUEST_CODE);
 		} else {
 			floaty.startService();
+			updateUI(floaty.getIsActive());
 		}
 	}
 
+
+	public void updateUI(Boolean active){
+		if(active){
+			button_start.setVisibility(View.INVISIBLE);
+			button_stop.setVisibility(View.VISIBLE);
+		}
+		else {
+
+			button_start.setVisibility(View.VISIBLE);
+			button_stop.setVisibility(View.INVISIBLE);
+		}
+	}
 
 	@TargetApi(Build.VERSION_CODES.M)
 	@Override
@@ -128,6 +148,7 @@ public class ChatDialog extends AppCompatActivity {
 		if (requestCode == PERMISSION_REQUEST_CODE) {
 			if (Settings.canDrawOverlays (this)) {
 				floaty.startService();
+				updateUI(floaty.getIsActive());
 			} else {
 				Spanned message = Html.fromHtml ("Please allow this permission, so <b>DexBot</b> can chat with you!");
 				Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -139,6 +160,7 @@ public class ChatDialog extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 		active = true;
+		updateUI(floaty.getIsActive());
 	}
 
 	@Override

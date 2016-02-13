@@ -482,9 +482,11 @@ public class LoginActivity2 extends Activity implements GoogleApiClient.OnConnec
                     SessionManager session= new SessionManager(LoginActivity2.this);
                     String json = msg.getData().getString("Result");
                     User user = createUser(json);
-                    if(user != null)
-                        session.createLoginSession(user.getToken(),user.getAuthentication_token(),user.getId(),
-                                user.getKid(),user.getName(),user.getSa_id(),user.getProvider());
+                    if(user != null) {
+                        session.createLoginSession(user.getToken(), user.getAuthentication_token(), user.getId(),
+                                user.getKid(), user.getName(), user.getSa_id(), user.getProvider());
+                        Toast.makeText(LoginActivity2.this,"Login Successful",Toast.LENGTH_LONG).show();
+                    }
                     else
                         session.setProvider(provider);
                     Log.e("Session", "created login session");

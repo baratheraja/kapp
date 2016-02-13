@@ -1,6 +1,9 @@
 package in.org.kurukshetra.app16;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,9 +34,11 @@ public class Workshops extends AppCompatActivity {
     ArrayList<String> categories = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
 
+
+
     String[] cats = {"Engineering","Robotics", "Management", "School"};
-    String[] engineering = {"IBM's Cognitive Computing","Creative Coding","Distance Relays and Substation Automation",
-            "Build Your 3D Printer","ESRI's Connective Convergence","Samsung's Virtual Reality"};
+    String[] engineering = {"Cognitive Computing","Creative Coding","DR and SA",
+            "Build Your 3D Printer","Connective Convergence","Samsung's VR"};
     String[] management = {"Growth Hacking"};
     String[] school = {"Krithi"};
     String[] robotics = {"Eye Controlled Robots"};
@@ -51,7 +56,39 @@ public class Workshops extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setTitle("Workshops");
-        for (int i = 0; i < 3; i++) {
+
+        final SharedPreferences s;
+        final String MyPREFERENCES = "MyPrefs" ;
+
+        s = getSharedPreferences(MyPREFERENCES,MODE_PRIVATE);
+
+        if(s.getInt("workshopnotif",0)==0){
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder (Workshops.this);
+
+            alertDialog.setMessage("Now you can register for workshops directly from this app.");
+
+            alertDialog.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                           dialog.cancel();
+                        }
+                    });
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to invoke NO event
+                            dialog.cancel();
+                        }
+                    });
+            // Showing Alert Message
+            alertDialog.show();
+            SharedPreferences.Editor e = s.edit();
+            e.putInt("workshopnotif", 1);
+            e.commit();
+        }
+        for (int i = 0; i < 4; i++) {
             entries.add(new Entry(1, i));
             categories.add(cats[i]);
         }
@@ -102,15 +139,15 @@ public class Workshops extends AppCompatActivity {
     }
 
     private void initKeys() {
-            eventKeys.put("IBM's Cognitive Computing","ibm-s-cognitive-computing");
+            eventKeys.put("Cognitive Computing","ibm-s-cognitive-computing");
             eventKeys.put("Creative Coding","creative-coding");
             eventKeys.put("Growth Hacking","growth-hacking");
             eventKeys.put("Krithi","krithi");
             eventKeys.put("Eye Controlled Robots","eye-controlled-robots");
-            eventKeys.put("Distance Relays and Substation Automation","distance-relays-and-substation-automation");
+            eventKeys.put("DR and SA","distance-relays-and-substation-automation");
             eventKeys.put("Build Your 3D Printer","build-your-3d-printer");
-            eventKeys.put("ESRI's Connective Convergence","esri-s-connective-convergence");
-            eventKeys.put("Samsung's Virtual Reality","samsung-s-virtual-reality");
+            eventKeys.put("Connective Convergence","esri-s-connective-convergence");
+            eventKeys.put("Samsung's VR","samsung-s-virtual-reality");
     }
 
     //showing events
@@ -129,7 +166,7 @@ public class Workshops extends AppCompatActivity {
         else if(cat.equals("Management")){
             events = management;
         }
-        else if(cats.equals("School")){
+        else if(cat.equals("School")){
             events = school;
         }
         else {
@@ -161,8 +198,16 @@ public class Workshops extends AppCompatActivity {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
                 String name = eventlist.get(e.getXIndex());
+                String name2;
+                switch (name){
+                    case "Cognitive Computing" : name2 = "IBM's Cognitive Computing"; break;
+                    case "DR and SA" : name2 = "Distance Relays and Substation Automation"; break;
+                    case "Connective Convergence" : name2 = "ESRI's Connective Convergence"; break;
+                    case "Samsung's VR" : name2 = "Samsung's Virtual Reality"; break;
+                    default:name2 = name;
+                }
                 Intent intent = new Intent(Workshops.this,WorkshopDetails.class);
-                intent.putExtra("name",name);
+                intent.putExtra("name",name2);
                 intent.putExtra("key",eventKeys.get(name));
                 intent.putExtra("cat", categories.get(index));
                 startActivity(intent);

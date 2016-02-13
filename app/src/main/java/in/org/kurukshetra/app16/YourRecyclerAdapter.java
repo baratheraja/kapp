@@ -4,17 +4,31 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.InputType;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 
 /**
  * Created by baratheraja on 23/11/15.
@@ -79,20 +93,20 @@ class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return holder;
     }
 
-
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int i) {
 
         final YourRecyclerViewHolder yourRecyclerViewHolder= (YourRecyclerViewHolder)viewHolder;
       //  URLImageParser p = new URLImageParser(yourRecyclerViewHolder.textView, context);
 
-        if(i<dataSource.length)
-            yourRecyclerViewHolder.textView.setText(Html.fromHtml(dataSource[i]));
+        if(i<dataSource.length) {
+            URLImageParser p = new URLImageParser(yourRecyclerViewHolder.textView, context);
+            Spanned htmlSpan = Html.fromHtml(dataSource[i], p, null);
+            yourRecyclerViewHolder.textView.setText(htmlSpan);
+            yourRecyclerViewHolder.textView.setMovementMethod(LinkMovementMethod.getInstance());
 
+        }
         if (isContact) {
-
-
-
 
             try {
                 if(i<dataSource.length) {
@@ -120,8 +134,6 @@ class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 else {
                     yourRecyclerViewHolder.email.setText(mail_id);
-
-
                     yourRecyclerViewHolder.fab_mail.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -159,7 +171,7 @@ class YourRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 m_Text = input.getText().toString();
                 if(m_Text.equals("Houston,"+" "+"we've had a problem here") || m_Text.equals("Houston,"+" "+"we've had a problem") || m_Text.equals("Houston,"+" "+"we have a problem"))
                 {
-                    Toast.makeText(v.getContext(), "Thats what i'm expecting", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "palmer luckey's product is now with facebook", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

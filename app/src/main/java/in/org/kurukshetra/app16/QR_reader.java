@@ -1,11 +1,14 @@
 package in.org.kurukshetra.app16;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.pushbots.push.Pushbots;
@@ -23,12 +26,10 @@ import java.net.URLEncoder;
 import in.org.kurukshetra.app16.app.MyApplication;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class QR_reader extends AppCompatActivity implements ZXingScannerView.ResultHandler{
-
-
+public class QR_reader extends AppCompatActivity implements ZXingScannerView.ResultHandler,CollegeChooserFragment.OnCollegeListener{
     private ZXingScannerView z;
     LinearLayout lv;
-
+    Result result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
         z.stopCamera();
     }
 
+
     @Override
     protected void onResume()
     {
@@ -59,7 +61,7 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
         MyApplication.getInstance().trackScreenView("Projects");
     }
 
-    public void send(String a,String b)
+    public void send(String a,String b,String c)
     {
         class asyncc extends AsyncTask<String,Void,respo>
         {
@@ -67,6 +69,7 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
             @Override
             protected respo doInBackground(String... params) {
                 String uss=params[0];
+                String clg = params[2];
                 respo r=new respo();
                 String link="http://test2014.kurukshetra.org.in/test.php";
                 String data;
@@ -74,6 +77,7 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
                 try {
                     data = URLEncoder.encode("qid", "UTF-8") + "=" + URLEncoder.encode(uss, "UTF-8");
                     data += "&" + URLEncoder.encode("kid", "UTF-8") + "=" + URLEncoder.encode(session.getKid(), "UTF-8");
+                    data += "&" + URLEncoder.encode("college", "UTF-8") + "=" + URLEncoder.encode(clg, "UTF-8");
                     URL url = new URL(link);
                     URLConnection conn = url.openConnection();
                     conn.setDoOutput(true);
@@ -104,22 +108,31 @@ public class QR_reader extends AppCompatActivity implements ZXingScannerView.Res
                 return r;
             }
 
+
             protected void onPostExecute(respo r){
 
                 lv.removeAllViewsInLayout();
                 finish();
-               // Toast.makeText(getApplicationContext(), "" + r.xc, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Scanned Successfully " + result.getText() , Toast.LENGTH_SHORT).show();
             }
         }
         asyncc aaa=new asyncc();
-        aaa.execute(a, b);
+        aaa.execute(a, b, c);
 
     }
 
     @Override
     public void handleResult(Result result) {
+        this.result = result;
+        CollegeChooserFragment fragment = CollegeChooserFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment.show(fragmentManager, "Enter College");
 
-        send(result.getText().toString(),result.getText().toString());
+    }
+
+    @Override
+    public void onCollege(String college) {
+        send(result.getText().toString(), result.getText().toString(), college);
         z.stopCamera();
 
     }

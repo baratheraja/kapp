@@ -69,7 +69,9 @@ public class Events extends AppCompatActivity {
         */
         setTitle("Events");
 
-        Pushbots.sharedInstance().tag("Events");
+        Pushbots p = Pushbots.sharedInstance();
+        if(p!=null)
+            p.tag("Events");
         //setting categories
 	    for (int i = 0; i < cats.length; i++) {
 		    entries.add(new Entry(1, i));

@@ -8,10 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="10px"
+        android:layout_marginBottom="0px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +21,7 @@
             <ImageButton
                 android:id="@+id/key"
                 android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/key"
                 android:background="@android:color/transparent"
@@ -29,7 +31,7 @@
             <ImageButton
                 android:id="@+id/close"
                 android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/close_ico"
                 android:background="@android:color/transparent"
@@ -42,7 +44,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40px"
                 android:paddingLeft="20px"
                 android:text="LOGIN"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -51,21 +53,20 @@
                 android:layout_toRightOf="@+id/key"
                 android:background="@android:color/transparent"
                 android:textColor="@color/white"
-                android:paddingTop="0px"
-                android:paddingBottom="0px"
+                android:paddingTop="3px"
+                android:paddingBottom="3px"
                 android:layout_alignParentTop="true" />
 
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
             android:id="@+id/hidden"
             >
             <ImageButton
                 android:id="@+id/kid_ico"
                 android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/k_ico"
                 android:background="@android:color/transparent"
@@ -77,11 +78,11 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40px"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:paddingLeft="20px"
-                android:paddingTop="0px"
-                android:paddingBottom="0px"
+                android:paddingTop="3px"
+                android:paddingBottom="3px"
                 android:text="KID"
                 android:id="@+id/kid"
                 android:background="@android:color/transparent"
@@ -93,7 +94,7 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_height="1dp"
             android:alpha="0.75"
             android:background="@color/white"/>
@@ -103,8 +104,9 @@
         android:layout_width="270dp"
         android:layout_height="300dp"
         android:id="@+id/cloudview"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearLayout2" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -112,7 +114,8 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:orientation="horizontal"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:id="@+id/linearLayout">
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
