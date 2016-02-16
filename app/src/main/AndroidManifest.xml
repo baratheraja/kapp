@@ -8,12 +8,13 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <permission
         android:name="in.org.kurukshetra.app16.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -23,73 +24,80 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name="in.org.kurukshetra.app16.app.MyApplication"
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <receiver android:name="in.org.kurukshetra.app16.customHandler" />
-        <activity android:name="in.org.kurukshetra.app16.SplashScreen"
+        <receiver android:name=".customHandler" />
+
+        <activity
+            android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
-        <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-
+        </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.workshopreg.TransactionActivity"
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".workshopreg.TransactionActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.Events"
+            android:name=".Events"
             android:label="@string/title_activity_events"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.Workshops"
+            android:name=".Workshops"
             android:label="Workshops"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.XceedActivity"
+            android:name=".XceedActivity"
             android:label="@string/title_activity_xceed"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.EventDetails"
+            android:name=".EventDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="in.org.kurukshetra.app16.WorkshopDetails"
+            android:name=".WorkshopDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="in.org.kurukshetra.app16.XceedDetails"
+            android:name=".XceedDetails"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="in.org.kurukshetra.app16.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -97,18 +105,17 @@
                 <action android:name="in.org.kurukshetra.app16.MESSAGE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
             </intent-filter>
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.OverlayActivity"
+            android:name=".OverlayActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
         <activity
-            android:name="in.org.kurukshetra.app16.HospiActivity"
+            android:name=".HospiActivity"
             android:label="Hospitality"
-            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -116,9 +123,9 @@
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.contacts"
+            android:name=".contacts"
             android:label="Contacts"
-            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -126,34 +133,32 @@
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
         <activity
-            android:name="in.org.kurukshetra.app16.AboutUsActivity"
+            android:name=".AboutUsActivity"
             android:label="About us"
-            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
-
         <activity
-            android:name="in.org.kurukshetra.app16.ProjectsActivity"
+            android:name=".ProjectsActivity"
             android:label="Projects"
-            android:parentActivityName="in.org.kurukshetra.app16.HomeActivity"
+            android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
-
-        <activity android:name="in.org.kurukshetra.app16.LoginActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
-            android:name="in.org.kurukshetra.app16.GlActivity"
+            android:name=".GlActivity"
             android:label="Guest Lectures"
             android:screenOrientation="portrait" />
         <activity
-            android:name="in.org.kurukshetra.app16.GlDetails"
+            android:name=".GlDetails"
             android:label="@string/title_activity_gl_details"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -176,58 +181,52 @@
         <service android:name="com.pushbots.push.GCMIntentService" />
 
         <activity
-            android:name="in.org.kurukshetra.app16.Sponsers"
+            android:name=".Sponsers"
             android:label="Sponsors"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
-
         <activity
-            android:name="in.org.kurukshetra.app16.workshopreg.OneParticipant"
+            android:name=".workshopreg.OneParticipant"
             android:label="Workshop Registration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-		
-		<activity
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ChatDialog"
             android:label="Chat"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="in.org.kurukshetra.app16.HomeActivity"/>
+                android:value="in.org.kurukshetra.app16.HomeActivity" />
         </activity>
-
         <activity
-            android:name="in.org.kurukshetra.app16.workshopreg.Twoparticipant"
+            android:name=".workshopreg.Twoparticipant"
             android:label="Workshop Registration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="in.org.kurukshetra.app16.workshopreg.ThreeParticipant"
+            android:name=".workshopreg.ThreeParticipant"
             android:label="Workshop Registration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="in.org.kurukshetra.app16.QR_reader"
+            android:name=".QR_reader"
             android:label="QR Scannner"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="in.org.kurukshetra.app16.LoginActivity2"
-            android:label="Login"
-            android:screenOrientation="portrait"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="in.org.kurukshetra.app16.workshopreg.FourParticipant"
+            android:name=".LoginActivity2"
+            android:label="Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".workshopreg.FourParticipant"
             android:label="Workshop Registration"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <receiver
             android:name="com.google.android.gms.analytics.AnalyticsReceiver"
             android:enabled="true">
@@ -253,13 +252,14 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"/>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.K16AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
@@ -268,26 +268,28 @@
         <!-- The SyncAdapter service -->
         <service
             android:name=".sync.K16SyncService"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
+
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
         </service>
-        
+
         <provider
-            android:authorities="@string/content_authority"
             android:name=".sync.DummyProvider"
-            android:syncable="true"
+            android:authorities="@string/content_authority"
             android:exported="false"
-            />
+            android:syncable="true" />
 
-        <service android:name="in.org.kurukshetra.app16.Floaty$FloatHeadService" >
-        </service>
+        <service android:name=".Floaty$FloatHeadService"></service>
 
+        <activity
+            android:name=".Results"
+            android:label="@string/title_activity_results"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

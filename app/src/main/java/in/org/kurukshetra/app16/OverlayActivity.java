@@ -64,8 +64,9 @@ public class OverlayActivity extends AppCompatActivity{
         initTag("Sponsors");
         initTag("Contacts");
         initTag("About us");
+        initTag("Results");
         initTag("Hospitality");
-        initTag("Student Ambassador");
+        initTag("Startup Weekend");
         initTag("QR Scanner");
        initTag("Projects");
 		initTag("Chat");
@@ -215,8 +216,8 @@ public class OverlayActivity extends AppCompatActivity{
                 } else if (vw.getText().toString().equals("Sponsors")) {
                     Intent intent = new Intent(OverlayActivity.this, Sponsers.class);
                     startActivity(intent);
-                } else if (vw.getText().toString().equals("Student Ambassador")) {
-                    Uri uri = Uri.parse("http://m.kurukshetra.org.in/#/sa");
+                } else if (vw.getText().toString().equals("Startup Weekend")) {
+                    Uri uri = Uri.parse("http://www.up.co/communities/india/chennai-tamil-nadu-india/startup-weekend/8316/");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 } else if (vw.getText().toString().equals("Events")) {
@@ -240,7 +241,11 @@ public class OverlayActivity extends AppCompatActivity{
 					
 					startActivity(new Intent(OverlayActivity.this, ChatDialog.class));
 					finish();
-			    } else if (vw.getText().toString().equals("QR Scanner")) {
+			    } else if (vw.getText().toString().equals("Results")) {
+
+                    startActivity(new Intent(OverlayActivity.this, Results.class));
+                    finish();
+                } else if (vw.getText().toString().equals("QR Scanner")) {
                     SessionManager session = new SessionManager(OverlayActivity.this);
                     if (session.isLoggedIn()) {
                         Intent intent = new Intent(OverlayActivity.this, QR_reader.class);
