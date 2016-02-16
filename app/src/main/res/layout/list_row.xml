@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bbg"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <!-- Title Of Song-->
+    <TextView
+        android:id="@+id/event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event Name"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="30dip"
+        android:textStyle="bold"/>
+
+    <!-- Artist Name -->
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event"
+        android:textColor="#343434"
+        android:textSize="20dip"
+        android:layout_marginTop="3dip"
+        android:text="Round" />
+
+    <!-- Rightend Duration -->
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="15dip"
+        android:gravity="right"
+        android:text="1"
+        android:layout_marginRight="5dip"
+        android:textSize="30dip"
+        android:textColor="#10bcc9"
+        android:textStyle="bold"/>
+
+
+
+</RelativeLayout>
