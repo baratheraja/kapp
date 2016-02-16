@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bbg"
     android:orientation="horizontal"
     android:padding="5dip" >
 
@@ -39,7 +38,6 @@
         android:text="1"
         android:layout_marginRight="5dip"
         android:textSize="30dip"
-        android:textColor="#10bcc9"
         android:textStyle="bold"/>
 
 

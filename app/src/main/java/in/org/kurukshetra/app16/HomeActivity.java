@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             new MaterialShowcaseView.Builder(this)
                     .setTarget(fab)
                     .setDismissText("GOT IT")
-                    .setContentText("Click this button to open the quick menu")
+                    .setContentText("Click this button to open the quick menu and view your event results")
                     .show();
             SharedPreferences.Editor e = s.edit();
             e.putInt("status", 1);
