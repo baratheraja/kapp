@@ -105,13 +105,15 @@ public class Results extends AppCompatActivity {
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
+                HashMap postDataParams = new HashMap();
+                SessionManager session = new SessionManager(Results.this);
+                String kid= session.getKid();
+                postDataParams.put("kid",kid);
                 writer.write(getPostDataString(postDataParams));
-
                 writer.flush();
                 writer.close();
                 os.close();
                 int responseCode=conn.getResponseCode();
-
                 if (responseCode == HttpsURLConnection.HTTP_OK) {
                     String line;
                     BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -126,11 +128,11 @@ public class Results extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return response;
-
         }
+
         private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+
             StringBuilder result = new StringBuilder();
             boolean first = true;
             for(Map.Entry<String, String> entry : params.entrySet()){
@@ -143,7 +145,6 @@ public class Results extends AppCompatActivity {
                 result.append("=");
                 result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
             }
-
             return result.toString();
         }
 
