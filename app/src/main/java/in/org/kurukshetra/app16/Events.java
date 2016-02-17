@@ -30,14 +30,61 @@ public class Events extends AppCompatActivity {
     ArrayList<Entry> entries = new ArrayList<>();
     ArrayList<String> eventlist = new ArrayList<>();
 
-    public static final  String[] cats = {"General", "Engineering", "Online", "Coding", "Robotics", "Quizzes", "Management"};
-    public static final String[] general = {"Alcatraz","Gambling Math","k! Spell Bee","Mock G20"};
-    public static final String[] engineering = {"BIM","Circuit Craze","Contraptions","Fully Doped","Godspeed","How Stuff Works","Innovate"};
-    public static final String[] online = {"Bank Robbery","Dalal Bull","OLPC","ROS","Sherlock"};
-    public static final String[] coding = {"Heptathlon","Ninja Coding","OSPC","Tame the Code","The Imitation Game"};
-    public static final String[] robotics = {"k!ardinal Quest","Robowars","Tanker Bot","The Gem Quest"};
-    public static final String[] quiz = {"k! Biz Quiz","k! Open Quiz","k! General Quiz","SciTech Quiz"};
-    public static final String[] management = {"Chaos Theory","Enigma","k! Wallet","Marketing Madness"};
+    public static final String[] cats = {
+            "General",
+            "Engineering",
+            "Online",
+            "Coding",
+            "Robotics",
+            "Quizzes",
+            "Management"
+    };
+    public static final String[] general = {
+            "Alcatraz",
+            "Gambling Math",
+            "k! Spell Bee",
+            "Mock G20"
+    };
+    public static final String[] engineering = {
+            "BIM",
+            "Circuit Craze",
+            "Contraptions",
+            "Fully Doped",
+            "Godspeed",
+            "How Stuff Works",
+            "Innovate"
+    };
+    public static final String[] online = {
+            "Bank Robbery",
+            "Dalal Bull",
+            "OLPC",
+            "ROS",
+            "Sherlock"
+    };
+    public static final String[] coding = {
+            "Heptathlon",
+            "Ninja Coding",
+            "OSPC",
+            "Tame the Code"
+    };
+    public static final String[] robotics = {
+            "k!ardinal Quest",
+            "Robowars",
+            "Tanker Bot",
+            "The Gem Quest"
+    };
+    public static final String[] quiz = {
+            "k! Biz Quiz",
+            "k! Open Quiz",
+            "k! General Quiz",
+            "SciTech Quiz"
+    };
+    public static final String[] management = {
+            "Chaos Theory",
+            "Enigma",
+            "k! Wallet",
+            "Marketing Madness"
+    };
 
 	ArrayList<String> categories = new ArrayList<>();
 
@@ -70,8 +117,7 @@ public class Events extends AppCompatActivity {
         setTitle("Events");
 
         Pushbots p = Pushbots.sharedInstance();
-        if(p!=null)
-            p.tag("Events");
+        if(p != null) p.tag("Events");
         //setting categories
 	    for (int i = 0; i < cats.length; i++) {
 		    entries.add(new Entry(1, i));
@@ -99,8 +145,8 @@ public class Events extends AppCompatActivity {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                final Entry e1 = e;
-                showEvents(e1.getXIndex());
+               // final Entry e1 = e;
+                showEvents(e.getXIndex());
                 View view = findViewById(android.R.id.content);
                 view.post(new Runnable() {
                     @Override
@@ -159,7 +205,6 @@ public class Events extends AppCompatActivity {
         eventKeys.put("Contraptions", "contraptions");
         eventKeys.put("Ninja Coding", "ninja-coding");
         eventKeys.put("k!ardinal Quest","k-ardinal-quest");
-        eventKeys.put("The Imitation Game", "the-imitation-game");
     }
 
     //showing events

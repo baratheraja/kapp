@@ -14,27 +14,52 @@ import in.org.kurukshetra.app16.app.MyApplication;
 public class GlActivity extends AppCompatActivity {
 
     public void onClick(View view) {
-      String gl = view.getContentDescription().toString();
-        if(gl.equals("algelo")) {
-           Intent intent = new Intent(this,GlDetails.class);
-            intent.putExtra("Title","Angelo Vermeulen");
-            startActivity(intent);
+        String gl = view.getContentDescription().toString();
+
+        Intent intent = new Intent(this, GlDetails.class);
+
+        switch (gl) {
+            case "angelo":
+                intent.putExtra("Title", "Angelo Vermeulen");
+                break;
+            case "abhas":
+                intent.putExtra("Title", "Abhas Mitra");
+                break;
+            case "arjun":
+                intent.putExtra("Title", "Arjun Shetty");
+                break;
+            case "chirag":
+                intent.putExtra("Title", "Chiragh Dewan");
+                break;
+            case "sesha":
+                intent.putExtra("Title", "Dr. Seshagiri Rao");
+                break;
+            case "hemanth":
+                intent.putExtra("Title", "Hemanth Kumar Guruswamy");
+                break;
+            case "girish":
+                intent.putExtra("Title", "Girish Mathrubootham");
+                break;
+            case "masha":
+                intent.putExtra("Title", "Masha Nazeem");
+                break;
         }
+
+        startActivity(intent);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gl_card);
+
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         int id = item.getItemId();
+        int id = item.getItemId();
 
-        if (id == android.R.id.home) {
-            onBackPressed();
-        }
+        if (id == android.R.id.home) onBackPressed();
 
         return super.onOptionsItemSelected(item);
     }

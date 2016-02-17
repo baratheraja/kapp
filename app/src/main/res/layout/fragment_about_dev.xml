@@ -1,0 +1,325 @@
+<ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+
+            android:id="@+id/view">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/im"
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/akil"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/list_item"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Akil Adeshwar"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/arvind"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Aravind"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    />
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/barathe"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Baratheraja"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Bharath"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Kishore"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/faizaan"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Md Faizaan"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginTop="10dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="2dp"
+            android:nestedScrollingEnabled="true"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+
+                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder"
+                android:layout_gravity="center_vertical|left"
+                app:riv_corner_radius_bottom_left="40dp"
+                app:riv_corner_radius_bottom_right="40dp"
+                app:riv_corner_radius_top_left="40dp"
+                app:riv_corner_radius_top_right="40dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:text="Yuvanesh"
+                    android:gravity="center_vertical|center"
+                    android:width="50dp"
+                    android:textSize="15sp"
+                    android:textColor="#c30b1f2b"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

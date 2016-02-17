@@ -30,6 +30,7 @@ public class AboutUsActivity extends AppCompatActivity {
                     "\n",
             "The Cyclotron symbolizes the celebration of the indomitable spirit of engineering and innovation. It represents the ever expanding pursuit of knowledge. Just as a cyclotron accelerates a charged particle using high frequency, Kurukshetra provides that extra impetus for the engineer to excel.",
     "The UNESCO patronage is the highest form of support granted by the organization, as a moral endorsement of exceptional activity which has a real impact on education, science, cultural or communication. Kurukshetra is the first event of its kind to receive this recognition. This recognition puts Kurukshetra in league with some of the most prestigious endeavors in the world.",
+            "About developers"
     };
     TabLayout tabLayout;
     /**
@@ -75,6 +76,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
         public PlaceholderFragment() {
         }
+
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -90,6 +92,7 @@ public class AboutUsActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_about_us, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.about_content);
             ImageView imageView = (ImageView) rootView.findViewById(R.id.about_image);
+
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 0:
                     imageView.setImageResource(R.drawable.logo_black);break;
@@ -104,9 +107,10 @@ public class AboutUsActivity extends AppCompatActivity {
                      imageView.setImageResource(R.drawable.cyclotron);break;
                 case 5:
                      imageView.setImageResource(R.drawable.unesco);break;
+                case 6:
+                    return inflater.inflate(R.layout.fragment_about_dev, container, false);
 
             }
-
 
             textView.setText(getArguments().getString(ARG_SECTION_CONTENT));
             return rootView;
@@ -127,7 +131,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 6;
+            return 7;
         }
 
         @Override
@@ -145,6 +149,8 @@ public class AboutUsActivity extends AppCompatActivity {
                     return "CYCLOTRON";
                 case 5:
                     return "UNESCO";
+                case 6:
+                    return "DEVELOPERS";
             }
             return null;
         }

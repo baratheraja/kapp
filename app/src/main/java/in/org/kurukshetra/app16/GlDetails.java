@@ -22,22 +22,56 @@ public class GlDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gl_details2);
-        Intent intent = getIntent();
-        title = intent.getStringExtra("Title");
+
+        title = getIntent().getStringExtra("Title");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(title);
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         glDetails = (TextView) findViewById(R.id.gl_details);
         imageView = (ImageView) findViewById(R.id.header_picture);
-        if(title.equals("Angelo Vermeulen")){
-            imageView.setImageResource(R.drawable.vermeulen_big);
-            String details = "<b>Crew commander of MARS Simulation program funded by NASA.</b> Has given numerous <b>TED</b> talks internationally about venturing into space and establishing life in other planets.\n" +
-                    "<b>Biomodd</b> is a well known project started by him in which ecosystems and computers coexist. On the most basic level, Biomodd creates symbiotic relationships between plants and computers. It is already in place in Athens, Ohio, Philippines, New Zealand, Belgium, Chile, and UK.\n" +
-                    "He has other well known achievements and awards to his name.<br><br><b>Date: Feb 6,2016 </b>";
-            glDetails.setText(Html.fromHtml(details));
+
+        switch (title) {
+            case "Angelo Vermeulen":
+                imageView.setImageResource(R.drawable.vermeulen_big);
+                glDetails.setText(R.string.angelo);
+                break;
+            case "Abhas Mitra":
+                imageView.setImageResource(R.drawable.abhasmitra);
+                glDetails.setText(R.string.abhas);
+                break;
+            case "Arjun Shetty":
+                imageView.setImageResource(R.drawable.gl3);
+                glDetails.setText(R.string.arjun);
+                break;
+            case "Chiragh Dewan":
+                imageView.setImageResource(R.drawable.chiragh);
+                glDetails.setText(R.string.chirag);
+                break;
+            case "Dr. Seshagiri Rao":
+                imageView.setImageResource(R.drawable.sesha);
+                glDetails.setText(R.string.sesha);
+                break;
+            case "Hemanth Kumar Guruswamy":
+                imageView.setImageResource(R.drawable.hemanth);
+                glDetails.setText(R.string.hemanth);
+                break;
+            case "Girish Mathrubootham":
+                imageView.setImageResource(R.drawable.girish);
+                glDetails.setText(R.string.girish);
+                break;
+            case "Masha Nazeem":
+                imageView.setImageResource(R.drawable.masha);
+                glDetails.setText(R.string.masha);
+                break;
         }
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

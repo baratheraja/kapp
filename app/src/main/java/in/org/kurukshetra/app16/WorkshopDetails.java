@@ -1,15 +1,13 @@
 package in.org.kurukshetra.app16;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +17,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -42,54 +39,48 @@ import in.org.kurukshetra.app16.app.MyApplication;
 import in.org.kurukshetra.app16.workshopreg.CountChooserFragment;
 
 public class WorkshopDetails extends AppCompatActivity implements LoginFragment.OnLoginListener{
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private ImageView imageView;
     String eventName,eventKey,category;
-    HashMap<String,String> idMap;
-    HashMap<String,Integer> minMap;
-    HashMap<String,Integer> maxMap;
-    FloatingActionButton fab;
+    HashMap<String, String> idMap;
+    HashMap<String, Integer> minMap, maxMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_workshop_details);
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-        actionBar.setHomeAsUpIndicator(upArrow);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Resources res = getResources();
+
+        final Drawable upArrow = res.getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        if (upArrow != null) {
+            upArrow.setColorFilter(res.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        }
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
 
         initMaps();
-        eventName=getIntent().getStringExtra("name");
+        eventName = getIntent().getStringExtra("name");
         category = getIntent().getStringExtra("cat");
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Pushbots.sharedInstance().tag("Register click "+ eventName);
-                handleRegister();
-            }
-        });
+
         setTitle(eventName);
         eventKey = getIntent().getStringExtra("key");
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar2);
         if (collapsingToolbarLayout != null) {
             collapsingToolbarLayout.setTitle(toolbar.getTitle());
         }
-        if(eventName.equals("Krithi")){
-            fab.setVisibility(View.GONE);
-        }
+
     }
 
     private void initMaps() {
@@ -125,47 +116,9 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
 
     }
 
-    public void onClickLogin(){
-        //LoginFragment loginFragment = LoginFragment.loginInstance();
-        //FragmentManager manager = getSupportFragmentManager();
-        //loginFragment.show(manager,"LOGIN");
-        Intent intent = new Intent(this,LoginActivity2.class);
-        startActivityForResult(intent, 101);
-    }
-
-    private void handleRegister() {
-        SessionManager session= new SessionManager(this);
-        if(session.isLoggedIn()){
-            proceedToRegister();
-        } else{
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                    WorkshopDetails.this);
-
-
-            alertDialog.setMessage("Please Login to register for Workshop");
-
-            alertDialog.setPositiveButton("OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            onClickLogin();
-                            dialog.cancel();
-                            //finish();
-                        }
-                    });
-
-            alertDialog.setNegativeButton("CANCEL",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-            alertDialog.show();
-        }
-    }
-
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        imageView = (ImageView) findViewById(R.id.backdrop);
+        ImageView imageView = (ImageView) findViewById(R.id.backdrop);
         Drawable d = loadImageFromAsset(eventKey);
         imageView.setImageDrawable(d);
 
@@ -175,9 +128,9 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         try {
             JSONObject obj = new JSONObject(json);
             JSONArray tabs = obj.getJSONObject("workshop").getJSONArray("tabs");
-            int n = tabs.length();
 
-            for(int i=0;i<n;i++) {
+            for(int i = 0; i < tabs.length(); i++) {
+
                 JSONObject tab = tabs.getJSONObject(i);
                 String title = tab.getString("title");
                 String content = tab.getString("content");
@@ -204,7 +157,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
         args3.putString("mail_id", mail_id);
 
         oneFragment3.setArguments(args3);
-      //  adapter.addFragment(oneFragment3, "Contact");
+        //  adapter.addFragment(oneFragment3, "Contact");
         viewPager.setAdapter(adapter);
 
     }
@@ -214,7 +167,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
             InputStream ims = getAssets().open("images/"+file+".jpeg");
             d = Drawable.createFromStream(ims, null);
         }
-        catch(IOException ex) {
+        catch(IOException ignored) {
         }
         return d;
     }
@@ -239,13 +192,6 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
 
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_hospi, menu);
-        return true;
-
-    }
-*/
     Intent intent2=new Intent(Intent.ACTION_SEND);
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -255,7 +201,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
             onBackPressed();
         }
         if (id == R.id.share){
-            String text="http://m.kurukshetra.org.in/#/"+category.toString();
+            String text="http://m.kurukshetra.org.in/#/"+ category;
             intent2.setType("text/plain");
             intent2.putExtra(Intent.EXTRA_TEXT,"Check out the  event "+eventName+" at 'Kurukshetra'16' "+text);
             startActivity(Intent.createChooser(intent2, "Share via . . ."));
@@ -277,7 +223,7 @@ public class WorkshopDetails extends AppCompatActivity implements LoginFragment.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         if(requestCode == 101){
+        if(requestCode == 101){
             if(resultCode == Activity.RESULT_OK){
                 Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show();
                 proceedToRegister();
