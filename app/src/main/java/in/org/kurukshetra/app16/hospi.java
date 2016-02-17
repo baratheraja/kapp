@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by Bharath on 12/18/2015.
- */
 public class hospi extends Fragment {
     public hospi() {
         // Required empty public constructor

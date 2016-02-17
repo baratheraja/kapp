@@ -58,6 +58,8 @@
         Arjun Shetty is the COO &amp; Co-Founder of BankBazaar, India\'s leading online financial products marketplace where you can get instant customized rate quotes and shop for loans and insurance products. Established in 2008, BankBazaar is venture funded by Walden International, Sequoia Capital, Fidelity Growth Partners and Amazon.
         \nIn the latest round of funding led by Amazon, the firm raised INR 375 crores in June 2015.\n
         The firm is headquartered in Chennai with offices in Bangalore, Mumbai, New Delhi, and Singapore.
+        \nDate: <b>Feb 20, 2016</b>
+        \nVenue: <b>Optimus Hall</b>
     </string>
 
     <string name="abhas">
@@ -68,35 +70,46 @@
     <string name="angelo">
         <b>Crew commander of MARS Simulation program funded by NASA.</b>\n\tHas given numerous <b>TED</b> talks internationally about venturing into space and establishing life in other planets.
         <b>Biomodd</b> is a well known project started by him in which ecosystems and computers coexist. On the most basic level, Biomodd creates symbiotic relationships between plants and computers. It is already in place in Athens, Ohio, Philippines, New Zealand, Belgium, Chile, and UK.
-        He has other well known achievements and awards to his name.<br/><br/><b>Date: Feb 6,2016 </b>
+        He has other well known achievements and awards to his name.
+        \nDate: <b>Feb 6,2016 </b>
     </string>
 
     <string name="chirag">
         \tChiragh Dewan embarked on an ambitious open-source artificial intelligence research project (called <b>JARVIS</b>) leading a team of 6 to develop a personalised operating system equipped with artificial intelligence, machine learning and natural language processing.
         \nApart from having founded Airocorp with Himanshu Vaishnav, he also built an AI sentence tagging algorithm that can accurately categorise any sentence as a question, assertion, command or greeting at a 96% rate as well as an embeddable natural language processing module.
+        \nDate: <b>Feb 19, 2016</b>
+        \nVenue: <b>Ada Lovelace Auditorium</b>
     </string>
 
     <string name="girish">
         \tFully funded by his friends, he established his first venture, Xpert Labs, a training institute.\n
         The number of students grew exponentially and at one point, he was making INR 1,00,000 a month!
         And it was not even his full time work; he was teaching after his work. As the number of students grew, he resigned from his job and started teaching multiple batches. Eventually he went to US and worked with Zoho for a decade.
+        \nDate: <b>Feb 18, 2016</b>
+        \nVenue: <b>Ada Lovelace Auditorium</b>
     </string>
 
     <string name="hemanth">
         \tAn IIM-A graduate who is a mighty proud CEG alumnus too, Hemanth Kumar is currently the CEO of Airtel Broadband.\n
         He has extensive experience and proven track record in established companies, start-ups and turnarounds across diverse sectors such as FMCG, Telecom and Retail.
         Before Airtel, Hemanth Kumar has handled national and regional level operations and leadership roles in Asian Paints, Tata Tele, Wipro etc.
+        \nDate: <b>Feb 19, 2016</b>
+        \nVenue: <b>Ada Lovelace Auditorium</b>
     </string>
 
     <string name="sesha">
-        \tAs the Associate Director at ISRO, Dr. Seshagiri Raohas also headed the <b>Multi-Object Tracking Radar</b> (MOTR) project as its <b>Project Director</b>.\n
-        The MOTR was recently launched for tracking objects in space. MOTR can track 10 different objects simultaneously in a range of 1000 kilometres.
+        \tAs the Associate Director at ISRO, Dr. Seshagiri Raohas also headed the <b>Multi-Object Tracking Radar</b> (MOTR) project as its <b>Project Director</b>.
+        \n The MOTR was recently launched for tracking objects in space. MOTR can track 10 different objects simultaneously in a range of 1000 kilometres.
         This 245 crore project was completed in a tight time-frame with scientists from various ISRO centres.
+        \nDate: <b>Feb 18, 2016</b>
+        \nVenue: <b>Ada Lovelace Auditorium</b>
     </string>
 
     <string name="masha">
         \tOne of India\'s prolific young inventors, Masha Nazem started making science models from the age of 9. Three of her projects are in the process of getting patented; she <b>received invites from Narendra Modi, Abdul Kalam, as well as the Government of Japan to demonstrate her projects</b>.
         Apart from winning numerous awards for her projects, six of her students have also gone on to win National Innovation Awards.
+        \nDate: <b>Feb 20, 2016</b>
+        \nVenue: <b>Vivek Auditorium</b>
     </string>
 
 </resources>

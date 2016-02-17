@@ -19,33 +19,30 @@ import in.org.kurukshetra.app16.app.MyApplication;
 
 public class contacts extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-
-    public void call(View view){
+    public void call(View view) {
         String phno = view.getContentDescription().toString();
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" +phno));
         startActivity(intent);
     }
-    public void mail(View view)
-    {
+
+    public void mail(View view) {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + view.getContentDescription().toString()));
         startActivity(Intent.createChooser(emailIntent, "Chooser Title"));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacts);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 
