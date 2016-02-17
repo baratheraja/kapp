@@ -2,11 +2,15 @@ package in.org.kurukshetra.app16;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,11 +50,12 @@ public class Results extends AppCompatActivity {
     private static final String TAG = Results.class.getSimpleName();
 
     // Movies json url
-    private static final String url = "http://api.androidhive.info/json/movies.json";
     private ProgressDialog pDialog;
     private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
     private CustomListAdapter adapter;
+    Button submit;
+    EditText kid;
 
 
     @Override
@@ -60,9 +65,25 @@ public class Results extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new MyAsyncTask().execute("", "");
-
         listView = (ListView) findViewById(R.id.list);
+        submit=(Button)findViewById(R.id.submit);
+        kid=(EditText)findViewById(R.id.kid);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(kid.getText().toString().equals("")){
+                    movieList.clear();
+                    Toast.makeText(getApplicationContext(),"Enter a valid k!ID.",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    movieList.clear();
+                    new MyAsyncTask().execute(kid.getText().toString());
+                }
+            }
+        });
+
         adapter = new CustomListAdapter(this, movieList);
         listView.setAdapter(adapter);
 
@@ -107,8 +128,7 @@ public class Results extends AppCompatActivity {
                         new OutputStreamWriter(os, "UTF-8"));
                 HashMap postDataParams = new HashMap();
                 SessionManager session = new SessionManager(Results.this);
-                String kid= session.getKid();
-                postDataParams.put("kid",kid);
+                postDataParams.put("kid", params[0]);
                 writer.write(getPostDataString(postDataParams));
                 writer.flush();
                 writer.close();
@@ -152,27 +172,44 @@ public class Results extends AppCompatActivity {
             //parse JSON data
             try {
                 JSONArray jArray = new JSONArray(s);
-                for (int i = 0; i < jArray.length(); i++) {
+                if(jArray.length()==0){
+                    Toast.makeText(getApplicationContext(),"No records found for this k!ID.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    for (int i = 0; i < jArray.length(); i++) {
 
-                    JSONObject jObject = jArray.getJSONObject(i);
+                        JSONObject jObject = jArray.getJSONObject(i);
 
-                    final String name = jObject.getString("event");
-                    final String tab1_text = jObject.getString("round");
-                    final String active = jObject.getString("position");
+                        final String event = jObject.getString("event");
+                        final String round = "Round:"+jObject.getString("round");
+                        final String position = jObject.getString("position");
 
-                    Movie movie=new Movie();
+                        Movie movie = new Movie();
 
-                    movie.setTitle(name);
-                    movie.setThumbnailUrl(tab1_text);
-                    movie.setYear(active);
-                    movieList.add(movie);
+                        movie.setTitle(event);
+                        movie.setYear(position);
 
-                } // End Loop
+                        if (jObject.getString("round").equals("Winners")) {
+                            movie.setThumbnailUrl("Winner");
+                        }else if (Integer.parseInt(round.toString()) > 1) {
+                            Integer t=Integer.parseInt(round.toString())-1;
+                            movie.setThumbnailUrl(t.toString());
+                        }
+                        else
+                        {
+                            movie.setThumbnailUrl("Participated");
+                        }
+                        movieList.add(movie);
+
+
+                    } // End Loop
+                }
                 this.progressDialog.dismiss();
                 adapter.notifyDataSetChanged();
             } catch (JSONException e) {
                 Log.e("JSONException", "Error: " + e.toString());
             } // catch (JSONException e)
+
         } // protected void onPostExecute(Void v)
 
 

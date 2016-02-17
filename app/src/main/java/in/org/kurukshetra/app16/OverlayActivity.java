@@ -242,23 +242,7 @@ public class OverlayActivity extends AppCompatActivity{
 					startActivity(new Intent(OverlayActivity.this, ChatDialog.class));
 					finish();
 			    } else if (vw.getText().toString().equals("Results")) {
-                    SessionManager session = new SessionManager(OverlayActivity.this);
-                    if(session.isLoggedIn())
                         startActivity(new Intent(OverlayActivity.this, Results.class));
-                    else {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                                OverlayActivity.this);
-                        alertDialog.setMessage("Please Login to proceed");
-                        alertDialog.setNegativeButton("CANCEL",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                    finish();
-
                 } else if (vw.getText().toString().equals("QR Scanner")) {
                     SessionManager session = new SessionManager(OverlayActivity.this);
                     if (session.isLoggedIn()) {
